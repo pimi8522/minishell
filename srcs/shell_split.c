@@ -3,100 +3,128 @@
 /*                                                        :::      ::::::::   */
 /*   shell_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
+/*   By: adores <adores@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:28:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/08/28 13:29:48 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/08/28 14:34:24 by adores           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_count_words(char const *str, char c)
+static int	count_words(char *str, char sep)
 {
+	int	count;
+	int	inword;
 	int	i;
-	int	in_word;
-	int	num_words;
 
+	count = 0;
+	inword = 0;
 	i = 0;
-	in_word = 0;
-	num_words = 0;
-	while (str[i])
+	while (str[i] != '\0')
 	{
-		if (str[i] != c && in_word == 0)
+		if (str[i] != sep)
 		{
-			in_word = 1;
-			num_words++;
+			if (inword == 0)
+			{
+				inword = 1;
+				count++;
+			}
 		}
-		else if (str[i] == c)
-			in_word = 0;
+		else
+			inword = 0;
 		i++;
 	}
-	return (num_words);
+	return (count);
 }
 
-static char	*get_word(char const *str, char c, int *x)
+static char	*malloc_word(char *s, char c)
 {
-	int		start;
 	int		len;
 	char	*word;
-	int		i;
 
 	len = 0;
-	while (str[*x] && str[*x] == c)
-		(*x)++;
-	start = *x;
-	while (str[*x + len] && str[*x + len] != c)
+	while (s[len] && s[len] != c)
 		len++;
-	word = (char *)malloc(sizeof(char) * (len + 1));
+	word = malloc(sizeof(char) * (len + 1));
 	if (!word)
 		return (NULL);
-	i = 0;
-	while (i < len)
+	len = 0;
+	while (s[len] && s[len] != c)
 	{
-		word[i] = str[start + i];
-		i++;
+		word[len] = s[len];
+		len++;
 	}
 	word[len] = '\0';
-	*x += len;
 	return (word);
 }
 
-static void	free_all(char **result, int y)
+static void	ft_free(char **str)
 {
-	while (y >= 0)
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	while (i > 0)
 	{
-		free(result[y]);
-		y--;
+		i--;
+		free(str[i]);
 	}
-	free(result);
+	free(str);
+}
+
+static void	ft_splitsplit(char **arr, char *str, char sep)
+{
+	int	i;
+	int	word_i;
+
+	word_i = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] == sep)
+			i++;
+		if (str[i])
+		{
+			arr[word_i] = malloc_word((char *)&str[i], sep);
+			if (!arr[word_i])
+			{
+				ft_free(arr);
+				return ;
+			}
+			word_i++;
+			while (str[i] && str[i] != sep)
+				i++;
+		}
+	}
+	arr[word_i] = NULL;
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	int		count;
-	int		x;
-	int		y;
+	char	**arr;
 
 	if (!s)
 		return (NULL);
-	count = ft_count_words(s, c);
-	result = (char **)malloc(sizeof(char *) * (count + 1));
-	if (!result)
+	arr = malloc(sizeof(char *) * (count_words((char *)s, c) + 1));
+	if (!arr)
 		return (NULL);
-	x = 0;
-	y = 0;
-	while (y < count)
-	{
-		result[y] = get_word(s, c, &x);
-		if (!result[y])
-		{
-			free_all(result, y - 1);
-			return (NULL);
-		}
-		y++;
-	}
-	result[y] = NULL;
-	return (result);
+	ft_splitsplit(arr, (char *)s, c);
+	return (arr);
 }
+/*#include <stdio.h>
+
+int	main(void)
+{
+	char const s[] = "   ";
+	char c = ' ';
+	int i = 0;
+	char **res = ft_split(s, c);
+	while(res[i])
+	{
+		printf("%s\n",res[i]);
+		i++;
+	}
+}
+*/
