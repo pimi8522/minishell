@@ -44,6 +44,7 @@ char **split_line(char *line)
 	}
 } */
 
+
 /* void shell_exec(char **args)
 {
 	int			i;
@@ -65,7 +66,7 @@ char *read_line(void)
     char *buf;
     size_t bufsize;
     char cwd[BUFSIZ];
-//fffewfuhfiuhfdusifhdsfhdsufihdshfuashfpdshfpdsh
+
     buf = NULL;
     get_cwd(cwd, sizeof(cwd));
     ft_printf(RED"%s "RST, cwd);
