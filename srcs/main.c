@@ -6,7 +6,7 @@
 /*   By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:19:30 by miduarte          #+#    #+#             */
-/*   Updated: 2025/08/28 12:03:05 by miduarte         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:14:00 by miduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,3 +111,14 @@ int main (int ac, char **av)
     free(args);
     return EXIT_SUCCESS;
 }
+
+//facilitar
+
+// ls -l | hvxjvjl | echo "|ola"
+
+//ls/2-l/2\3\2echo\2" OLA SOU O HENRIQUE"
+
+//FAZER UM SPLIT SUPER CHIQUE 
+//flags de in_aspas e in_nao  me lembro
+
+//linked lists
