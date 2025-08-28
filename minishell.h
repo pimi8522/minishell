@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
+/*   By: adores <adores@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/08/28 15:31:43 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/08/28 16:22:23 by adores           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <sysexits.h>
+#include <fcntl.h>
+#include <time.h>
+
 # include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
 

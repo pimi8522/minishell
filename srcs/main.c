@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
+/*   By: adores <adores@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:19:30 by miduarte          #+#    #+#             */
-/*   Updated: 2025/08/28 15:48:29 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/08/28 16:18:39 by adores           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	forkado(t_list *list)
 	}
 	
 }
-
 
 char **split_line(char *line)
 {
