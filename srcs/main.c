@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:19:30 by miduarte          #+#    #+#             */
-/*   Updated: 2025/08/28 13:14:00 by miduarte         ###   ########.fr       */
+/*   Updated: 2025/08/28 15:48:29 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	forkado(t_list *list)
+{
+	pid_t	pid;
+	
+	pid = fork();
+	if (pid == 0)
+	{
+		executor(list);
+	}
+	
+}
+
 
 char **split_line(char *line)
 {
@@ -20,17 +33,17 @@ char **split_line(char *line)
     return tokens;
 }
 
-/* void	shell_launch(char **args)
+void	shell_launch(char **args)
 {
 	// Is fork returning 2 values?
-	if (Fork() == SHELL_JR)
+	if (Fork() == 0)
 	{
 		// replace the current process image with a new process image
 		//v for "vector", p for "path".
 		//Takes an array of arguments and uses PATH to find the executable.
 		//	char *args[] = {"ls", "-l", "-a", NULL};
-		//	execvp("ls", args);
-		Execvp(args[0], args);
+		//	execve("ls", args);
+		execve(args[0], args);
 	}
 	else
 	{
@@ -39,10 +52,10 @@ char **split_line(char *line)
 		//shells that only handle one child process at a time.
 		// FINE for SHELL v°1
 		//Wait(&status);
-		Waitpid(cell_jr, &status, 0);
+		waitpid(cell_jr, &status, 0);
 
 	}
-} */
+}
 
 
 /* void shell_exec(char **args)
@@ -88,7 +101,7 @@ char *read_line(void)
     
 }
 
-int main (int ac, char **av)
+int main (int ac, char **av, char **env)
 {
     char *line;
     char **args;
@@ -98,6 +111,7 @@ int main (int ac, char **av)
     (void)av;
     i = 0;
     print_banner();
+	
     while((line = read_line()))
     {   
         args = split_line(line);
@@ -106,6 +120,7 @@ int main (int ac, char **av)
            ft_printf("You entered: %s\n", args[i]);
            i++;
         }
+		shell_launch(args);
     }
     free(line);
     free(args);
@@ -122,3 +137,13 @@ int main (int ac, char **av)
 //flags de in_aspas e in_nao  me lembro
 
 //linked lists
+
+//definir variaveis de environment com export e ler com echo
+
+//handle sinais aqui (SIGINT CTRL D, CTRL C, CTRL \)
+
+//figure out o que sao env e como manda las junto com os tokens???????????
+
+//fazer o comando export e env (EXPORT MOSTRA ENVS SEM VALOR bobao)
+
+//descobrir como expandir variaveis (detetar dollar sign como ir buscar ao env o valor)

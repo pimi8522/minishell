@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/08/27 17:19:48 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/08/28 15:31:43 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,18 @@
 # include "libft/libft.h"
 
 #define SPACE	"\t\n\v\f\r "
-#define SHELL_JR	0
+
+
+typedef struct s_list
+{
+	char	*cmd;
+	char	**flag;
+	int		in;
+	int		out;
+	int		fd[2];
+	/* data */
+} t_list;
+
 
 /*
 ** ANSI Color codes for terminal output formatting:
