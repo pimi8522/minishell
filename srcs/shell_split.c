@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int is_space(char c)
+static int is_blank(char c)
 {
 	int r;
 
@@ -24,13 +24,14 @@ static int is_space(char c)
 	return (r);
 }
 
-static void skip_ws(const char *s, size_t *i)
+static void skip_blanks(const char *s, size_t *i)
 {
-	while (s[*i] && is_space(s[*i]))
+	while (s[*i] && is_blank(s[*i]))
 		*i += 1;
 }
 
-static int pass1_len(const char *s, size_t *i, int *qs, int *qd)
+static int span_token(const char *s, size_t *i,
+					  int *squote, int *dquote)
 {
 	size_t  start;
 	char    c;
@@ -39,115 +40,115 @@ static int pass1_len(const char *s, size_t *i, int *qs, int *qd)
 	while (s[*i])
 	{
 		c = s[*i];
-		if (c == '\'' && !*qd)
+		if (c == '\'' && !*dquote)
 		{
-			*qs = !*qs;
+			*squote = !*squote;
 			*i += 1;
 			continue ;
 		}
-		if (c == '"' && !*qs)
+		if (c == '"' && !*squote)
 		{
-			*qd = !*qd;
+			*dquote = !*dquote;
 			*i += 1;
 			continue ;
 		}
-		if (!*qs && !*qd && is_space(c))
+		if (!*squote && !*dquote && is_blank(c))
 			break ;
 		*i += 1;
 	}
-	if (*qs || *qd)
+	if (*squote || *dquote)
 		return (-1);
 	return ((int)(*i - start));
 }
 
-static int pass1_count(const char *s, size_t *i)
+static int count_tokens(const char *s, size_t *i)
 {
 	int     count;
-	int     qs;
-	int     qd;
-	int     len;
+	int     squote;
+	int     dquote;
+	int     span;
 
 	count = 0;
-	qs = 0;
-	qd = 0;
+	squote = 0;
+	dquote = 0;
 	while (s[*i])
 	{
-		skip_ws(s, i);
+		skip_blanks(s, i);
 		if (!s[*i])
 			break ;
-		len = pass1_len(s, i, &qs, &qd);
-		if (len < 0)
+		span = span_token(s, i, &squote, &dquote);
+		if (span < 0)
 			return (-1);
 		count += 1;
 	}
 	return (count);
 }
 
-static char *copy_token(const char *s, size_t *i)
+static char *copy_unquoted_token(const char *s, size_t *i)
 {
-	size_t  j;
-	size_t  k;
-	int     qs;
-	int     qd;
-	char    *dst;
+	size_t  end;
+	size_t  out;
+	int     squote;
+	int     dquote;
+	char    *token;
 	char    c;
 
-	qs = 0;
-	qd = 0;
-	j = *i;
-	while (s[j] && (qs || qd || !is_space(s[j])))
+	squote = 0;
+	dquote = 0;
+	end = *i;
+	while (s[end] && (squote || dquote || !is_blank(s[end])))
 	{
-		if (s[j] == '\'' && !qd)
-			qs = !qs;
-		else if (s[j] == '"' && !qs)
-			qd = !qd;
-		j += 1;
+		if (s[end] == '\'' && !dquote)
+			squote = !squote;
+		else if (s[end] == '"' && !squote)
+			dquote = !dquote;
+		end += 1;
 	}
-	dst = (char *)do_malloc((j - *i) + 1);
-	k = 0;
-	while (*i < j)
+	token = (char *)do_malloc((end - *i) + 1);
+	out = 0;
+	while (*i < end)
 	{
 		c = s[*i];
-		if (c == '\'' && !qd)
-			qs = !qs;
-		else if (c == '"' && !qs)
-			qd = !qd;
+		if (c == '\'' && !dquote)
+			squote = !squote;
+		else if (c == '"' && !squote)
+			dquote = !dquote;
 		else
 		{
-			dst[k] = c;
-			k += 1;
+			token[out] = c;
+			out += 1;
 		}
 		*i += 1;
 	}
-	dst[k] = '\0';
-	return (dst);
+	token[out] = '\0';
+	return (token);
 }
 
 char **shell_split(char const *s)
 {
 	size_t  i;
-	int     n;
-	char    **arr;
-	int     k;
+	int     count;
+	char    **tokens;
+	int     t;
 	
 	if (!s)
 		return (NULL);
 	i = 0;
-	n = pass1_count(s, &i);
-	if (n < 0)
+	count = count_tokens(s, &i);
+	if (count < 0)
 		return (NULL);
 
-	arr = (char **)do_malloc(sizeof(char *) * (n + 1));
-	k = 0;
+	tokens = (char **)do_malloc(sizeof(char *) * (count + 1));
+	t = 0;
 	i = 0;
 	while (s[i])
 	{
-		skip_ws(s, &i);
+		skip_blanks(s, &i);
 		if (!s[i])
 			break ;
-		arr[k] = copy_token(s, &i);
-		k += 1;
+		tokens[t] = copy_unquoted_token(s, &i);
+		t += 1;
 	}
-	arr[k] = NULL;
-	return (arr);
+	tokens[t] = NULL;
+	return (tokens);
 }
