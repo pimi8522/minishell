@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores <adores@student.42.fr>              +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/08/28 16:22:23 by adores           ###   ########.fr       */
+/*   Updated: 2025/08/29 15:04:28 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 #define SPACE	"\t\n\v\f\r "
 
 
-typedef struct s_list
+typedef struct s_cmd
 {
 	char	*cmd;
 	char	**flag;
@@ -37,8 +37,26 @@ typedef struct s_list
 	int		out;
 	int		fd[2];
 	/* data */
-} t_list;
+} t_cmd;
 
+
+//structs para o shell split line
+typedef struct s_tokbuf {
+	char   *buf;
+	size_t  len;
+	size_t  cap;
+}   t_tokbuf;
+
+typedef struct s_split {
+	const char *s;
+	size_t      i;
+	int         in_squote;
+	int         in_dquote;
+	char      **tokens;
+	size_t      tcount;
+	size_t      tcap;
+	t_tokbuf    tok;
+}   t_split;
 
 /*
 ** ANSI Color codes for terminal output formatting:
@@ -57,5 +75,7 @@ typedef struct s_list
 char *get_cwd(char *buf, size_t size);
 void *do_malloc(size_t size);
 void print_banner(void);
+char **shell_split(char const *s);
+void shell_launch(char **args);
 
 #endif

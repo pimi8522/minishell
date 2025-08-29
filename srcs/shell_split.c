@@ -2,129 +2,152 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   shell_split.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: adores <adores@student.42.fr>              +#+  +:+       +#+        */
+/*                                                    +:+ +:+         +:+      */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:28:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/08/28 14:34:24 by adores           ###   ########.fr       */
+/*   Updated: 2025/08/29 16:55:07 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_words(char *str, char sep)
+static int is_space(char c)
 {
-	int	count;
-	int	inword;
-	int	i;
+	int r;
+
+	r = 0;
+	if (c == ' ' || c == '\t' || c == '\n')
+		r = 1;
+	if (c == '\r' || c == '\v' || c == '\f')
+		r = 1;
+	return (r);
+}
+
+static void skip_ws(const char *s, size_t *i)
+{
+	while (s[*i] && is_space(s[*i]))
+		*i += 1;
+}
+
+static int pass1_len(const char *s, size_t *i, int *qs, int *qd)
+{
+	size_t  start;
+	char    c;
+
+	start = *i;
+	while (s[*i])
+	{
+		c = s[*i];
+		if (c == '\'' && !*qd)
+		{
+			*qs = !*qs;
+			*i += 1;
+			continue ;
+		}
+		if (c == '"' && !*qs)
+		{
+			*qd = !*qd;
+			*i += 1;
+			continue ;
+		}
+		if (!*qs && !*qd && is_space(c))
+			break ;
+		*i += 1;
+	}
+	if (*qs || *qd)
+		return (-1);
+	return ((int)(*i - start));
+}
+
+static int pass1_count(const char *s, size_t *i)
+{
+	int     count;
+	int     qs;
+	int     qd;
+	int     len;
 
 	count = 0;
-	inword = 0;
-	i = 0;
-	while (str[i] != '\0')
+	qs = 0;
+	qd = 0;
+	while (s[*i])
 	{
-		if (str[i] != sep)
-		{
-			if (inword == 0)
-			{
-				inword = 1;
-				count++;
-			}
-		}
-		else
-			inword = 0;
-		i++;
+		skip_ws(s, i);
+		if (!s[*i])
+			break ;
+		len = pass1_len(s, i, &qs, &qd);
+		if (len < 0)
+			return (-1);
+		count += 1;
 	}
 	return (count);
 }
 
-static char	*malloc_word(char *s, char c)
+static char *copy_token(const char *s, size_t *i)
 {
-	int		len;
-	char	*word;
+	size_t  j;
+	size_t  k;
+	int     qs;
+	int     qd;
+	char    *dst;
+	char    c;
 
-	len = 0;
-	while (s[len] && s[len] != c)
-		len++;
-	word = malloc(sizeof(char) * (len + 1));
-	if (!word)
-		return (NULL);
-	len = 0;
-	while (s[len] && s[len] != c)
+	qs = 0;
+	qd = 0;
+	j = *i;
+	while (s[j] && (qs || qd || !is_space(s[j])))
 	{
-		word[len] = s[len];
-		len++;
+		if (s[j] == '\'' && !qd)
+			qs = !qs;
+		else if (s[j] == '"' && !qs)
+			qd = !qd;
+		j += 1;
 	}
-	word[len] = '\0';
-	return (word);
-}
-
-static void	ft_free(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	while (i > 0)
+	dst = (char *)do_malloc((j - *i) + 1);
+	k = 0;
+	while (*i < j)
 	{
-		i--;
-		free(str[i]);
-	}
-	free(str);
-}
-
-static void	ft_splitsplit(char **arr, char *str, char sep)
-{
-	int	i;
-	int	word_i;
-
-	word_i = 0;
-	i = 0;
-	while (str[i])
-	{
-		while (str[i] == sep)
-			i++;
-		if (str[i])
+		c = s[*i];
+		if (c == '\'' && !qd)
+			qs = !qs;
+		else if (c == '"' && !qs)
+			qd = !qd;
+		else
 		{
-			arr[word_i] = malloc_word((char *)&str[i], sep);
-			if (!arr[word_i])
-			{
-				ft_free(arr);
-				return ;
-			}
-			word_i++;
-			while (str[i] && str[i] != sep)
-				i++;
+			dst[k] = c;
+			k += 1;
 		}
+		*i += 1;
 	}
-	arr[word_i] = NULL;
+	dst[k] = '\0';
+	return (dst);
 }
 
-char	**ft_split(char const *s, char c)
+char **shell_split(char const *s)
 {
-	char	**arr;
-
+	size_t  i;
+	int     n;
+	char    **arr;
+	int     k;
+	
 	if (!s)
 		return (NULL);
-	arr = malloc(sizeof(char *) * (count_words((char *)s, c) + 1));
-	if (!arr)
+	i = 0;
+	n = pass1_count(s, &i);
+	if (n < 0)
 		return (NULL);
-	ft_splitsplit(arr, (char *)s, c);
+
+	arr = (char **)do_malloc(sizeof(char *) * (n + 1));
+	k = 0;
+	i = 0;
+	while (s[i])
+	{
+		skip_ws(s, &i);
+		if (!s[i])
+			break ;
+		arr[k] = copy_token(s, &i);
+		k += 1;
+	}
+	arr[k] = NULL;
 	return (arr);
 }
-/*#include <stdio.h>
-
-int	main(void)
-{
-	char const s[] = "   ";
-	char c = ' ';
-	int i = 0;
-	char **res = ft_split(s, c);
-	while(res[i])
-	{
-		printf("%s\n",res[i]);
-		i++;
-	}
-}
-*/

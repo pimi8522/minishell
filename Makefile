@@ -6,15 +6,19 @@
 #    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/08/27 15:44:15 by miduarte &       ###   ########.fr        #
+#    Updated: 2025/08/29 14:39:04 by miduarte &       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ilibft -Ift_printf
+CFLAGS = -Wall -Wextra -Werror -I. -Ilibft -Ift_printf
 
-SRCS = main.c utils.c
+SRCS = \
+	srcs/main.c \
+	srcs/utils.c \
+	srcs/shell_split.c \
+	srcs/launch.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR = libft
