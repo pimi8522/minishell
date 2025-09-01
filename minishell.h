@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: anarita <anarita@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/08/29 15:04:28 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/09/01 11:32:39 by anarita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 #include <fcntl.h>
 #include <time.h>
 
-# include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
 
 #define SPACE	"\t\n\v\f\r "
