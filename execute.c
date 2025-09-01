@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anarita <anarita@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 12:30:19 by anarita           #+#    #+#             */
+/*   Updated: 2025/09/01 12:53:33 by anarita          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
 
 void	ft_error(void)
 {
@@ -67,31 +80,19 @@ static char	*find_path(char *envp[], char *cmd)
 	return (path);
 }
 
-void	exec(char *av, char *envp[])
+void	execute_command(char **args, char *envp[])
 {
 	char	*path;
-	char	**cmd;
-
-	cmd = ft_split(av, ' ');
-	if (!cmd || !cmd[0] || !cmd[0][0])
-	{
-		free(cmd);
-		cmd_not_found();
-	}
-	path = find_path(envp, cmd[0]);
+	path = find_path(envp, args[0]);
 	if (!path)
 	{
-		free_str(cmd);
-		perror(av);
+		write(2, "minishell: ", 11);
+		write(2, args[0], ft_strlen(args[0]));
+		write(2, ": command not found\n", 20);
 		exit(127);
 	}
-	free(cmd[0]);
-	cmd[0] = path;
-	if (path == cmd[0] && !ft_strchr(cmd[0], '/'))
-		ft_error();
-	if (execve(cmd[0], cmd, envp) == -1)
-	{
-		free_str(cmd);
-		ft_error();
-	}
+	execve(path, args, envp);
+	free(path);
+	perror("minishell");
+	exit(EXIT_FAILURE);
 }

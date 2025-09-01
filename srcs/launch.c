@@ -3,18 +3,118 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: anarita <anarita@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/08/29 14:40:02 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/09/01 13:03:18 by anarita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void shell_launch(char **args)
+static void execute_single_command(char **args, char **envp)
 {
-    (void)args;
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		printf("Execute single command: %s...\n", args[0]);
+		execute_command(args, envp);
+		exit(EXIT_SUCCESS);
+	}
+	else if (pid < 0)
+		perror("minishell: fork error");
+	else
+	{
+		waitpid(pid, &status, 0);
+	}
+}
+
+static void execute_pipe_command(char **cmd1, char **cmd2, char **envp)
+{
+	int		fd[2];
+	pid_t	pid1;
+	pid_t	pid2;
+
+	printf("Executing pipe command: %s | %s..\n", cmd1[0], cmd2[0]);
+	if(pipe(fd) == -1)
+	{
+		perror("minishell: pipe error");
+		return;
+	}
+	pid1 = fork();
+	if(pid1 < 0)
+	{
+		perror("minishell: fork error");
+		return ;
+	}
+	if (pid1 == 0)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		execute_command(cmd1, envp);
+	}
+	pid2 = fork();
+	if(pid2 < 0)
+	{
+		perror("minishell: fork error");
+		return ;
+	}
+	if (pid2 == 0)
+	{
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		execute_command(cmd2, envp);
+	}
+	close(fd[0]);
+	close(fd[1]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	
+}
+
+static int	find_pipe_index(char **args)
+{
+	int i;
+	i = 0;
+	while(args && args[i])
+	{
+		if (ft_strncmp(args[i], "|", 2) == 0)
+			return(i);
+		i++;
+	}
+	return(-1);
+}
+
+void shell_launch(char **args, char **envp)
+{
+	int pipe_index;
+	char **cmd1;
+	char **cmd2;
+	if(!args || !args[0])
+	{
+		//exit?
+		return ;
+	}
+	pipe_index = find_pipe_index(args);
+	if (pipe_index != -1)
+	{
+		args[pipe_index] = NULL;
+		cmd1 = args;
+		cmd2 = &args[pipe_index + 1];
+		if (!cmd2[0])
+		{
+			write(2, "minishell: syntax error near unexpected token `|'\n", 50);
+			return ;
+		}
+		execute_pipe_command(cmd1, cmd2, envp);
+	}
+	else
+		execute_single_command(args, envp);
 }
 /* void	shell_launch(char **args)
 {

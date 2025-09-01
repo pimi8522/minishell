@@ -6,7 +6,7 @@
 /*   By: anarita <anarita@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/01 11:32:39 by anarita          ###   ########.fr       */
+/*   Updated: 2025/09/01 12:41:55 by anarita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
 # include <errno.h>
 # include <string.h>
 # include <sys/wait.h>
 # include <sysexits.h>
-#include <fcntl.h>
-#include <time.h>
+# include <fcntl.h>
+# include <time.h>
 
 # include "libft/libft.h"
+# include "pipex/pipex.h"
 
 #define SPACE	"\t\n\v\f\r "
 
@@ -75,6 +77,8 @@ char *get_cwd(char *buf, size_t size);
 void *do_malloc(size_t size);
 void print_banner(void);
 char **shell_split(char const *s);
-void shell_launch(char **args);
+void shell_launch(char **args, char **envp);
+void execute_command(char **args, char **envp);
+
 
 #endif

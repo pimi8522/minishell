@@ -14,61 +14,61 @@
 
 char *read_line(void)
 {
-    char    *buf;
-    size_t  bufsize;
-    char    cwd[BUFSIZ];
+	char    *buf;
+	size_t  bufsize;
+	char    cwd[BUFSIZ];
 
-    buf = NULL;
-    get_cwd(cwd, sizeof(cwd));
-    ft_printf(RED"%s "RST, cwd);
-    ft_printf(""C"minishell$ "RST);
-    if (getline(&buf, &bufsize, stdin) == -1)
-    {
-        if (feof(stdin))
-        {
-            ft_printf(RED"EOF\n"RST);
-            exit(EXIT_SUCCESS);
-        }
-        else
-        {
-            perror(RED"readline"RST);
-            exit(EXIT_FAILURE);
-        }
-    }
-    return (buf);
+	buf = NULL;
+	get_cwd(cwd, sizeof(cwd));
+	printf(RED"%s "RST, cwd);
+	printf(""C"minishell$ "RST);
+	if (getline(&buf, &bufsize, stdin) == -1)
+	{
+		if (feof(stdin))
+		{
+			printf(RED"EOF\n"RST);
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			perror(RED"readline"RST);
+			exit(EXIT_FAILURE);
+		}
+	}
+	return (buf);
 }
 
 int main(int ac, char **av, char **env)
 {
-    char    *line;
-    char    **args;
-    int     i;
+	char	*line;
+	char	**args;
+	int		i;
 
-    (void)ac;
-    (void)av;
-    (void)env;
-    print_banner();
+	(void)ac;
+	(void)av;
+	(void)env;
+	print_banner();
 
-    while ((line = read_line()))
-    {
-        args = shell_split(line);
-        i = 0;
-        while (args && args[i])
-        {
-            ft_printf("You entered: %s\n", args[i]);
-            i++;
-        }
-        shell_launch(args);
-        i = 0;
-        while (args && args[i])
-        {
-            free(args[i]);
-            i++;
-        }
-        free(args);
-        free(line);
-    }
-    return (EXIT_SUCCESS);
+	while ((line = read_line()))
+	{
+		args = shell_split(line);
+		i = 0;
+		while (args && args[i])
+		{
+			printf("You entered: %s\n", args[i]);
+			i++;
+		}
+		shell_launch(args, env);
+		i = 0;
+		while (args && args[i])
+		{
+			free(args[i]);
+			i++;
+		}
+		free(args);
+		free(line);
+	}
+	return (EXIT_SUCCESS);
 }
 
 //facilitar
