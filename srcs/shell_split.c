@@ -6,12 +6,13 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:28:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/08/29 16:55:07 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/09/02 17:25:00 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// retorna 1 se for whitespace
 static int is_blank(char c)
 {
 	int r;
@@ -24,12 +25,16 @@ static int is_blank(char c)
 	return (r);
 }
 
+// salta whitespace
 static void skip_blanks(const char *s, size_t *i)
 {
 	while (s[*i] && is_blank(s[*i]))
 		*i += 1;
 }
 
+// retorna o tamanho do token e valida aspas
+//squote - plicas
+//dquote - aspas
 static int span_token(const char *s, size_t *i,
 					  int *squote, int *dquote)
 {
@@ -61,12 +66,13 @@ static int span_token(const char *s, size_t *i,
 	return ((int)(*i - start));
 }
 
+// conta tokens (primeira passagem)
 static int count_tokens(const char *s, size_t *i)
 {
-	int	count;
-	int	squote;
-	int	dquote;
-	int	span;
+	int count;
+	int squote;
+	int dquote;
+	int span;
 
 	count = 0;
 	squote = 0;
@@ -84,18 +90,16 @@ static int count_tokens(const char *s, size_t *i)
 	return (count);
 }
 
-static char *copy_unquoted_token(const char *s, size_t *i)
+// encontra o fim do token respeitando aspas
+static size_t find_token_end(const char *s, size_t start)
 {
-	size_t	end;
-	size_t	out;
-	int		squote;
-	int		dquote;
-	char	*token;
-	char	c;
+	size_t  end;
+	int     squote;
+	int     dquote;
 
+	end = start;
 	squote = 0;
 	dquote = 0;
-	end = *i;
 	while (s[end] && (squote || dquote || !is_blank(s[end])))
 	{
 		if (s[end] == '\'' && !dquote)
@@ -104,8 +108,22 @@ static char *copy_unquoted_token(const char *s, size_t *i)
 			dquote = !dquote;
 		end += 1;
 	}
+	return (end);
+}
+
+// copia o span removendo aspas e avança *i até end (segunda passagem)
+static char *copy_span_unquoted(const char *s, size_t *i, size_t end)
+{
+	size_t  out;
+	int     squote;
+	int     dquote;
+	char    *token;
+	char    c;
+
 	token = (char *)do_malloc((end - *i) + 1);
 	out = 0;
+	squote = 0;
+	dquote = 0;
 	while (*i < end)
 	{
 		c = s[*i];
@@ -124,13 +142,22 @@ static char *copy_unquoted_token(const char *s, size_t *i)
 	return (token);
 }
 
+// cria o token removendo aspas
+static char *copy_unquoted_token(const char *s, size_t *i)
+{
+	size_t  end;
+
+	end = find_token_end(s, *i);
+	return (copy_span_unquoted(s, i, end));
+}
+
 char **shell_split(char const *s)
 {
 	size_t  i;
 	int     count;
 	char    **tokens;
 	int     t;
-	
+    
 	if (!s)
 		return (NULL);
 	i = 0;
@@ -152,3 +179,5 @@ char **shell_split(char const *s)
 	tokens[t] = NULL;
 	return (tokens);
 }
+
+//todo - classificar operadores e dividir em operadores e argumentos n shit
