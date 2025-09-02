@@ -63,10 +63,10 @@ static int span_token(const char *s, size_t *i,
 
 static int count_tokens(const char *s, size_t *i)
 {
-	int     count;
-	int     squote;
-	int     dquote;
-	int     span;
+	int	count;
+	int	squote;
+	int	dquote;
+	int	span;
 
 	count = 0;
 	squote = 0;
@@ -86,12 +86,12 @@ static int count_tokens(const char *s, size_t *i)
 
 static char *copy_unquoted_token(const char *s, size_t *i)
 {
-	size_t  end;
-	size_t  out;
-	int     squote;
-	int     dquote;
-	char    *token;
-	char    c;
+	size_t	end;
+	size_t	out;
+	int		squote;
+	int		dquote;
+	char	*token;
+	char	c;
 
 	squote = 0;
 	dquote = 0;

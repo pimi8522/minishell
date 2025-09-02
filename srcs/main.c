@@ -14,9 +14,9 @@
 
 char *read_line(void)
 {
-	char    *buf;
-	size_t  bufsize;
-	char    cwd[BUFSIZ];
+	char	*buf;
+	size_t	bufsize;
+	char	cwd[BUFSIZ];
 
 	buf = NULL;
 	get_cwd(cwd, sizeof(cwd));

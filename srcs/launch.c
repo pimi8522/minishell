@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarita <anarita@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adores <adores@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/01 13:03:18 by anarita          ###   ########.fr       */
+/*   Updated: 2025/09/02 11:30:34 by adores           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void execute_pipe_command(char **cmd1, char **cmd2, char **envp)
 	int		fd[2];
 	pid_t	pid1;
 	pid_t	pid2;
+	int		status1;
+	int		status2;
 
 	printf("Executing pipe command: %s | %s..\n", cmd1[0], cmd2[0]);
 	if(pipe(fd) == -1)
@@ -72,9 +74,8 @@ static void execute_pipe_command(char **cmd1, char **cmd2, char **envp)
 	}
 	close(fd[0]);
 	close(fd[1]);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
-	
+	waitpid(pid1, &status1, 0);
+	waitpid(pid2, &status2, 0);
 }
 
 static int	find_pipe_index(char **args)
