@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anarita <anarita@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 12:30:19 by anarita           #+#    #+#             */
-/*   Updated: 2025/09/01 12:53:33 by anarita          ###   ########.fr       */
+/*   Updated: 2025/09/03 14:51:20 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char	*find_path(char *envp[], char *cmd)
 		return (NULL);
 	paths = ft_split(envp[i] + 5, ':');
 	if (!paths)
-		ft_error();
+		ft_error(); //nao e suposto dar error com certas funcoes
 	path = get_cmd_path(paths, cmd);
 	return (path);
 }

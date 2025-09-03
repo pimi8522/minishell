@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
+#    By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/09/02 16:28:19 by miduarte &       ###   ########.fr        #
+#    Updated: 2025/09/03 14:31:56 by adores & mi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS = \
 	srcs/shell_split.c \
 	srcs/execute.c \
 	srcs/launch.c \
+	builtin/builtin.c
 
 OBJS = $(SRCS:.c=.o)
 

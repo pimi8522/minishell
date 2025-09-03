@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/02 16:28:21 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/09/03 14:25:44 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void *do_malloc(size_t size);
 void print_banner(void);
 char **shell_split(char const *s);
 void shell_launch(char **args, char **envp);
-void execute_command(char **args, char **envp);
-
+void	execute_command(char **args, char *envp[]);
+int	exe_builtin(char **args);
 
 #endif

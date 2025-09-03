@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores <adores@student.42.fr>              +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/02 14:26:40 by adores           ###   ########.fr       */
+/*   Updated: 2025/09/03 14:30:59 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void shell_launch(char **args, char **envp)
 		//exit?
 		return ;
 	}
+	if(exe_builtin(args))
+		return;
 	if (ft_strncmp((args[0]), "cd", 3) == 0)
 	{
 		ft_cd(args);
