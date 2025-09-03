@@ -2,39 +2,56 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+      */
+/*                                                    +:+ +:+         +:+     */
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 15:19:30 by miduarte          #+#    #+#             */
-/*   Updated: 2025/08/29 17:35:00 by miduarte &       ###   ########.fr       */
+/*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
+/*   Updated: 2025/09/03 17:06:59 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minishell.h"
 
+//check se  a linha tá em branco pra n dar merda  no history
+static int	is_blank_line(const char *s)
+{
+	size_t	i;
+
+	if (!s)
+		return (1);
+	i = 0;
+	while (s[i] && (s[i] == ' ' || s[i] == '\t'))
+		i++;
+	return (s[i] == '\0');
+}
+
+//dá display ao current directory, junto de adicionar a linha à history se n for em branco
 char *read_line(void)
 {
 	char	*buf;
-	size_t	bufsize;
+	char	*prompt;
 	char	cwd[BUFSIZ];
 
-	buf = NULL;
 	get_cwd(cwd, sizeof(cwd));
-	printf(RED"%s "RST, cwd);
-	printf(""C"minishell$ "RST);
-	if (getline(&buf, &bufsize, stdin) == -1)
+	prompt = ft_strjoin(RED, cwd);
+	if (!prompt)
+		return (NULL);
+	buf = ft_strjoin(prompt, " "RST""C"minishell$ "RST);
+	free(prompt);
+	if (!buf)
+		return (NULL);
+	prompt = buf;
+	buf = readline(prompt);
+	free(prompt);
+	if (!buf)
 	{
-		if (feof(stdin))
-		{
-			printf(RED"EOF\n"RST);
-			exit(EXIT_SUCCESS);
-		}
-		else
-		{
-			perror(RED"readline"RST);
-			exit(EXIT_FAILURE);
-		}
+		printf(RED"exit\n"RST);
+		exit(EXIT_SUCCESS);
 	}
+//history type shit
+	if (!is_blank_line(buf))
+		add_history(buf);
 	return (buf);
 }
 
@@ -48,9 +65,17 @@ int main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 	print_banner();
+//sinais de lixo
+	signal(SIGINT, sigint_handler);  /* Ctrl+C */
+	signal(SIGQUIT, SIG_IGN);        /* Ctrl+backslash */
+	init_shell_history();
 
-	while ((line = read_line()))
+	while (1)
 	{
+		line = read_line();
+		if (!line)
+			break;
+			
 		args = shell_split(line);
 		i = 0;
 		while (args && args[i])
@@ -68,6 +93,9 @@ int main(int ac, char **av, char **env)
 		free(args);
 		free(line);
 	}
+	
+ // guardar history aqui
+	save_shell_history();
 	return (EXIT_SUCCESS);
 }
 

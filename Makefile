@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+         #
+#    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/09/03 14:31:56 by adores & mi      ###   ########.fr        #
+#    Updated: 2025/09/03 17:00:50 by miduarte &       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ SRCS = \
 	srcs/shell_split.c \
 	srcs/execute.c \
 	srcs/launch.c \
+	srcs/signals.c \
+	srcs/history.c \
 	builtin/builtin.c
 
 OBJS = $(SRCS:.c=.o)
@@ -34,7 +36,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lreadline
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
