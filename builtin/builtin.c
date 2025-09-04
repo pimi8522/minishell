@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:55:04 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/03 15:18:08 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/04 11:45:37 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ static void	echo_builtin(char **args)
 		printf("\n");
 }
 
+void	ft_cd(char **args)
+{
+	if(!args[1])
+	{
+		write(2, "minishell: cd: missing argument\n", 31);
+		return ;
+	}
+	if(chdir(args[1]) != 0)
+		perror("minishell: cd");
+}
+
 int	exe_builtin(char **args)
 {
 	if(!args || !args[0])
@@ -44,7 +55,11 @@ int	exe_builtin(char **args)
 		echo_builtin(args);
 		return(1);
 	}
-	//else if cd
+	else if (ft_strcmp((args[0]), "cd") == 0)
+	{
+		ft_cd(args);
+		return ;
+	}
 	//else if pwd
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/03 14:30:59 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/04 11:45:08 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,7 @@ static int	find_pipe_index(char **args)
 	return(-1);
 }
 
-void	ft_cd(char **args)
-{
-	if(!args[1])
-	{
-		write(2, "minishell: cd: missing argument\n", 31);
-		return ;
-	}
-	if(chdir(args[1]) != 0)
-		perror("minishell: cd");
-}
+
 
 void shell_launch(char **args, char **envp)
 {
@@ -114,11 +105,6 @@ void shell_launch(char **args, char **envp)
 	}
 	if(exe_builtin(args))
 		return;
-	if (ft_strncmp((args[0]), "cd", 3) == 0)
-	{
-		ft_cd(args);
-		return ;
-	}
 	pipe_index = find_pipe_index(args);
 	if (pipe_index != -1)
 	{
