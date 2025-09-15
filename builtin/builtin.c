@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:55:04 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/15 15:41:26 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/15 16:22:25 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,21 @@ static void pwd_builtin(void)
 		perror("pwd");
 }
 
+static void	exit_builtin(char **args)
+{
+	int	exit_code;
+
+	if(!args[1])
+		exit(0);
+	exit_code = ft_atoi(args[1]);
+	if(args[2])
+	{
+		write(2, "minishell: exit: too many arguments\n", 36);
+		return ; // We should set a specific error status here, but for now, just return.
+	}
+	exit(exit_code);
+}
+
 int	exe_builtin(char **args)
 {
 	if(!args || !args[0])
@@ -74,6 +89,11 @@ int	exe_builtin(char **args)
 	else if (ft_strcmp((args[0]), "pwd") == 0)
 	{
 		pwd_builtin();
+		return(1);
+	}
+	else if (ft_strcmp((args[0]), "exit") == 0)
+	{
+		exit_builtin(args);
 		return(1);
 	}
 	return(0);
