@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:55:04 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/15 14:58:07 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/15 15:41:26 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,13 @@ void	ft_cd(char **args)
 
 static void pwd_builtin(void)
 {
-	
+	char cwd[PATH_MAX];
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	{
+		printf("%s\n", cwd);
+	}
+	else
+		perror("pwd");
 }
 
 int	exe_builtin(char **args)
@@ -65,6 +71,10 @@ int	exe_builtin(char **args)
 		ft_cd(args);
 		return (1) ;
 	}
-	//else if pwd
+	else if (ft_strcmp((args[0]), "pwd") == 0)
+	{
+		pwd_builtin();
+		return(1);
+	}
 	return(0);
 }
