@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:55:04 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/04 11:45:37 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/15 14:58:07 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	ft_cd(char **args)
 		perror("minishell: cd");
 }
 
+static void pwd_builtin(void)
+{
+	
+}
+
 int	exe_builtin(char **args)
 {
 	if(!args || !args[0])
@@ -58,7 +63,7 @@ int	exe_builtin(char **args)
 	else if (ft_strcmp((args[0]), "cd") == 0)
 	{
 		ft_cd(args);
-		return ;
+		return (1) ;
 	}
 	//else if pwd
 	return(0);
