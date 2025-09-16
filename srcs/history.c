@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:45 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/16 16:12:27 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/09/16 16:16:55 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int	init_shell_history(void)
 	if (bytes_read <= 0)
 	{
 		close(fd);
-		return (bytes_read < 0 ? -1 : 0);
+		if (bytes_read < 0)
+			return (-1);
+		return (0);
 	}
 	
 	buffer[bytes_read] = '\0';
