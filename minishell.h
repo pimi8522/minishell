@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/15 15:30:39 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/17 14:32:30 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,14 @@ typedef struct s_split {
 	t_tokbuf    tok;
 }   t_split;
 
+
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+} t_env;
+
 /*
 ** ANSI Color codes for terminal output formatting:
 ** Y    - Yellow
@@ -83,9 +91,10 @@ void print_banner(void);
 char **shell_split(char const *s);
 void shell_launch(char **args, char **envp);
 void execute_command(char **args, char *envp[]);
-int exe_builtin(char **args);
+int	exe_builtin(char **args, t_env *env_list);
 void sigint_handler(int signo);
 int init_shell_history(void);
 void save_shell_history(void);
+t_env	*init_env(char **envp);
 
 #endif

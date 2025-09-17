@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/04 11:45:08 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/16 15:15:48 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void shell_launch(char **args, char **envp)
 		//exit?
 		return ;
 	}
-	if(exe_builtin(args))
+	if(exe_builtin(args, ))
 		return;
 	pipe_index = find_pipe_index(args);
 	if (pipe_index != -1)
