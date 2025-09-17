@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/17 15:28:44 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/17 15:56:22 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static int	find_pipe_index(char **args)
 	return(-1);
 }
 
-void	shell_launch(char **args, t_env *env_list)
+void	shell_launch(char **args, t_env **env_list_head)
 {
 	int pipe_index;
 	char **cmd1;
@@ -106,7 +106,7 @@ void	shell_launch(char **args, t_env *env_list)
 		//exit?
 		return ;
 	}
-	if(exe_builtin(args, env_list))
+	if(exe_builtin(args, env_list_head))
 		return;
 	pipe_index = find_pipe_index(args);
 	if (pipe_index != -1)
@@ -119,10 +119,10 @@ void	shell_launch(char **args, t_env *env_list)
 			write(2, "minishell: syntax error near unexpected token `|'\n", 50);
 			return ;
 		}
-		execute_pipe_command(cmd1, cmd2, env_list);
+		execute_pipe_command(cmd1, cmd2, *env_list_head);
 	}
 	else
-		execute_single_command(args, env_list);
+		execute_single_command(args, *env_list_head);
 }
 /* void	shell_launch(char **args)
 {

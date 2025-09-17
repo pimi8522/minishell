@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/17 14:41:45 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/17 15:45:10 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int main(int ac, char **av, char **env)
 			printf("You entered: %s\n", args[i]);
 			i++;
 		}
-		shell_launch(args, env_list);
+		shell_launch(args, &env_list);
 		i = 0;
 		while (args && args[i])
 		{

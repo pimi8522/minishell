@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/17 15:15:21 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/17 16:22:17 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <limits.h>
+# include <linux/limits.h>
 
 # include "libft/libft.h"
 # include "pipex/pipex.h"
@@ -89,9 +89,9 @@ char	*get_cwd(char *buf, size_t size);
 void	*do_malloc(size_t size);
 void	print_banner(void);
 char	**shell_split(char const *s);
-void	shell_launch(char **args, t_env *env_list);
+void	shell_launch(char **args, t_env **env_list_head);
 void	execute_command(char **args, char *envp[]);
-int		exe_builtin(char **args, t_env *env_list);
+int	exe_builtin(char **args, t_env **env_list);
 void	sigint_handler(int signo);
 int		init_shell_history(void);
 void	save_shell_history(void);

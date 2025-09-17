@@ -6,11 +6,20 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:55:04 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/16 15:09:03 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/17 16:18:56 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	free_env_node(t_env *node)
+{
+	if(!node)
+		return ;
+	free(node->key);
+	free(node->value);
+	free(node);
+}
 
 static void	echo_builtin(char **args)
 {
@@ -85,7 +94,38 @@ static void	env_builtin(t_env *env_list)
 	}
 }
 
-int	exe_builtin(char **args, t_env *env_list)
+static void	unset_builtin(char **args, t_env **env_list_head)
+{
+	t_env	*current;
+	t_env	*prev;
+	int		i;
+
+	if (!args[1])
+		return ;
+	i = 1;
+	while (args[i])
+	{
+		current = *env_list_head;
+		prev = NULL;
+		while(current)
+		{
+			if(ft_strcmp(current->key, args[i]) == 0)
+			{
+				if (prev == NULL)
+					*env_list_head = current->next;
+				else
+					prev->next = current->next;
+				free_env_node(current);
+				break;
+			}
+			prev = current;
+			current = current->next;
+		}
+		i++;
+	}
+}
+
+int	exe_builtin(char **args, t_env **env_list)
 {
 	if(!args || !args[0])
 		return(0);
@@ -111,7 +151,12 @@ int	exe_builtin(char **args, t_env *env_list)
 	}
 	else if(ft_strcmp(args[0], "env") == 0)
 	{
-		env_builtin(env_list);
+		env_builtin(*env_list);
+		return(1);
+	}
+	else if(ft_strcmp(args[0], "unset") == 0)
+	{
+		unset_builtin(args, env_list);
 		return(1);
 	}
 	return(0);
