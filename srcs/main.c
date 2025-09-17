@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/17 14:34:25 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/17 14:41:45 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ int main(int ac, char **av, char **env)
 	char	*line;
 	char	**args;
 	int		i;
+	t_env	*env_list;
 
 	(void)ac;
 	(void)av;
-	(void)env;
+	env_list = init_env(env);
 	print_banner();
 //sinais de lixo
 	signal(SIGINT, sigint_handler);  /* Ctrl+C */
@@ -83,7 +84,7 @@ int main(int ac, char **av, char **env)
 			printf("You entered: %s\n", args[i]);
 			i++;
 		}
-		shell_launch(args, env);
+		shell_launch(args, env_list);
 		i = 0;
 		while (args && args[i])
 		{

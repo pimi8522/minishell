@@ -6,22 +6,24 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/17 14:38:09 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/17 15:28:44 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void execute_single_command(char **args, char **envp)
+static void execute_single_command(char **args, t_env *env_list)
 {
 	pid_t	pid;
 	int		status;
+	char	**env_array;
 
 	pid = fork();
 	if (pid == 0)
 	{
 		printf("Execute single command: %s...\n", args[0]);
-		execute_command(args, envp);
+		env_array = convert_env_to_array(env_list);
+		execute_command(args, env_array);
 		exit(EXIT_SUCCESS);
 	}
 	else if (pid < 0)
@@ -32,13 +34,14 @@ static void execute_single_command(char **args, char **envp)
 	}
 }
 
-static void execute_pipe_command(char **cmd1, char **cmd2, char **envp)
+static void execute_pipe_command(char **cmd1, char **cmd2, t_env *env_list)
 {
 	int		fd[2];
 	pid_t	pid1;
 	pid_t	pid2;
 	int		status1;
 	int		status2;
+	char	**env_array;
 
 	printf("Executing pipe command: %s | %s..\n", cmd1[0], cmd2[0]);
 	if(pipe(fd) == -1)
@@ -57,7 +60,8 @@ static void execute_pipe_command(char **cmd1, char **cmd2, char **envp)
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		execute_command(cmd1, envp);
+		env_array = convert_env_to_array(env_list);
+		execute_command(cmd1, env_array);
 	}
 	pid2 = fork();
 	if(pid2 < 0)
@@ -70,7 +74,8 @@ static void execute_pipe_command(char **cmd1, char **cmd2, char **envp)
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		execute_command(cmd2, envp);
+		env_array = convert_env_to_array(env_list);
+		execute_command(cmd2, env_array);
 	}
 	close(fd[0]);
 	close(fd[1]);
@@ -91,7 +96,7 @@ static int	find_pipe_index(char **args)
 	return(-1);
 }
 
-void shell_launch(char **args, char **envp)
+void	shell_launch(char **args, t_env *env_list)
 {
 	int pipe_index;
 	char **cmd1;
@@ -101,7 +106,7 @@ void shell_launch(char **args, char **envp)
 		//exit?
 		return ;
 	}
-	if(exe_builtin(args, ))
+	if(exe_builtin(args, env_list))
 		return;
 	pipe_index = find_pipe_index(args);
 	if (pipe_index != -1)
@@ -114,10 +119,10 @@ void shell_launch(char **args, char **envp)
 			write(2, "minishell: syntax error near unexpected token `|'\n", 50);
 			return ;
 		}
-		execute_pipe_command(cmd1, cmd2, envp);
+		execute_pipe_command(cmd1, cmd2, env_list);
 	}
 	else
-		execute_single_command(args, envp);
+		execute_single_command(args, env_list);
 }
 /* void	shell_launch(char **args)
 {

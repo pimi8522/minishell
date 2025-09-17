@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/17 14:32:30 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/17 15:15:21 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,17 @@ typedef struct s_env
 #define RED		"\033[1;31m"
 #define RST 	"\033[0m"
 
-char *get_cwd(char *buf, size_t size);
-void *do_malloc(size_t size);
-void print_banner(void);
-char **shell_split(char const *s);
-void shell_launch(char **args, char **envp);
-void execute_command(char **args, char *envp[]);
-int	exe_builtin(char **args, t_env *env_list);
-void sigint_handler(int signo);
-int init_shell_history(void);
-void save_shell_history(void);
+char	*get_cwd(char *buf, size_t size);
+void	*do_malloc(size_t size);
+void	print_banner(void);
+char	**shell_split(char const *s);
+void	shell_launch(char **args, t_env *env_list);
+void	execute_command(char **args, char *envp[]);
+int		exe_builtin(char **args, t_env *env_list);
+void	sigint_handler(int signo);
+int		init_shell_history(void);
+void	save_shell_history(void);
 t_env	*init_env(char **envp);
+char	**convert_env_to_array(t_env *env_list);
 
 #endif
