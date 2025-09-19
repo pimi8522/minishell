@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/17 16:22:17 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/19 13:12:32 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,12 @@ typedef struct s_env
 ** RED  - Red
 ** RST  - Reset to default color
 */
-#define Y		"\033[1;33m"
-#define G		"\033[1;32m"
-#define C 		"\033[1;36m"
-#define RED		"\033[1;31m"
-#define RST 	"\033[0m"
+#define Y		"\1\033[1;33m\2"
+#define G		"\1\033[1;32m\2"
+#define C 		"\1\033[1;36m\2"
+#define RED		"\1\033[1;31m\2"
+#define RST 	"\1\033[0m\2"
+
 
 char	*get_cwd(char *buf, size_t size);
 void	*do_malloc(size_t size);
@@ -91,11 +92,13 @@ void	print_banner(void);
 char	**shell_split(char const *s);
 void	shell_launch(char **args, t_env **env_list_head);
 void	execute_command(char **args, char *envp[]);
-int	exe_builtin(char **args, t_env **env_list);
+int		exe_builtin(char **args, t_env **env_list);
 void	sigint_handler(int signo);
 int		init_shell_history(void);
 void	save_shell_history(void);
 t_env	*init_env(char **envp);
 char	**convert_env_to_array(t_env *env_list);
-
+t_env	*find_env_node(t_env *env_list, const char *key);
+void	add_env_node_back(t_env **env_list_head, t_env *new_node);
+t_env	*new_env_node(char *key, char *value);
 #endif

@@ -6,13 +6,13 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 10:31:54 by adores            #+#    #+#             */
-/*   Updated: 2025/09/03 15:02:14 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/19 12:49:26 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	unsigned int	i;
 

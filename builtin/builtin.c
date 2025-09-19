@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:55:04 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/17 16:18:56 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/19 12:58:44 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,57 @@ static void	unset_builtin(char **args, t_env **env_list_head)
 	}
 }
 
+static void	export_builtin(char **args, t_env **env_list_head)
+{
+	int	i;
+	char	*equal_sign;
+	char	*key;
+	char	*value;
+	t_env	*existing_node;
+	t_env	*new_node;
+
+	i = 1;
+	if (!args[i])
+	{
+		return ;
+	}
+	while (args[i])
+	{
+		equal_sign = ft_strchr(args[i], '=');
+		if (equal_sign)
+		{
+			key = ft_substr(args[i], 0, equal_sign - args[i]);
+			if(!key)
+				break;
+			value = ft_strdup(equal_sign + 1);
+			if(!value)
+			{
+				free(key);
+				break;
+			}
+			existing_node = find_env_node(*env_list_head, key);
+			if(existing_node)
+			{
+				free(existing_node->value);
+				existing_node->value = value;
+				free(key);
+			}
+			else
+			{
+				new_node = new_env_node(key, value);
+				if (!new_node)
+				{
+					free(key);
+					free(value);
+					break;
+				}
+				add_env_node_back(env_list_head, new_node);
+			}
+		}
+		i++;
+	}
+}
+
 int	exe_builtin(char **args, t_env **env_list)
 {
 	if(!args || !args[0])
@@ -157,6 +208,11 @@ int	exe_builtin(char **args, t_env **env_list)
 	else if(ft_strcmp(args[0], "unset") == 0)
 	{
 		unset_builtin(args, env_list);
+		return(1);
+	}
+	else if(ft_strcmp(args[0], "export") == 0)
+	{
+		export_builtin(args, env_list);
 		return(1);
 	}
 	return(0);

@@ -6,13 +6,13 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:19:53 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/17 16:01:03 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/19 13:05:33 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_env *new_env_node(char *key, char *value)
+t_env	*new_env_node(char *key, char *value)
 {
 	t_env	*new_node;
 
@@ -97,3 +97,30 @@ char	**convert_env_to_array(t_env *env_list)
 	env_array[i] = NULL;
 	return(env_array);
 }
+
+t_env	*find_env_node(t_env *env_list, const char *key)
+{
+	while (env_list)
+	{
+		if (ft_strcmp(env_list->key, key) == 0)
+			return (env_list);
+		env_list = env_list->next;
+	}
+	return (NULL);
+}
+
+void	add_env_node_back(t_env **env_list_head, t_env *new_node)
+{
+	t_env	*current;
+
+	if(!*env_list_head)
+	{
+		*env_list_head = new_node;
+		return;
+	}
+	current = *env_list_head;
+	while(current->next)
+		current = current->next;
+	current->next = new_node;
+}
+
