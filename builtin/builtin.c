@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:55:04 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/19 12:58:44 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/19 16:35:58 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,40 @@ static void	unset_builtin(char **args, t_env **env_list_head)
 	}
 }
 
+static void	print_sorted_env(t_env *env_list)
+{
+	char	**env_array;
+	int		i;
+	char	*equal_sign;
+	char	*key;
+
+	env_array = convert_env_to_array(env_list);
+	if (!env_array)
+		return;
+	bubble_sort_array(env_array);
+	i = 0;
+	while(env_array[i])
+	{
+		equal_sign = ft_strchr(env_array[i], '=');
+		if (equal_sign)
+		{
+			key = ft_substr(env_array[i], 0, equal_sign - env_array[i]);
+			if (key)
+			{
+				printf("declare -x %s=\"%s\"\n", key, equal_sign + 1);
+				free(key);
+			}
+		}
+		else
+			printf("declare -x %s\n", env_array[i]);
+		i++;
+	}
+	free_str(env_array);
+}
+
 static void	export_builtin(char **args, t_env **env_list_head)
 {
-	int	i;
+	int		i;
 	char	*equal_sign;
 	char	*key;
 	char	*value;
@@ -137,6 +168,7 @@ static void	export_builtin(char **args, t_env **env_list_head)
 	i = 1;
 	if (!args[i])
 	{
+		print_sorted_env(*env_list_head);
 		return ;
 	}
 	while (args[i])

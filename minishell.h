@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/19 13:12:32 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/19 16:07:44 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,7 @@ char	**convert_env_to_array(t_env *env_list);
 t_env	*find_env_node(t_env *env_list, const char *key);
 void	add_env_node_back(t_env **env_list_head, t_env *new_node);
 t_env	*new_env_node(char *key, char *value);
+void	bubble_sort_array(char **arr);
+void	free_str(char **str);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:19:53 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/19 13:05:33 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/19 16:08:50 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,3 +124,42 @@ void	add_env_node_back(t_env **env_list_head, t_env *new_node)
 	current->next = new_node;
 }
 
+static int	count_array_strings(char **arr)
+{
+	int	count;
+
+	count = 0;
+	if (!arr)
+		return(0);
+	while (arr[count])
+		count++;
+	return(count);
+}
+
+void	bubble_sort_array(char **arr)
+{
+	int		i;
+	int		j;
+	int		n;
+	char	*temp;
+
+	n = count_array_strings(arr);
+	if (n < 2)
+		return ;
+	i = 0;
+	while (i < n - 1)
+	{
+		j = 0;
+		while(j < n -i - 1)
+		{
+			if (ft_strcmp(arr[j], arr[j + 1]) > 0)
+			{
+				temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
