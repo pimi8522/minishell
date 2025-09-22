@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/22 11:00:23 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/22 15:11:01 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 
 #define WHITESPACE	"\t\n\v\f\r "
 
-
 typedef struct s_cmd
 {
 	char	*cmd;
@@ -41,8 +40,9 @@ typedef struct s_cmd
 	int		in;
 	int		out;
 	int		fd[2];
-	/* data */
+	struct s_cmd	*next;
 } t_cmd;
+
 
 
 //structs para o shell split line
@@ -104,6 +104,10 @@ t_env	*new_env_node(char *key, char *value);
 void	bubble_sort_array(char **arr);
 void	free_str(char **str);
 void	free_env_node(t_env *node);
+t_cmd	*parse_line(char *line);
+void	free_cmds(t_cmd *cmd_list);
+t_cmd	*new_cmd_node(char *cmd, char **flags);
+void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
 
 void	echo_builtin(char **args);
 void	ft_cd(char **args);
