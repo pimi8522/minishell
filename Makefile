@@ -6,7 +6,7 @@
 #    By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/09/17 14:32:57 by adores & mi      ###   ########.fr        #
+#    Updated: 2025/09/22 11:02:21 by adores & mi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,20 @@ CFLAGS = -Wall -Wextra -Werror -I. -Ilibft -Ipipex
 SRCS = \
 	srcs/main.c \
 	srcs/utils.c \
-	srcs/utils2.c \
 	srcs/shell_split.c \
 	srcs/execute.c \
 	srcs/launch.c \
 	srcs/signals.c \
 	srcs/history.c \
-	builtin/builtin.c
+	builtin/builtin.c \
+	builtin/builtin_utils.c\
+	builtin/cd.c\
+	builtin/echo.c\
+	builtin/env.c\
+	builtin/exit.c\
+	builtin/export.c\
+	builtin/pwd.c\
+	builtin/unset.c\
 
 OBJS = $(SRCS:.c=.o)
 
