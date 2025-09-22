@@ -6,16 +6,14 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:55:04 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/22 11:00:53 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/22 11:32:51 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exe_builtin(char **args, t_env **env_list)
+static int	exe_builtin2(char **args, t_env **env_list)
 {
-	if(!args || !args[0])
-		return(0);
 	if(ft_strcmp(args[0], "echo") == 0)
 	{
 		echo_builtin(args);
@@ -31,7 +29,16 @@ int	exe_builtin(char **args, t_env **env_list)
 		pwd_builtin();
 		return(1);
 	}
-	else if (ft_strcmp(args[0], "exit") == 0)
+	return(0);
+}
+
+int	exe_builtin(char **args, t_env **env_list)
+{
+	if(!args || !args[0])
+		return(0);
+	if(exe_builtin2(args, env_list))
+		return (1);
+	if (ft_strcmp(args[0], "exit") == 0)
 	{
 		exit_builtin(args);
 		return(1);
