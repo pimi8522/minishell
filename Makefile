@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+         #
+#    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/09/22 11:02:21 by adores & mi      ###   ########.fr        #
+#    Updated: 2025/09/22 15:06:25 by miduarte &       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SRCS = \
 	srcs/launch.c \
 	srcs/signals.c \
 	srcs/history.c \
+	srcs/cmd_utils.c \
+	srcs/parser.c \
 	builtin/builtin.c \
 	builtin/builtin_utils.c\
 	builtin/cd.c\

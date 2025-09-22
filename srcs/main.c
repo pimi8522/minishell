@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/17 15:45:10 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/22 15:05:28 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ char *read_line(void)
 int main(int ac, char **av, char **env)
 {
 	char	*line;
-	char	**args;
-	int		i;
+	t_cmd	*cmds;
 	t_env	*env_list;
 
 	(void)ac;
@@ -76,22 +75,14 @@ int main(int ac, char **av, char **env)
 		line = read_line();
 		if (!line)
 			break;
-			
-		args = shell_split(line);
-		i = 0;
-		while (args && args[i])
+		cmds = parse_line(line);
+		// The execution logic will go here, using the 'cmds' list.
+		(void)env_list;
+		if (cmds)
 		{
-			printf("You entered: %s\n", args[i]);
-			i++;
+			// execution logic will go here
+			free_cmds(cmds);
 		}
-		shell_launch(args, &env_list);
-		i = 0;
-		while (args && args[i])
-		{
-			free(args[i]);
-			i++;
-		}
-		free(args);
 		free(line);
 	}
 	
