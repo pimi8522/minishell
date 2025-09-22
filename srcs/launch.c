@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/17 15:56:22 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/22 16:13:14 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,19 @@ void	shell_launch(char **args, t_env **env_list_head)
 	else
 		execute_single_command(args, *env_list_head);
 }
+
+void	execute_pipeline(t_cmd *cmds, t_env **env_list)
+{
+	if(!cmds)
+		return ;
+	if(!cmds->next && exe_builtin(cmds->flag, env_list))
+	{
+		// Note: Redirection for built-ins will be handled later.
+		return;
+	}
+	printf("PIPELINE EXECUTION NOT IMPLEMENTED YET.\n");
+}
+
 /* void	shell_launch(char **args)
 {
 	// Is fork returning 2 values?

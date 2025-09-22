@@ -6,13 +6,13 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:55:04 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/22 11:32:51 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/22 16:31:06 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	exe_builtin2(char **args, t_env **env_list)
+static int	exe_builtin2(char **args)
 {
 	if(ft_strcmp(args[0], "echo") == 0)
 	{
@@ -36,7 +36,7 @@ int	exe_builtin(char **args, t_env **env_list)
 {
 	if(!args || !args[0])
 		return(0);
-	if(exe_builtin2(args, env_list))
+	if(exe_builtin2(args))
 		return (1);
 	if (ft_strcmp(args[0], "exit") == 0)
 	{

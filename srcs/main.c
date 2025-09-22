@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/22 15:05:28 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/09/22 16:56:25 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,8 @@ int main(int ac, char **av, char **env)
 	(void)av;
 	env_list = init_env(env);
 	print_banner();
-//sinais de lixo
-	signal(SIGINT, sigint_handler);  /* Ctrl+C */
-	signal(SIGQUIT, SIG_IGN);        /* Ctrl+backslash */
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 	init_shell_history();
 
 	while (1)
@@ -75,21 +74,24 @@ int main(int ac, char **av, char **env)
 		line = read_line();
 		if (!line)
 			break;
+		
+		// Use the new parser to create a structured command list
 		cmds = parse_line(line);
-		// The execution logic will go here, using the 'cmds' list.
-		(void)env_list;
+		
+		// If parsing was successful, pass the list to the new execution engine
 		if (cmds)
 		{
-			// execution logic will go here
-			free_cmds(cmds);
+			execute_pipeline(cmds, &env_list);
+			free_cmds(cmds); // Free the allocated command list
 		}
-		free(line);
+		
+		free(line); // Free the line read from input
 	}
 	
- // guardar history aqui
 	save_shell_history();
 	return (EXIT_SUCCESS);
 }
+
 
 //facilitar
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/22 15:11:01 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/09/22 16:14:14 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 typedef struct s_cmd
 {
 	char	*cmd;
-	char	**flag;
+	char	**flag; //os comandos em si separados
 	int		in;
 	int		out;
 	int		fd[2];
@@ -116,5 +116,7 @@ void	exit_builtin(char **args);
 void	env_builtin(t_env *env_list);
 void	unset_builtin(char **args, t_env **env_list_head);
 void	export_builtin(char **args, t_env **env_list_head);
+
+void	execute_pipeline(t_cmd *cmds, t_env **env_list);
 
 #endif
