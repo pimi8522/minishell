@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/19 16:07:44 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/22 11:00:23 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,14 @@ void	add_env_node_back(t_env **env_list_head, t_env *new_node);
 t_env	*new_env_node(char *key, char *value);
 void	bubble_sort_array(char **arr);
 void	free_str(char **str);
+void	free_env_node(t_env *node);
+
+void	echo_builtin(char **args);
+void	ft_cd(char **args);
+void	pwd_builtin(void);
+void	exit_builtin(char **args);
+void	env_builtin(t_env *env_list);
+void	unset_builtin(char **args, t_env **env_list_head);
+void	export_builtin(char **args, t_env **env_list_head);
 
 #endif

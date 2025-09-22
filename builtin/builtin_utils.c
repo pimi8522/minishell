@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:19:53 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/19 16:08:50 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/22 10:47:50 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,4 +162,13 @@ void	bubble_sort_array(char **arr)
 		}
 		i++;
 	}
+}
+
+void	free_env_node(t_env *node)
+{
+	if(!node)
+		return ;
+	free(node->key);
+	free(node->value);
+	free(node);
 }
