@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/22 16:13:14 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/24 17:33:06 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,34 @@ void	shell_launch(char **args, t_env **env_list_head)
 		execute_single_command(args, *env_list_head);
 }
 
+
+void	execute_child(t_cmd *cmd, t_env **env_list)
+{
+	char	**env_array;
+
+	if(cmd->in != STDIN_FILENO)
+	{
+		dup2(cmd->in, STDIN_FILENO);
+		close(cmd->in);
+	}
+	if(cmd->out != STDOUT_FILENO)
+	{
+		dup2(cmd->out, STDOUT_FILENO);
+		close(cmd->out);
+	}
+	env_array = convert_env_to_array(*env_list);
+	execute_command(cmd->flag, env_array);
+	exit(EXIT_FAILURE);
+}
+
 void	execute_pipeline(t_cmd *cmds, t_env **env_list)
 {
+	pid_t	pid;
+	int		status;
+	t_cmd	*current_cmd;
+	int		pipe_fds[2];
+	int		input_fd;
+
 	if(!cmds)
 		return ;
 	if(!cmds->next && exe_builtin(cmds->flag, env_list))
@@ -134,7 +160,49 @@ void	execute_pipeline(t_cmd *cmds, t_env **env_list)
 		// Note: Redirection for built-ins will be handled later.
 		return;
 	}
-	printf("PIPELINE EXECUTION NOT IMPLEMENTED YET.\n");
+	current_cmd = cmds;
+	input_fd = STDIN_FILENO;
+	while(current_cmd)
+	{
+		if(current_cmd->next)
+		{
+			if(pipe(pipe_fds) == -1)
+			{
+				perror("pipe");
+				return ;
+			}
+		}
+		pid = fork();
+		if(pid == -1)
+			return;
+		if(pid == 0)
+		{
+			if(input_fd != STDIN_FILENO) //for the next commands, only the first doesnt enter the loop
+			{
+				dup2(input_fd, STDIN_FILENO);
+				close(input_fd);
+			}
+			if (current_cmd->next)
+			{
+				close(pipe_fds[0]);
+				dup2(pipe_fds[1], STDOUT_FILENO);
+				close(pipe_fds[1]);
+			}
+			execute_child(current_cmd, env_list);
+		}
+		if (input_fd != STDIN_FILENO)
+		{
+			close(input_fd);
+		}
+		if(current_cmd->next)
+		{
+			close(pipe_fds[1]);
+			input_fd = pipe_fds[0];
+		}
+		current_cmd = current_cmd->next;
+
+	}
+	while (wait(&status) > 0); //ATENÇAO NAO SEI SE É PERMITIDO
 }
 
 /* void	shell_launch(char **args)
