@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/24 17:33:06 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/26 17:35:52 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,21 +145,31 @@ void	execute_child(t_cmd *cmd, t_env **env_list)
 	exit(EXIT_FAILURE);
 }
 
-void	execute_pipeline(t_cmd *cmds, t_env **env_list)
+int	execute_pipeline(t_cmd *cmds, t_env **env_list)
 {
 	pid_t	pid;
+	pid_t	last_pid;
 	int		status;
 	t_cmd	*current_cmd;
 	int		pipe_fds[2];
 	int		input_fd;
 
 	if(!cmds)
-		return ;
+		return (0);
+	current_cmd = cmds;
+	while (current_cmd)
+	{
+		expand_variables(current_cmd, *env_list);
+		current_cmd = current_cmd->next;
+	}
 	if(!cmds->next && exe_builtin(cmds->flag, env_list))
 	{
-		// Note: Redirection for built-ins will be handled later.
-		return;
+		// For now, we assume built-ins return 0 on success and 1 on failure.
+		// This will need to be improved later.
+		return (0); // Placeholder status for built-in
 	}
+	last_pid = -1;
+	status = 0;
 	current_cmd = cmds;
 	input_fd = STDIN_FILENO;
 	while(current_cmd)
@@ -169,12 +179,15 @@ void	execute_pipeline(t_cmd *cmds, t_env **env_list)
 			if(pipe(pipe_fds) == -1)
 			{
 				perror("pipe");
-				return ;
+				return (1);
 			}
 		}
 		pid = fork();
-		if(pid == -1)
-			return;
+		if (pid == -1)
+		{
+			perror("fork");
+			return (1); // Fork failed
+		}
 		if(pid == 0)
 		{
 			if(input_fd != STDIN_FILENO) //for the next commands, only the first doesnt enter the loop
@@ -190,6 +203,7 @@ void	execute_pipeline(t_cmd *cmds, t_env **env_list)
 			}
 			execute_child(current_cmd, env_list);
 		}
+		last_pid = pid;
 		if (input_fd != STDIN_FILENO)
 		{
 			close(input_fd);
@@ -200,9 +214,13 @@ void	execute_pipeline(t_cmd *cmds, t_env **env_list)
 			input_fd = pipe_fds[0];
 		}
 		current_cmd = current_cmd->next;
-
 	}
-	while (wait(&status) > 0); //ATENÇAO NAO SEI SE É PERMITIDO
+	if(last_pid != -1)
+		waitpid(last_pid, &status, 0);
+	while (wait(NULL) > 0); //ATENÇAO NAO SEI SE É PERMITIDO
+	if (WIFEXITED(status))
+		return(WEXITSTATUS(status));
+	return (127);
 }
 
 /* void	shell_launch(char **args)

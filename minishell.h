@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/22 16:14:14 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/26 17:19:59 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,10 @@ void	env_builtin(t_env *env_list);
 void	unset_builtin(char **args, t_env **env_list_head);
 void	export_builtin(char **args, t_env **env_list_head);
 
-void	execute_pipeline(t_cmd *cmds, t_env **env_list);
+void	set_env_var(t_env **env_list, const char *key, const char *value);
+char	*get_env_value(t_env *env_list, const char *key);
+void	expand_variables(t_cmd *cmd, t_env *env_list);
+
+int	execute_pipeline(t_cmd *cmds, t_env **env_list);
 
 #endif

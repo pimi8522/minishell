@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:42:53 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/03 16:33:19 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/09/26 17:18:54 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,55 @@ void print_banner(void)
         "┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓\n"
         "╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛\n"
         RST);
+}
+
+void	set_env_var(t_env **env_list, const char *key, const char *value)
+{
+	t_env	*node;
+
+	node = find_env_node(*env_list, key);
+	if (node)
+	{
+		free(node->value);
+		node->value = ft_strdup(value);
+	}
+	else
+	{
+		node = new_env_node(ft_strdup(key), ft_strdup(value));
+		if(node)
+			add_env_node_back(env_list, node);
+	}
+	
+}
+
+char	*get_env_value(t_env *env_list, const char *key)
+{
+	t_env	*node;
+
+	node = find_env_node(env_list, key);
+	if (node)
+		return(node->value);
+	return (NULL);
+}
+
+void	expand_variables(t_cmd *cmd, t_env *env_list)
+{
+	int		i;
+	char	*status_str;
+
+	if(!cmd || !cmd->flag)
+		return ;
+	status_str = get_env_value(env_list, "?");
+	if(!status_str)
+		status_str = "0";
+	i = 0;
+	while(cmd->flag[i])
+	{
+		if(ft_strcmp(cmd->flag[i], "$?") == 0)
+		{
+			free(cmd->flag[i]);
+			cmd->flag[i] = ft_strdup(status_str);
+		}
+		i++;
+	}
 }
