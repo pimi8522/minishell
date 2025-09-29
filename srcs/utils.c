@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:42:53 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/26 17:18:54 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/29 15:58:34 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,79 @@ char	*get_env_value(t_env *env_list, const char *key)
 	return (NULL);
 }
 
+char	*str_append_char(char *str, char c)
+{
+	char	*new_str;
+	size_t	len;
+
+	len = 0;
+	if(str)
+		len = ft_strlen(str);
+	new_str = (char *)malloc(len + 2);
+	if(!new_str)
+		return (NULL);
+	if(str)
+		ft_strlcpy(new_str, str, len + 1);
+	new_str[len] = c;
+	new_str[len + 1] = '\0';
+	if(str)
+		free(str);
+	return(new_str);
+}
+
+char	*extract_var_name(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while(str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+		i++;
+	return(ft_substr(str, 0, i));
+}
+
+char	*expand_arg(char *arg, t_env *env_list)
+{
+	char	*new_arg;
+	int		i;
+	char	*var_name;
+	char	*var_value;
+	char	*temp;
+
+	new_arg = ft_strdup("");
+	i = 0;
+	while(arg[i])
+	{
+		if (arg[i] == '$')
+		{
+			var_name = extract_var_name(&arg[i + 1]);
+			var_value = get_env_value(env_list, var_name);
+			i += ft_strlen(var_name) + 1;
+			if (var_value)
+			{
+				temp = ft_strjoin(new_arg, var_value);
+				free(new_arg);
+				new_arg = temp;
+			}
+			free(var_name);
+		}
+		else
+			new_arg = str_append_char(new_arg, arg[i++]);
+	}
+	free(arg);
+	return(new_arg);
+}
+
 void	expand_variables(t_cmd *cmd, t_env *env_list)
 {
 	int		i;
-	char	*status_str;
-
+	
 	if(!cmd || !cmd->flag)
 		return ;
-	status_str = get_env_value(env_list, "?");
-	if(!status_str)
-		status_str = "0";
 	i = 0;
 	while(cmd->flag[i])
 	{
-		if(ft_strcmp(cmd->flag[i], "$?") == 0)
-		{
-			free(cmd->flag[i]);
-			cmd->flag[i] = ft_strdup(status_str);
-		}
+		if(ft_strchr(cmd->flag[i], '$'))
+			cmd->flag[i] = expand_arg(cmd->flag[i], env_list);
 		i++;
 	}
 }
