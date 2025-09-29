@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/26 17:19:59 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/29 15:11:18 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 
 # include "libft/libft.h"
 # include "pipex/pipex.h"
-
 #define WHITESPACE	"\t\n\v\f\r "
 
 typedef struct s_cmd
@@ -108,7 +107,7 @@ t_cmd	*parse_line(char *line);
 void	free_cmds(t_cmd *cmd_list);
 t_cmd	*new_cmd_node(char *cmd, char **flags);
 void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
-
+int	handle_heredoc(const char *delimiter);
 void	echo_builtin(char **args);
 void	ft_cd(char **args);
 void	pwd_builtin(void);

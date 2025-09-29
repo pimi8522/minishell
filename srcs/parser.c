@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/19 15:40:33 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/09/29 15:05:03 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	handle_redir(t_cmd *cmd, char **tokens, int *i, int end)
 		cmd->out = open(tokens[*i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if (ft_strcmp(tokens[*i], "<") == 0)
 		cmd->in = open(tokens[*i + 1], O_RDONLY);
-	// '<<' (heredoc) requires more complex handling and will be implemented later.
+	else if (ft_strcmp(tokens[*i], "<<") == 0)
+		cmd->in = handle_heredoc(tokens[*i + 1]);
 	if (cmd->in == -1 || cmd->out == -1)
 	{
 		perror("minishell"); // Or a custom error message
