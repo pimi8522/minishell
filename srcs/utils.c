@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:42:53 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/29 15:58:34 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/29 16:24:11 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,16 +118,32 @@ char	*expand_arg(char *arg, t_env *env_list)
 	{
 		if (arg[i] == '$')
 		{
-			var_name = extract_var_name(&arg[i + 1]);
-			var_value = get_env_value(env_list, var_name);
-			i += ft_strlen(var_name) + 1;
-			if (var_value)
+			if(arg[i + 1] == '?')
 			{
-				temp = ft_strjoin(new_arg, var_value);
-				free(new_arg);
-				new_arg = temp;
+				var_value = get_env_value(env_list, "?");
+				if(var_value)
+				{
+					temp = ft_strjoin(new_arg, var_value);
+					free(new_arg);
+					new_arg = temp;
+				}
+				i += 2;
 			}
-			free(var_name);
+			else if (ft_isalpha(arg[i + 1]) || arg[i + 1] == '_')
+			{
+				var_name = extract_var_name(&arg[i + 1]);
+				var_value = get_env_value(env_list, var_name);
+				i += ft_strlen(var_name) + 1;
+				if (var_value)
+				{
+					temp = ft_strjoin(new_arg, var_value);
+					free(new_arg);
+					new_arg = temp;
+				}
+				free(var_name);
+			}
+			else
+				new_arg = str_append_char(new_arg, arg[i++]);
 		}
 		else
 			new_arg = str_append_char(new_arg, arg[i++]);
