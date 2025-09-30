@@ -6,13 +6,13 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/26 17:35:52 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/30 15:27:09 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void execute_single_command(char **args, t_env *env_list)
+/*static void execute_single_command(char **args, t_env *env_list)
 {
 	pid_t	pid;
 	int		status;
@@ -123,10 +123,9 @@ void	shell_launch(char **args, t_env **env_list_head)
 	}
 	else
 		execute_single_command(args, *env_list_head);
-}
+}*/
 
-
-void	execute_child(t_cmd *cmd, t_env **env_list)
+void	execute_child(t_cmd *cmd, t_env **env_list, int input_fd, int pipe_fds[2])
 {
 	char	**env_array;
 
@@ -135,12 +134,26 @@ void	execute_child(t_cmd *cmd, t_env **env_list)
 		dup2(cmd->in, STDIN_FILENO);
 		close(cmd->in);
 	}
+	else if(input_fd != STDIN_FILENO)
+	{
+		dup2(input_fd, STDIN_FILENO);
+		close(input_fd);
+	}
 	if(cmd->out != STDOUT_FILENO)
 	{
 		dup2(cmd->out, STDOUT_FILENO);
 		close(cmd->out);
 	}
+	else if(cmd->next)
+		dup2(pipe_fds[1], STDOUT_FILENO);
+	if (cmd->next)
+	{
+		close(pipe_fds[0]);
+		close(pipe_fds[1]);
+	}
 	env_array = convert_env_to_array(*env_list);
+	if (exe_builtin(cmd->flag, env_list))
+		exit(EXIT_SUCCESS);
 	execute_command(cmd->flag, env_array);
 	exit(EXIT_FAILURE);
 }
@@ -178,41 +191,24 @@ int	execute_pipeline(t_cmd *cmds, t_env **env_list)
 		{
 			if(pipe(pipe_fds) == -1)
 			{
-				perror("pipe");
+				perror("minishell: pipe");
 				return (1);
 			}
 		}
-		pid = fork();
-		if (pid == -1)
+		last_pid = fork();
+		if (last_pid == -1)
 		{
-			perror("fork");
+			perror("minishell: fork");
 			return (1); // Fork failed
 		}
-		if(pid == 0)
-		{
-			if(input_fd != STDIN_FILENO) //for the next commands, only the first doesnt enter the loop
-			{
-				dup2(input_fd, STDIN_FILENO);
-				close(input_fd);
-			}
-			if (current_cmd->next)
-			{
-				close(pipe_fds[0]);
-				dup2(pipe_fds[1], STDOUT_FILENO);
-				close(pipe_fds[1]);
-			}
-			execute_child(current_cmd, env_list);
-		}
-		last_pid = pid;
-		if (input_fd != STDIN_FILENO)
-		{
-			close(input_fd);
-		}
+		if(last_pid == 0)
+			execute_child(current_cmd, env_list, input_fd, pipe_fds);
 		if(current_cmd->next)
-		{
 			close(pipe_fds[1]);
+		if (input_fd != STDIN_FILENO)
+			close(input_fd);
+		if (current_cmd->next)
 			input_fd = pipe_fds[0];
-		}
 		current_cmd = current_cmd->next;
 	}
 	if(last_pid != -1)
