@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/29 15:11:18 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/09/30 16:04:20 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_cmd	*new_cmd_node(char *cmd, char **flags);
 void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
 int	handle_heredoc(const char *delimiter);
 void	echo_builtin(char **args);
-void	ft_cd(char **args);
+void	ft_cd(char **args, t_env **env_list);
 void	pwd_builtin(void);
 void	exit_builtin(char **args);
 void	env_builtin(t_env *env_list);
