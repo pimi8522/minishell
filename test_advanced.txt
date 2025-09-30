@@ -1,0 +1,17 @@
+ls -l | grep "minishell"
+echo "Redirecting output" > redirect_out.txt
+cat redirect_out.txt
+echo "Appending output" >> redirect_out.txt
+cat redirect_out.txt
+echo "Redirecting input" > redirect_in.txt
+cat < redirect_in.txt
+cat << EOF
+This is a here document.
+The delimiter is EOF.
+EOF
+echo "Your user is: $USER"
+echo 'Your user is: $USER'
+this_is_not_a_command
+echo $?
+rm redirect_out.txt redirect_in.txt
+exit

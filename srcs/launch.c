@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/30 15:27:09 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/09/30 15:43:50 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ void	execute_child(t_cmd *cmd, t_env **env_list, int input_fd, int pipe_fds[2])
 
 int	execute_pipeline(t_cmd *cmds, t_env **env_list)
 {
-	pid_t	pid;
 	pid_t	last_pid;
 	int		status;
 	t_cmd	*current_cmd;
@@ -218,56 +217,3 @@ int	execute_pipeline(t_cmd *cmds, t_env **env_list)
 		return(WEXITSTATUS(status));
 	return (127);
 }
-
-/* void	shell_launch(char **args)
-{
-	// Is fork returning 2 values?
-	if (Fork() == 0)
-	{
-		// replace the current process image with a new process image
-		//v for "vector", p for "path".
-		//Takes an array of arguments and uses PATH to find the executable.
-		//	char *args[] = {"ls", "-l", "-a", NULL};
-		//	execve("ls", args);
-		execve(args[0], args);
-	}
-	else
-	{
-		//Automatically waits for any child process, 
-		//which is often sufficient for beginner-level 
-		//shells that only handle one child process at a time.
-		// FINE for SHELL v°1
-		//Wait(&status);
-		waitpid(cell_jr, &status, 0);
-
-	}
-} */
-
-
-/* void	forkado(t_list *list)
-{
-	pid_t	pid;
-	
-	pid = fork();
-	if (pid == 0)
-	{
-		executor(list);
-	}
-	
-} */
-
-/* void shell_exec(char **args)
-{
-	int			i;
-	const char	*curr_builtin;
-
-	if (!args || !args[0])
-		return ;
-	i = 0;
-
-    //if is builtin
-        //run builtin
-	
-	// fork and launch 
-	shell_launch(args);
-} */
