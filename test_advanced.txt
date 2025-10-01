@@ -1,17 +1,49 @@
-ls -l | grep "minishell"
-echo "Redirecting output" > redirect_out.txt
-cat redirect_out.txt
-echo "Appending output" >> redirect_out.txt
-cat redirect_out.txt
-echo "Redirecting input" > redirect_in.txt
-cat < redirect_in.txt
-cat << EOF
-This is a here document.
-The delimiter is EOF.
-EOF
-echo "Your user is: $USER"
-echo 'Your user is: $USER'
-this_is_not_a_command
-echo $?
-rm redirect_out.txt redirect_in.txt
-exit
+# Advanced Test Cases for Minishell
+
+# --- Quoting and Expansion ---
+echo "This is a test with 'single quotes' inside double quotes"
+echo 'This is a test with "double quotes" inside single quotes'
+echo "Your user is $USER and your home is $HOME"
+echo 'Your user is $USER and your home is $HOME'
+echo "The exit status is $?"
+echo 'The exit status is $?'
+echo "This will not expand: \$USER"
+echo "This will expand: $USER"
+export VAR="a b c"
+echo $VAR
+echo "$VAR"
+
+# --- Redirections ---
+echo "hello" > outfile
+cat < outfile
+echo "append" >> outfile
+cat outfile
+< infile cat > outfile2
+< infile cat -e > outfile3
+cat < infile | grep "line" > outfile4
+
+# --- Pipes ---
+ls -l | grep "src" | wc -l
+cat Makefile | grep "FLAGS" | cut -d "=" -f 2
+echo "test" | cat -e
+sleep 2 | echo "finished"
+
+# --- Built-ins and Pipes ---
+export | grep "USER"
+env | sort
+cd /tmp | pwd
+
+# --- Error Handling ---
+cat non_existent_file
+ls non_existent_dir
+cd non_existent_dir
+export 1VAR=invalid
+export VAR=
+export
+
+# --- Complex Cases ---
+echo "one" > file1
+echo "two" > file2
+cat < file1 | tr 'o' 'a' > file3
+cat < file2 | tr 't' 'b' >> file3
+cat file3

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:59:57 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/01 15:44:23 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/01 19:51:53 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	is_valid_identifier(const char *str)
 	return (1);
 }
 
+// imprime as variáveis de ambiente por ordem alfabética
 static void	print_sorted_env(t_shell *shell)
 {
 	char	**env_array;
@@ -45,11 +46,13 @@ static void	print_sorted_env(t_shell *shell)
 			key = ft_substr(env_array[i], 0, equal_sign - env_array[i]);
 			if (key)
 			{
+				// imprime no formato: declare -x KEY="value"
 				printf("declare -x %s=\"%s\"\n", key, equal_sign + 1);
 				free(key);
 			}
 		}
 		else
+			// imprime variáveis sem valor, ex: declare -x VAR
 			printf("declare -x %s\n", env_array[i]);
 		i++;
 	}
@@ -64,6 +67,7 @@ void	export_builtin(char **args, t_shell *shell)
 	char	*value;
 
 	shell->last_exit_status = 0;
+	// se não houver argumentos, imprime as variáveis de ambiente
 	if (!args[1])
 	{
 		print_sorted_env(shell);
@@ -84,6 +88,7 @@ void	export_builtin(char **args, t_shell *shell)
 			equal_sign = ft_strchr(args[i], '=');
 			if(equal_sign)
 			{
+				// caso: export VAR=value
 				key = ft_substr(args[i], 0, equal_sign - args[i]);
 				value = ft_strdup(equal_sign + 1);
 				set_env_var(shell, key, value);
@@ -92,8 +97,11 @@ void	export_builtin(char **args, t_shell *shell)
 			}
 			else
 			{
-				if(!get_env_value(shell, args[i]))
-					set_env_var(shell, args[i], NULL);
+				// caso: export VAR
+				// adiciona a variável apenas se ela não existir, com um valor nulo
+				// para evitar que `set_env_var` falhe com `strdup(NULL)`
+				if(!find_env_node(shell->env_list, args[i]))
+					set_env_var(shell, args[i], "");
 			}
 		}
 		i++;

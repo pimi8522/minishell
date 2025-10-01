@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/01 12:26:21 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/01 19:55:04 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "minishell.h"
 
 //check se  a linha tá em branco pra n dar merda  no history
+// verifica se a linha está em branco para não a adicionar ao histórico
 static int	is_blank_line(const char *s)
 {
 	size_t	i;
@@ -26,13 +27,14 @@ static int	is_blank_line(const char *s)
 	return (s[i] == '\0');
 }
 
-//dá display ao current directory, junto de adicionar a linha à history se n for em branco
+// lê a linha de input do utilizador e mostra o prompt
 char *read_line(void)
 {
 	char	*buf;
 	char	*prompt;
 	char	cwd[BUFSIZ];
 
+	// obtém o diretório atual para mostrar no prompt
 	get_cwd(cwd, sizeof(cwd));
 	prompt = ft_strjoin(RED, cwd);
 	if (!prompt)
@@ -42,14 +44,16 @@ char *read_line(void)
 	if (!buf)
 		return (NULL);
 	prompt = buf;
+	// lê a linha de input
 	buf = readline(prompt);
 	free(prompt);
+	// se o readline retornar NULL (ctrl-D), sai da shell
 	if (!buf)
 	{
 		printf(RED"exit\n"RST);
 		exit(EXIT_SUCCESS);
 	}
-//history type shit
+	// adiciona a linha ao histórico se não estiver em branco
 	if (!is_blank_line(buf))
 		add_history(buf);
 	return (buf);
@@ -63,31 +67,33 @@ int main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+	// inicializa a estrutura da shell
 	shell.pid = getpid();
 	shell.last_exit_status = 0;
 	shell.env_list = init_env(env);
 	
 	print_banner();
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
+	// configura os sinais para o modo interativo
+	setup_interactive_signals();
 	init_shell_history();
+	// loop principal da shell
 	while (1)
 	{
 		line = read_line();
 		if (!line)
 			break;
 		
-		// Use the new parser to create a structured command list
+		// faz o parsing da linha para uma lista de comandos
 		cmds = parse_line(line);
 		
-		// If parsing was successful, pass the list to the new execution engine
+		// se o parsing for bem sucedido, executa o pipeline
 		if (cmds)
 		{
 			shell.last_exit_status = execute_pipeline(cmds, &shell);
-			free_cmds(cmds); // Free the allocated command list
+			free_cmds(cmds); // liberta a memória da lista de comandos
 		}
 		
-		free(line); // Free the line read from input
+		free(line); // liberta a memória da linha lida
 	}
 	
 	save_shell_history();

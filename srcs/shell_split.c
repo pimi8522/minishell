@@ -2,182 +2,133 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   shell_split.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+      */
+/*                                                    +:+ +:+         +:+     */
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:28:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/02 17:25:00 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/01 19:00:00 by Roo               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// retorna 1 se for whitespace
-static int is_blank(char c)
+// verifica se um caractere é um metacaractere (|, <, >)
+static int	is_meta_char(char c)
 {
-	int r;
-
-	r = 0;
-	if (c == ' ' || c == '\t' || c == '\n')
-		r = 1;
-	if (c == '\r' || c == '\v' || c == '\f')
-		r = 1;
-	return (r);
+	return (c == '|' || c == '<' || c == '>');
 }
 
-// salta whitespace
-static void skip_blanks(const char *s, size_t *i)
+// avança o índice `i` para ignorar o whitespace
+static void	skip_whitespace(const char *s, size_t *i)
 {
-	while (s[*i] && is_blank(s[*i]))
-		*i += 1;
+	while (s[*i] && ft_strchr(WHITESPACE, s[*i]))
+		(*i)++;
 }
 
-// retorna o tamanho do token e valida aspas
-//squote - plicas
-//dquote - aspas
-static int span_token(const char *s, size_t *i,
-					  int *squote, int *dquote)
+// conta o número de tokens na string de input
+static int	count_tokens(const char *s)
 {
-	size_t  start;
-	char    c;
-
-	start = *i;
-	while (s[*i])
-	{
-		c = s[*i];
-		if (c == '\'' && !*dquote)
-		{
-			*squote = !*squote;
-			*i += 1;
-			continue ;
-		}
-		if (c == '"' && !*squote)
-		{
-			*dquote = !*dquote;
-			*i += 1;
-			continue ;
-		}
-		if (!*squote && !*dquote && is_blank(c))
-			break ;
-		*i += 1;
-	}
-	if (*squote || *dquote)
-		return (-1);
-	return ((int)(*i - start));
-}
-
-// conta tokens (primeira passagem)
-static int count_tokens(const char *s, size_t *i)
-{
-	int count;
-	int squote;
-	int dquote;
-	int span;
+	int		count;
+	size_t	i;
+	int		in_squote;
+	int		in_dquote;
 
 	count = 0;
-	squote = 0;
-	dquote = 0;
-	while (s[*i])
+	i = 0;
+	while (s[i])
 	{
-		skip_blanks(s, i);
-		if (!s[*i])
+		skip_whitespace(s, &i);
+		if (!s[i])
 			break ;
-		span = span_token(s, i, &squote, &dquote);
-		if (span < 0)
-			return (-1);
-		count += 1;
+		count++;
+		if (is_meta_char(s[i]))
+		{
+			if ((s[i] == '<' && s[i + 1] == '<')
+				|| (s[i] == '>' && s[i + 1] == '>'))
+				i += 2;
+			else
+				i++;
+		}
+		else
+		{
+			in_squote = 0;
+			in_dquote = 0;
+			while (s[i] && (in_squote || in_dquote || \
+				(!ft_strchr(WHITESPACE, s[i]) && !is_meta_char(s[i]))))
+			{
+				if (s[i] == '\'' && !in_dquote)
+					in_squote = !in_squote;
+				else if (s[i] == '"' && !in_squote)
+					in_dquote = !in_dquote;
+				i++;
+			}
+		}
 	}
 	return (count);
 }
 
-// encontra o fim do token respeitando aspas
-static size_t find_token_end(const char *s, size_t start)
+// extrai o próximo token da string de input
+static char	*get_next_token(const char *s, size_t *i)
 {
-	size_t  end;
-	int     squote;
-	int     dquote;
+	size_t	start;
+	int		in_squote;
+	int		in_dquote;
 
-	end = start;
-	squote = 0;
-	dquote = 0;
-	while (s[end] && (squote || dquote || !is_blank(s[end])))
+	skip_whitespace(s, i);
+	start = *i;
+	if (is_meta_char(s[*i]))
 	{
-		if (s[end] == '\'' && !dquote)
-			squote = !squote;
-		else if (s[end] == '"' && !squote)
-			dquote = !dquote;
-		end += 1;
-	}
-	return (end);
-}
-
-// copia o span removendo aspas e avança *i até end (segunda passagem)
-static char *copy_span_unquoted(const char *s, size_t *i, size_t end)
-{
-	size_t  out;
-	int     squote;
-	int     dquote;
-	char    *token;
-	char    c;
-
-	token = (char *)do_malloc((end - *i) + 1);
-	out = 0;
-	squote = 0;
-	dquote = 0;
-	while (*i < end)
-	{
-		c = s[*i];
-		if (c == '\'' && !dquote)
-			squote = !squote;
-		else if (c == '"' && !squote)
-			dquote = !dquote;
+		if ((s[*i] == '<' && s[*i + 1] == '<')
+			|| (s[*i] == '>' && s[*i + 1] == '>'))
+			*i += 2;
 		else
-		{
-			token[out] = c;
-			out += 1;
-		}
-		*i += 1;
+			(*i)++;
 	}
-	token[out] = '\0';
-	return (token);
+	else
+	{
+		in_squote = 0;
+		in_dquote = 0;
+		while (s[*i] && (in_squote || in_dquote || \
+			(!ft_strchr(WHITESPACE, s[*i]) && !is_meta_char(s[*i]))))
+		{
+			if (s[*i] == '\'' && !in_dquote)
+				in_squote = !in_squote;
+			else if (s[*i] == '"' && !in_squote)
+				in_dquote = !in_dquote;
+			(*i)++;
+		}
+	}
+	return (ft_substr(s, start, *i - start));
 }
 
-// cria o token removendo aspas
-static char *copy_unquoted_token(const char *s, size_t *i)
+// função principal que divide a string de input num array de tokens
+char	**shell_split(char const *s)
 {
-	size_t  end;
+	size_t	i;
+	int		count;
+	char	**tokens;
+	int		t;
 
-	end = find_token_end(s, *i);
-	return (copy_span_unquoted(s, i, end));
-}
-
-char **shell_split(char const *s)
-{
-	size_t  i;
-	int     count;
-	char    **tokens;
-	int     t;
-    
 	if (!s)
 		return (NULL);
-	i = 0;
-	count = count_tokens(s, &i);
+	count = count_tokens(s);
 	if (count < 0)
 		return (NULL);
-
-	tokens = (char **)do_malloc(sizeof(char *) * (count + 1));
+	tokens = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!tokens)
+		return (NULL);
 	t = 0;
 	i = 0;
-	while (s[i])
+	while (t < count)
 	{
-		skip_blanks(s, &i);
-		if (!s[i])
-			break ;
-		tokens[t] = copy_unquoted_token(s, &i);
-		t += 1;
+		tokens[t] = get_next_token(s, &i);
+		if (!tokens[t])
+		{
+			free_str(tokens);
+			return (NULL);
+		}
+		t++;
 	}
 	tokens[t] = NULL;
 	return (tokens);
 }
-
-//todo - classificar operadores e dividir em operadores e argumentos n shit
