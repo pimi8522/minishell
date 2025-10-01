@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/01 12:38:57 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/01 15:54:28 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	print_banner(void);
 char	**shell_split(char const *s);
 
 void	execute_command(char **args, char *envp[]);
-int		exe_builtin(char **args, t_env **env_list);
+int		exe_builtin(char **args, t_shell *shell);
 void	sigint_handler(int signo);
 int		init_shell_history(void);
 void	save_shell_history(void);
@@ -119,17 +119,15 @@ void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
 int	handle_heredoc(const char *delimiter);
 
 void	echo_builtin(char **args);
-void	ft_cd(char **args, t_env **env_list);
+void	ft_cd(char **args, t_shell *shell);
 void	pwd_builtin(void);
 void	exit_builtin(char **args);
-void	env_builtin(t_env *env_list);
-void	unset_builtin(char **args, t_env **env_list_head);
-void	export_builtin(char **args, t_env **env_list_head);
+void	env_builtin(t_shell *shell);
+void	unset_builtin(char **args, t_shell *shell);
+void	export_builtin(char **args, t_shell *shell);
 
 void	set_env_var(t_shell *shell, const char *key, const char *value);
 char	*get_env_value(t_shell *shell, const char *key);
 void	expand_variables(t_cmd *cmd, t_shell *shell);
-
-int	execute_pipeline(t_cmd *cmds, t_env **env_list);
-
+int	execute_pipeline(t_cmd *cmds, t_shell *shell);
 #endif

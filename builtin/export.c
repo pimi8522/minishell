@@ -3,23 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:59:57 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/30 16:06:56 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/01 15:44:23 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_sorted_env(t_env *env_list)
+static int	is_valid_identifier(const char *str)
+{
+	if(!str || (!ft_isalpha(*str) && *str != '_'))
+		return (0);
+	while (*str && *str != '=')
+	{
+		if (!ft_isalnum(*str) && *str != '_')
+			return(0);
+		str++;
+	}
+	return (1);
+}
+
+static void	print_sorted_env(t_shell *shell)
 {
 	char	**env_array;
 	int		i;
 	char	*equal_sign;
 	char	*key;
 
-	env_array = convert_env_to_array(env_list);
+	env_array = convert_env_to_array(shell->env_list);
 	if (!env_array)
 		return;
 	bubble_sort_array(env_array);
@@ -43,52 +56,44 @@ static void	print_sorted_env(t_env *env_list)
 	free_str(env_array);
 }
 
-void	export_builtin(char **args, t_env **env_list_head)
+void	export_builtin(char **args, t_shell *shell)
 {
 	int		i;
 	char	*equal_sign;
 	char	*key;
 	char	*value;
-	t_env	*existing_node;
-	t_env	*new_node;
 
-	i = 1;
-	if (!args[i])
+	shell->last_exit_status = 0;
+	if (!args[1])
 	{
-		print_sorted_env(*env_list_head);
+		print_sorted_env(shell);
 		return ;
 	}
+	i = 1;
 	while (args[i])
 	{
-		equal_sign = ft_strchr(args[i], '=');
-		if (equal_sign)
+		if(!is_valid_identifier(args[i]))
 		{
-			key = ft_substr(args[i], 0, equal_sign - args[i]);
-			if(!key)
-				break;
-			value = ft_strdup(equal_sign + 1);
-			if(!value)
+			ft_putstr_fd("minishell: export: `", 2);
+			ft_putstr_fd(args[i], 2);
+			ft_putstr_fd("': not a valid identifier\n", 2);
+			shell->last_exit_status = 1;
+		}
+		else
+		{
+			equal_sign = ft_strchr(args[i], '=');
+			if(equal_sign)
 			{
+				key = ft_substr(args[i], 0, equal_sign - args[i]);
+				value = ft_strdup(equal_sign + 1);
+				set_env_var(shell, key, value);
 				free(key);
-				break;
-			}
-			existing_node = find_env_node(*env_list_head, key);
-			if(existing_node)
-			{
-				free(existing_node->value);
-				existing_node->value = value;
-				free(key);
+				free(value);
 			}
 			else
 			{
-				new_node = new_env_node(key, value);
-				if (!new_node)
-				{
-					free(key);
-					free(value);
-					break;
-				}
-				add_env_node_back(env_list_head, new_node);
+				if(!get_env_value(shell, args[i]))
+					set_env_var(shell, args[i], NULL);
 			}
 		}
 		i++;

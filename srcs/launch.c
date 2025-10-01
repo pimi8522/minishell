@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/30 15:43:50 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/01 12:47:48 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	shell_launch(char **args, t_env **env_list_head)
 		execute_single_command(args, *env_list_head);
 }*/
 
-void	execute_child(t_cmd *cmd, t_env **env_list, int input_fd, int pipe_fds[2])
+void	execute_child(t_cmd *cmd, t_shell *shell, int input_fd, int pipe_fds[2])
 {
 	char	**env_array;
 
@@ -151,14 +151,14 @@ void	execute_child(t_cmd *cmd, t_env **env_list, int input_fd, int pipe_fds[2])
 		close(pipe_fds[0]);
 		close(pipe_fds[1]);
 	}
-	env_array = convert_env_to_array(*env_list);
-	if (exe_builtin(cmd->flag, env_list))
+	env_array = convert_env_to_array(shell->env_list);
+	if (exe_builtin(cmd->flag, shell))
 		exit(EXIT_SUCCESS);
 	execute_command(cmd->flag, env_array);
 	exit(EXIT_FAILURE);
 }
 
-int	execute_pipeline(t_cmd *cmds, t_env **env_list)
+int	execute_pipeline(t_cmd *cmds, t_shell *shell)
 {
 	pid_t	last_pid;
 	int		status;
@@ -171,14 +171,14 @@ int	execute_pipeline(t_cmd *cmds, t_env **env_list)
 	current_cmd = cmds;
 	while (current_cmd)
 	{
-		expand_variables(current_cmd, *env_list);
+		expand_variables(current_cmd, shell);
 		current_cmd = current_cmd->next;
 	}
-	if(!cmds->next && exe_builtin(cmds->flag, env_list))
+	if(!cmds->next && exe_builtin(cmds->flag, shell))
 	{
 		// For now, we assume built-ins return 0 on success and 1 on failure.
 		// This will need to be improved later.
-		return (0); // Placeholder status for built-in
+		return (shell->last_exit_status);// Placeholder status for built-in
 	}
 	last_pid = -1;
 	status = 0;
@@ -201,7 +201,7 @@ int	execute_pipeline(t_cmd *cmds, t_env **env_list)
 			return (1); // Fork failed
 		}
 		if(last_pid == 0)
-			execute_child(current_cmd, env_list, input_fd, pipe_fds);
+			execute_child(current_cmd, shell, input_fd, pipe_fds);
 		if(current_cmd->next)
 			close(pipe_fds[1]);
 		if (input_fd != STDIN_FILENO)
