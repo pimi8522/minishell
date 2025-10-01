@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
+#    By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/09/29 15:06:00 by miduarte &       ###   ########.fr        #
+#    Updated: 2025/10/01 12:38:35 by adores & mi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS = \
 	srcs/cmd_utils.c \
 	srcs/parser.c \
 	srcs/heredoc.c \
+	srcs/expansion.c \
 	builtin/builtin.c \
 	builtin/builtin_utils.c\
 	builtin/cd.c\
@@ -34,6 +35,7 @@ SRCS = \
 	builtin/export.c\
 	builtin/pwd.c\
 	builtin/unset.c\
+	
 
 OBJS = $(SRCS:.c=.o)
 

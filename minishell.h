@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/01 12:18:52 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/01 12:38:57 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*get_cwd(char *buf, size_t size);
 void	*do_malloc(size_t size);
 void	print_banner(void);
 char	**shell_split(char const *s);
-void	shell_launch(char **args, t_env **env_list_head);
+
 void	execute_command(char **args, char *envp[]);
 int		exe_builtin(char **args, t_env **env_list);
 void	sigint_handler(int signo);
@@ -117,6 +117,7 @@ void	free_cmds(t_cmd *cmd_list);
 t_cmd	*new_cmd_node(char *cmd, char **flags);
 void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
 int	handle_heredoc(const char *delimiter);
+
 void	echo_builtin(char **args);
 void	ft_cd(char **args, t_env **env_list);
 void	pwd_builtin(void);
@@ -125,9 +126,9 @@ void	env_builtin(t_env *env_list);
 void	unset_builtin(char **args, t_env **env_list_head);
 void	export_builtin(char **args, t_env **env_list_head);
 
-void	set_env_var(t_env **env_list, const char *key, const char *value);
-char	*get_env_value(t_env *env_list, const char *key);
-void	expand_variables(t_cmd *cmd, t_env *env_list);
+void	set_env_var(t_shell *shell, const char *key, const char *value);
+char	*get_env_value(t_shell *shell, const char *key);
+void	expand_variables(t_cmd *cmd, t_shell *shell);
 
 int	execute_pipeline(t_cmd *cmds, t_env **env_list);
 
