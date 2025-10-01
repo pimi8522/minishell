@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/30 16:04:20 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/01 12:18:03 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,15 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 } t_env;
+
+
+//shell struct
+typedef struct s_shell
+{
+	pid_t	pid;
+	int		last_exit_status;
+	t_env	*env_list;
+}	t_shell;
 
 /*
 ** ANSI Color codes for terminal output formatting:

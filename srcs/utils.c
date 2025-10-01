@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:42:53 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/29 16:24:11 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/01 11:53:42 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,24 +116,14 @@ char	*expand_arg(char *arg, t_env *env_list)
 	i = 0;
 	while(arg[i])
 	{
-		if (arg[i] == '$')
+		if (arg[i] == '$' && arg[i + 1])
 		{
-			if(arg[i + 1] == '?')
+			i++;
+			if (ft_isalpha(arg[i]) || arg[i] == '_')
 			{
-				var_value = get_env_value(env_list, "?");
-				if(var_value)
-				{
-					temp = ft_strjoin(new_arg, var_value);
-					free(new_arg);
-					new_arg = temp;
-				}
-				i += 2;
-			}
-			else if (ft_isalpha(arg[i + 1]) || arg[i + 1] == '_')
-			{
-				var_name = extract_var_name(&arg[i + 1]);
+				var_name = extract_var_name(&arg[i]);
 				var_value = get_env_value(env_list, var_name);
-				i += ft_strlen(var_name) + 1;
+				i += ft_strlen(var_name);
 				if (var_value)
 				{
 					temp = ft_strjoin(new_arg, var_value);
@@ -142,11 +132,29 @@ char	*expand_arg(char *arg, t_env *env_list)
 				}
 				free(var_name);
 			}
+			else if(arg[i + 1] == '?')
+			{
+				var_value = get_env_value(env_list, "?");
+				if(var_value)
+				{
+					temp = ft_strjoin(new_arg, var_value);
+					free(new_arg);
+					new_arg = temp;
+				}
+				i++;
+			}
+			else if (ft_isdigit(arg[i]) || arg[i] == '!' || arg[i] == '$')
+			{
+				i++; //not implemented
+			}
 			else
-				new_arg = str_append_char(new_arg, arg[i++]);
+				new_arg = str_append_char(new_arg, '$');
 		}
 		else
-			new_arg = str_append_char(new_arg, arg[i++]);
+		{
+			new_arg = str_append_char(new_arg, arg[i]);
+			i++;
+		}
 	}
 	free(arg);
 	return(new_arg);
