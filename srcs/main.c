@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/26 16:51:19 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/01 12:26:21 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,18 @@ int main(int ac, char **av, char **env)
 {
 	char	*line;
 	t_cmd	*cmds;
-	t_env	*env_list;
-	int		exit_status;
-	char	*status_str;
+	t_shell	shell;
 
 	(void)ac;
 	(void)av;
-	env_list = init_env(env);
-	set_env_var(&env_list, "?", "0");
+	shell.pid = getpid();
+	shell.last_exit_status = 0;
+	shell.env_list = init_env(env);
+	
 	print_banner();
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	init_shell_history();
-	exit_status = 0;
 	while (1)
 	{
 		line = read_line();
@@ -84,10 +83,7 @@ int main(int ac, char **av, char **env)
 		// If parsing was successful, pass the list to the new execution engine
 		if (cmds)
 		{
-			exit_status = execute_pipeline(cmds, &env_list);
-			status_str = ft_itoa(exit_status);
-			set_env_var(&env_list, "?", status_str);
-			free(status_str);
+			shell.last_exit_status = execute_pipeline(cmds, &shell);
 			free_cmds(cmds); // Free the allocated command list
 		}
 		
@@ -95,7 +91,7 @@ int main(int ac, char **av, char **env)
 	}
 	
 	save_shell_history();
-	return (exit_status);
+	return (shell.last_exit_status);
 }
 
 
