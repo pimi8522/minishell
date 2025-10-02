@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/02 11:33:50 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/02 12:00:24 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ char	**shell_split(char const *s);
 void	execute_command(char **args, char *envp[]);
 int		exe_builtin(char **args, t_shell *shell);
 void	sigint_handler(int signo);
+void	setup_interactive_signals(void);
+void	setup_exec_signals(void);
 int		init_shell_history(void);
 void	save_shell_history(void);
 t_env	*init_env(char **envp);
@@ -116,7 +118,7 @@ t_cmd	*parse_line(char *line);
 void	free_cmds(t_cmd *cmd_list);
 t_cmd	*new_cmd_node(char *cmd, char **flags);
 void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
-int	handle_heredoc(const char *delimiter);
+int		handle_heredoc(const char *delimiter);
 
 void	echo_builtin(char **args, t_shell *shell);
 void	ft_cd(char **args, t_shell *shell);

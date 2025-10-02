@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:19:53 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/02 10:21:00 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/02 12:01:56 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,26 @@ char	**convert_env_to_array(t_env *env_list)
 	}
 	env_array[i] = NULL;
 	return(env_array);
+}
+
+char	*get_env_value(t_shell *shell, const char *key)
+{
+	t_env	*node;
+
+	// Verificação de segurança para ponteiros nulos
+	if (!key || !shell)
+		return (NULL);
+
+	// Reutiliza a função find_env_node para encontrar o nó
+	node = find_env_node(shell->env_list, key);
+	if (node)
+	{
+		// Se o nó for encontrado, retorna o seu valor
+		return (node->value);
+	}
+
+	// Se não for encontrado, retorna NULL
+	return (NULL);
 }
 
 t_env	*find_env_node(t_env *env_list, const char *key)
@@ -200,6 +220,6 @@ void	set_env_var(t_shell *shell, const char *key, const char *value)
 			free(new_value);
 			return;
 		}
-		add_cmd_node_back(&shell->env_list, env_node);
+		add_env_node_back(&shell->env_list, env_node);
 	}
 }

@@ -12,33 +12,6 @@
 
 #include "minishell.h"
 
-void	set_env_var(t_shell *shell, const char *key, const char *value)
-{
-	t_env	*node;
-	char	*value_copy;
-
-	// A correção está aqui:
-	if (value)
-		value_copy = ft_strdup(value);
-	else
-		value_copy = NULL;
-
-	node = find_env_node(shell->env_list, key);
-	if (node)
-	{
-		free(node->value);
-		node->value = value_copy;
-	}
-	else
-	{
-		node = new_env_node(ft_strdup(key), value_copy);
-		if(node)
-			add_env_node_back(&shell->env_list, node);
-		else
-			free(value_copy); // Liberta a cópia se a criação do nó falhar
-	}
-}
-
 // adiciona um caractere a uma string, realocando a memória
 static char	*str_append_char(char *str, char c)
 {
@@ -113,22 +86,39 @@ static char	*expand_and_unquote_arg(char *arg, t_shell *shell)
 	{
 		// se for uma plica e não estiver dentro de aspas, muda o estado de in_squote
 		if (arg[i] == '\'' && !in_dquote)
+		{
 			in_squote = !in_squote;
+			i++;
+		}
 		// se for aspas e não estiver dentro de plicas, muda o estado de in_dquote
 		else if (arg[i] == '"' && !in_squote)
+		{
 			in_dquote = !in_dquote;
+			i++;
+		}
 		// se for um '$' e não estiver dentro de plicas, expande a variável
 		else if (arg[i] == '$' && !in_squote)
 		{
-			char *var_name = extract_var_name(&arg[i + 1]);
-			new_arg = append_var_value(new_arg, var_name, shell);
-			i += ft_strlen(var_name);
-			free(var_name);
+			if (!ft_isalnum(arg[i + 1]) && arg[i + 1] != '_' && arg[i + 1] != '?' 
+				&& arg[i + 1] != '$')
+			{
+				new_arg = str_append_char(new_arg, arg[i]);
+				i++;
+			}
+			else
+			{
+				char *var_name = extract_var_name(&arg[i + 1]);
+				new_arg = append_var_value(new_arg, var_name, shell);
+				i += ft_strlen(var_name) + 1;
+				free(var_name);
+			}
 		}
 		else
+		{
 			// senão, apenas adiciona o caractere ao novo argumento
 			new_arg = str_append_char(new_arg, arg[i]);
-		i++;
+			i++;
+		}
 	}
 	free(arg);
 	return (new_arg);

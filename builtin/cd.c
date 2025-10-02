@@ -6,13 +6,11 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:50:49 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/02 10:18:53 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/02 11:39:55 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 void	ft_cd(char **args, t_shell *shell)
 {
