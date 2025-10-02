@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/02 10:32:10 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/02 11:33:50 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,5 @@ void	set_env_var(t_shell *shell, const char *key, const char *value);
 char	*get_env_value(t_shell *shell, const char *key);
 void	expand_variables(t_cmd *cmd, t_shell *shell);
 int		execute_pipeline(t_cmd *cmds, t_shell *shell);
-int		is_valid_identifier(const char *str)
+int		is_valid_identifier(const char *str);
 #endif
