@@ -3,127 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/01 19:54:06 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/02 16:45:16 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*static void execute_single_command(char **args, t_env *env_list)
-{
-	pid_t	pid;
-	int		status;
-	char	**env_array;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		printf("Execute single command: %s...\n", args[0]);
-		env_array = convert_env_to_array(env_list);
-		execute_command(args, env_array);
-		exit(EXIT_SUCCESS);
-	}
-	else if (pid < 0)
-		perror("minishell: fork error");
-	else
-	{
-		waitpid(pid, &status, 0);
-	}
-}
-
-static void execute_pipe_command(char **cmd1, char **cmd2, t_env *env_list)
-{
-	int		fd[2];
-	pid_t	pid1;
-	pid_t	pid2;
-	int		status1;
-	int		status2;
-	char	**env_array;
-
-	printf("Executing pipe command: %s | %s..\n", cmd1[0], cmd2[0]);
-	if(pipe(fd) == -1)
-	{
-		perror("minishell: pipe error");
-		return;
-	}
-	pid1 = fork();
-	if(pid1 < 0)
-	{
-		perror("minishell: fork error");
-		return ;
-	}
-	if (pid1 == 0)
-	{
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		env_array = convert_env_to_array(env_list);
-		execute_command(cmd1, env_array);
-	}
-	pid2 = fork();
-	if(pid2 < 0)
-	{
-		perror("minishell: fork error");
-		return ;
-	}
-	if (pid2 == 0)
-	{
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		env_array = convert_env_to_array(env_list);
-		execute_command(cmd2, env_array);
-	}
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(pid1, &status1, 0);
-	waitpid(pid2, &status2, 0);
-}
-
-static int	find_pipe_index(char **args)
-{
-	int i;
-	i = 0;
-	while(args && args[i])
-	{
-		if (ft_strncmp(args[i], "|", 2) == 0)
-			return(i);
-		i++;
-	}
-	return(-1);
-}
-
-void	shell_launch(char **args, t_env **env_list_head)
-{
-	int pipe_index;
-	char **cmd1;
-	char **cmd2;
-	if(!args || !args[0])
-	{
-		//exit?
-		return ;
-	}
-	if(exe_builtin(args, env_list_head))
-		return;
-	pipe_index = find_pipe_index(args);
-	if (pipe_index != -1)
-	{
-		args[pipe_index] = NULL;
-		cmd1 = args;
-		cmd2 = &args[pipe_index + 1];
-		if (!cmd2[0])
-		{
-			write(2, "minishell: syntax error near unexpected token `|'\n", 50);
-			return ;
-		}
-		execute_pipe_command(cmd1, cmd2, *env_list_head);
-	}
-	else
-		execute_single_command(args, *env_list_head);
-}*/
 
 // esta função é executada no processo filho
 void	execute_child(t_cmd *cmd, t_shell *shell, int input_fd, int pipe_fds[2])
