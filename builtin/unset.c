@@ -6,24 +6,11 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:58:22 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/01 15:51:07 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/02 10:33:17 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	is_valid_un_identifier(const char *str)
-{
-	if (!str || (!ft_isalpha(*str) && *str != '_'))
-		return (0);
-	while (*str)
-	{
-		if (!ft_isalnum(*str) && *str != '_')
-			return (0);
-		str++;
-	}
-	return (1);
-}
 
 void	unset_builtin(char **args, t_shell *shell)
 {
@@ -37,7 +24,7 @@ void	unset_builtin(char **args, t_shell *shell)
 	i = 1;
 	while (args[i])
 	{
-		if(!is_valid_un_identifier(args[i]))
+		if(!is_valid_identifier(args[i]))
 		{
 			ft_putstr_fd("minishell: unset: `", 2);
 			ft_putstr_fd(args[i], 2);

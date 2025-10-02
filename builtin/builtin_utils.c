@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:19:53 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/09/22 10:47:50 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/02 10:21:00 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,4 +171,35 @@ void	free_env_node(t_env *node)
 	free(node->key);
 	free(node->value);
 	free(node);
+}
+
+// Define ou atualiza uma variável de ambiente.
+void	set_env_var(t_shell *shell, const char *key, const char *value)
+{
+	t_env	*env_node;
+	char	*new_value;
+
+	env_node = find_env_node(shell->env_list, key);
+	if (value)
+		new_value = ft_strdup(value);
+	else
+		new_value = NULL; // Permite definir valores nulos
+	if (env_node)
+	{
+		// A variável já existe, atualiza o valor.
+		free(env_node->value); // Liberta o valor antigo
+		env_node->value = new_value;
+	}
+	else
+	{
+		// A variável não existe, cria um novo nó.
+		env_node = new_env_node((char *)key, new_value);
+		if (!env_node)
+		{
+			// Tratar erro de alocação, se necessário
+			free(new_value);
+			return;
+		}
+		add_cmd_node_back(&shell->env_list, env_node);
+	}
 }

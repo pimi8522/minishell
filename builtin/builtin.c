@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 11:55:04 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/01 12:54:20 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/02 10:29:54 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	exe_builtin2(char **args, t_shell *shell)
 {
 	if(ft_strcmp(args[0], "echo") == 0)
 	{
-		echo_builtin(args);
+		echo_builtin(args, shell);
 		return(1);
 	}
 	else if (ft_strcmp(args[0], "cd") == 0)
@@ -26,7 +26,7 @@ static int	exe_builtin2(char **args, t_shell *shell)
 	}
 	else if (ft_strcmp(args[0], "pwd") == 0)
 	{
-		pwd_builtin();
+		pwd_builtin(shell);
 		return(1);
 	}
 	return(0);
@@ -40,7 +40,7 @@ int	exe_builtin(char **args, t_shell *shell)
 		return (1);
 	if (ft_strcmp(args[0], "exit") == 0)
 	{
-		exit_builtin(args);
+		exit_builtin(args, shell);
 		return(1);
 	}
 	else if(ft_strcmp(args[0], "env") == 0)

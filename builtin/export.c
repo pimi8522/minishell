@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:59:57 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/01 19:51:53 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/02 10:31:46 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_valid_identifier(const char *str)
+int	is_valid_identifier(const char *str)
 {
 	if(!str || (!ft_isalpha(*str) && *str != '_'))
 		return (0);
+	str++;
 	while (*str && *str != '=')
 	{
 		if (!ft_isalnum(*str) && *str != '_')
@@ -101,7 +102,7 @@ void	export_builtin(char **args, t_shell *shell)
 				// adiciona a variável apenas se ela não existir, com um valor nulo
 				// para evitar que `set_env_var` falhe com `strdup(NULL)`
 				if(!find_env_node(shell->env_list, args[i]))
-					set_env_var(shell, args[i], "");
+					set_env_var(shell, args[i], NULL);
 			}
 		}
 		i++;

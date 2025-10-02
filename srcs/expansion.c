@@ -12,6 +12,33 @@
 
 #include "minishell.h"
 
+void	set_env_var(t_shell *shell, const char *key, const char *value)
+{
+	t_env	*node;
+	char	*value_copy;
+
+	// A correção está aqui:
+	if (value)
+		value_copy = ft_strdup(value);
+	else
+		value_copy = NULL;
+
+	node = find_env_node(shell->env_list, key);
+	if (node)
+	{
+		free(node->value);
+		node->value = value_copy;
+	}
+	else
+	{
+		node = new_env_node(ft_strdup(key), value_copy);
+		if(node)
+			add_env_node_back(&shell->env_list, node);
+		else
+			free(value_copy); // Liberta a cópia se a criação do nó falhar
+	}
+}
+
 // adiciona um caractere a uma string, realocando a memória
 static char	*str_append_char(char *str, char c)
 {
