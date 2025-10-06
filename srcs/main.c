@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/01 19:55:04 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/06 15:05:58 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int main(int ac, char **av, char **env)
 			break;
 		
 		// faz o parsing da linha para uma lista de comandos
-		cmds = parse_line(line);
+		cmds = parse_line(line, &shell);
 		
 		// se o parsing for bem sucedido, executa o pipeline
 		if (cmds)

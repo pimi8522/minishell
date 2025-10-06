@@ -1,8 +1,10 @@
 #include "../minishell.h"
 
-static void	read_heredoc(const char *delimiter, int fd)
+static void	read_heredoc(const char *delimiter, int fd, int expand,
+		t_shell *shell)
 {
 	char	*line;
+	char	*expanded_line;
 
 	while (1)
 	{
@@ -13,12 +15,19 @@ static void	read_heredoc(const char *delimiter, int fd)
 				free(line);
 			break ;
 		}
-		ft_putendl_fd(line, fd);
+		if (expand)
+		{
+			expanded_line = expand_line_for_heredoc(line, shell);
+			ft_putendl_fd(expanded_line, fd);
+			free(expanded_line);
+		}
+		else
+			ft_putendl_fd(line, fd);
 		free(line);
 	}
 }
 
-int	handle_heredoc(const char *delimiter)
+int	handle_heredoc(const char *delimiter, int expand, t_shell *shell)
 {
 	int		pipe_fd[2];
 	pid_t	pid;
@@ -40,7 +49,7 @@ int	handle_heredoc(const char *delimiter)
 	if (pid == 0)
 	{
 		close(pipe_fd[0]);
-		read_heredoc(delimiter, pipe_fd[1]);
+		read_heredoc(delimiter, pipe_fd[1], expand, shell);
 		close(pipe_fd[1]);
 		exit(0);
 	}

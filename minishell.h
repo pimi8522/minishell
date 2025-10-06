@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/03 13:33:25 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/06 15:05:21 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_cmd
 	int		in;
 	int		out;
 	int		fd[2];
+	int		heredoc_expand;
 	struct s_cmd	*next;
 } t_cmd;
 
@@ -114,11 +115,11 @@ t_env	*new_env_node(char *key, char *value);
 void	bubble_sort_array(char **arr);
 void	free_str(char **str);
 void	free_env_node(t_env *node);
-t_cmd	*parse_line(char *line);
+t_cmd	*parse_line(char *line, t_shell *shell);
 void	free_cmds(t_cmd *cmd_list);
 t_cmd	*new_cmd_node(char *cmd, char **flags);
 void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
-int		handle_heredoc(const char *delimiter);
+int		handle_heredoc(const char *delimiter, int expand, t_shell *shell);
 
 void	echo_builtin(char **args, t_shell *shell);
 void	ft_cd(char **args, t_shell *shell);
@@ -131,6 +132,7 @@ void	export_builtin(char **args, t_shell *shell);
 void	set_env_var(t_shell *shell, const char *key, const char *value);
 char	*get_env_value(t_shell *shell, const char *key);
 void	expand_variables(t_cmd *cmd, t_shell *shell);
+char	*expand_line_for_heredoc(char *line, t_shell *shell);
 int		execute_pipeline(t_cmd *cmds, t_shell *shell);
 int		is_valid_identifier(const char *str);
 #endif

@@ -142,3 +142,37 @@ void	expand_variables(t_cmd *cmd, t_shell *shell)
 		i++;
 	}
 }
+
+char	*expand_line_for_heredoc(char *line, t_shell *shell)
+{
+	char	*new_line;
+	int		i;
+
+	new_line = ft_strdup("");
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '$')
+		{
+			if (!ft_isalnum(line[i + 1]) && line[i + 1] != '_'
+				&& line[i + 1] != '?')
+			{
+				new_line = str_append_char(new_line, line[i]);
+				i++;
+			}
+			else
+			{
+				char *var_name = extract_var_name(&line[i + 1]);
+				new_line = append_var_value(new_line, var_name, shell);
+				i += ft_strlen(var_name) + 1;
+				free(var_name);
+			}
+		}
+		else
+		{
+			new_line = str_append_char(new_line, line[i]);
+			i++;
+		}
+	}
+	return (new_line);
+}
