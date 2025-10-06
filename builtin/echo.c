@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:48:54 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/02 10:03:41 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/06 14:28:41 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	echo_builtin(char **args, t_shell *shell)
 
 	i = 1;
 	newline = 1;
-	while (args[i] && ft_strcmp(args[1], "-n") == 0)
+	while (args[i] && ft_strcmp(args[i], "-n") == 0)
 	{
 		newline = 0;
 		i++;

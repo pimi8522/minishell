@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:59:57 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/02 10:31:46 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/06 14:24:51 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ void	export_builtin(char **args, t_shell *shell)
 				key = ft_substr(args[i], 0, equal_sign - args[i]);
 				value = ft_strdup(equal_sign + 1);
 				set_env_var(shell, key, value);
-				free(key);
-				free(value);
 			}
 			else
 			{
