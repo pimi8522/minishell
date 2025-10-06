@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/29 15:05:03 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/06 14:44:56 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,22 @@ static t_cmd	*create_cmd_from_tokens(char **tokens, int start, int end)
 	return (cmd);
 }
 
+static void free_tokens(char **tokens)
+{
+	int i;
+
+	i = 0;
+	if (!tokens)
+		return;
+		
+	while (tokens[i])
+	{
+		free(tokens[i]);
+		i++;
+	}
+	free(tokens);
+}
+
 t_cmd	*parse_line(char *line)
 {
 	char	**tokens;
@@ -113,25 +129,32 @@ t_cmd	*parse_line(char *line)
 	start = 0;
 	i = 0;
 	while (tokens[i])
-	{
-		if (ft_strcmp(tokens[i], "|") == 0)
-		{
-			new_cmd = create_cmd_from_tokens(tokens, start, i);
-			if (new_cmd)
-				add_cmd_node_back(&cmd_list, new_cmd);
-			start = i + 1;
-		}
-		i++;
-	}
+    {
+        if (ft_strcmp(tokens[i], "|") == 0)
+        {
+            new_cmd = create_cmd_from_tokens(tokens, start, i);
+            if (!new_cmd) // <-- VERIFICAÇÃO DE ERRO
+            {
+                ft_putstr_fd("minishell: syntax error near unexpected token '|'\n", 2);
+                free_tokens(tokens);
+                free_cmds(cmd_list); // Liberta o que já foi parsed
+                return (NULL);
+            }
+            add_cmd_node_back(&cmd_list, new_cmd);
+            start = i + 1;
+        }
+        i++;
+    }
 	new_cmd = create_cmd_from_tokens(tokens, start, i);
-	if (new_cmd)
-		add_cmd_node_back(&cmd_list, new_cmd);
-	i = 0;
-	while (tokens[i])
-	{
-		free(tokens[i]);
-		i++;
-	}
-	free(tokens);
-	return (cmd_list);
+ 	if (!new_cmd && cmd_list) // Erro se a linha termina com |
+    {
+        ft_putstr_fd("minishell: syntax error: unexpected end of file\n", 2);
+        free_tokens(tokens);
+        free_cmds(cmd_list);
+        return (NULL);
+    }
+    if (new_cmd)
+        add_cmd_node_back(&cmd_list, new_cmd);
+    free_tokens(tokens); // A função de limpeza substitui o ciclo manual
+    return (cmd_list);
 }
