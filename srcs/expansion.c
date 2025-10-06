@@ -155,7 +155,7 @@ char	*expand_line_for_heredoc(char *line, t_shell *shell)
 		if (line[i] == '$')
 		{
 			if (!ft_isalnum(line[i + 1]) && line[i + 1] != '_'
-				&& line[i + 1] != '?')
+				&& line[i + 1] != '?'&& line[i + 1] != '$')
 			{
 				new_line = str_append_char(new_line, line[i]);
 				i++;

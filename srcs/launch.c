@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/02 16:45:16 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:17:40 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,43 @@ void	execute_child(t_cmd *cmd, t_shell *shell, int input_fd, int pipe_fds[2])
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	// redireciona o input, se necessário
-	if(cmd->in != STDIN_FILENO)
+	if (cmd->in != STDIN_FILENO)
 	{
-		dup2(cmd->in, STDIN_FILENO);
+		if (dup2(cmd->in, STDIN_FILENO) == -1)
+		{
+			perror("minishell: dup2");
+			exit(EXIT_FAILURE);
+		}
 		close(cmd->in);
 	}
 	else if(input_fd != STDIN_FILENO)
 	{
-		dup2(input_fd, STDIN_FILENO);
+		if (dup2(input_fd, STDIN_FILENO) == -1)
+		{
+			perror("minishell: dup2");
+			exit(EXIT_FAILURE);
+		}
 		close(input_fd);
 	}
 	// redireciona o output, se necessário
 	if(cmd->out != STDOUT_FILENO)
 	{
-		dup2(cmd->out, STDOUT_FILENO);
+		if (dup2(cmd->out, STDOUT_FILENO) == -1)
+		{
+			perror("minishell: dup2");
+			exit(EXIT_FAILURE);
+		}
 		close(cmd->out);
 	}
 	// se houver um próximo comando, o output é o pipe
 	else if(cmd->next)
-		dup2(pipe_fds[1], STDOUT_FILENO);
+	{
+		if (dup2(pipe_fds[1], STDOUT_FILENO) == -1)
+		{
+			perror("minishell: dup2");
+			exit(EXIT_FAILURE);
+		}
+	}
 	// fecha os descritores do pipe no filho
 	if (cmd->next)
 	{
