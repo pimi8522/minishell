@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:50:49 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/02 11:39:55 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/06 16:04:00 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ void	ft_cd(char **args, t_shell *shell)
 			return ;
 		}
 	}
+	else if (ft_strcmp(args[1], "-") == 0)
+	{
+		path = get_env_value(shell, "OLDPWD");
+		if (!path)
+		{
+			write(2, "minishell: cd: OLDPWD not set\n", 30);
+			shell->last_exit_status = 1;
+			return ;
+		}
+		printf("%s\n", path);
+	}
 	else
 		// senão, o caminho é o primeiro argumento
 		path = args[1];
@@ -44,7 +55,7 @@ void	ft_cd(char **args, t_shell *shell)
 	{
 		perror("minishell: cd");
 		shell->last_exit_status = 1;
-		return;
+		return ;
 	}
 	// obtém o novo diretório de trabalho
 	if (getcwd(new_pwd, sizeof(new_pwd)) == NULL)
