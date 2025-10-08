@@ -39,6 +39,12 @@ void	exec_sigquit_handler(int signo)
 	ft_putstr_fd("Quit (core dumped)\n", 2);
 }
 
+void	heredoc_sigint_handler(int signo)
+{
+	(void)signo;
+	exit(130);
+}
+
 // configura os handlers de sinal para o modo interativo
 void	setup_interactive_signals(void)
 {

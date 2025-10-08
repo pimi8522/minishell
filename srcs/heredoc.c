@@ -48,6 +48,7 @@ int	handle_heredoc(const char *delimiter, int expand, t_shell *shell)
 	}
 	if (pid == 0)
 	{
+		signal(SIGINT, heredoc_sigint_handler);
 		close(pipe_fd[0]);
 		read_heredoc(delimiter, pipe_fd[1], expand, shell);
 		close(pipe_fd[1]);
@@ -55,5 +56,12 @@ int	handle_heredoc(const char *delimiter, int expand, t_shell *shell)
 	}
 	close(pipe_fd[1]);
 	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+	{
+		shell->last_exit_status = 130;
+		close(pipe_fd[0]);
+		write(1, "\n", 1);
+		return (-1);
+	}
 	return (pipe_fd[0]);
 }

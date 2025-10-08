@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/06 15:05:21 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/08 15:52:24 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int		exe_builtin(char **args, t_shell *shell);
 void	sigint_handler(int signo);
 void	setup_interactive_signals(void);
 void	setup_exec_signals(void);
+void	heredoc_sigint_handler(int signo);
 int		init_shell_history(void);
 void	save_shell_history(void);
 t_env	*init_env(char **envp);
