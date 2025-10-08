@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:50:49 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/06 16:04:00 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/08 16:29:46 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	ft_cd(char **args, t_shell *shell)
 	{
 		perror("minishell: cd");
 		shell->last_exit_status = 1;
+		if (args[1] && path != args[1])
+			free(path);
 		return ;
 	}
 	// obtém o novo diretório de trabalho
@@ -62,11 +64,15 @@ void	ft_cd(char **args, t_shell *shell)
 	{
 		perror("cd: error retrieving new directory");
 		shell->last_exit_status = 1;
+		if (args[1] && path != args[1])
+			free(path);
 		return;
 	}
 	// atualiza as variáveis de ambiente OLDPWD e PWD
 	set_env_var(shell, "OLDPWD", old_pwd);
 	set_env_var(shell, "PWD", new_pwd);
 	shell->last_exit_status = 0;
+	if (args[1] && path != args[1])
+		free(path);
 }
 
