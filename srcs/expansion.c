@@ -77,6 +77,7 @@ static char	*expand_and_unquote_arg(char *arg, t_shell *shell)
 	int		i;
 	int		in_squote;
 	int		in_dquote;
+	char	*var_name;
 
 	new_arg = ft_strdup("");
 	i = 0;
@@ -99,19 +100,18 @@ static char	*expand_and_unquote_arg(char *arg, t_shell *shell)
 		// se for um '$' e não estiver dentro de plicas, expande a variável
 		else if (arg[i] == '$' && !in_squote)
 		{
-			if (!ft_isalnum(arg[i + 1]) && arg[i + 1] != '_' && arg[i + 1] != '?' 
-				&& arg[i + 1] != '$')
+			var_name = extract_var_name(&arg[i + 1]);
+			if (ft_strlen(var_name) == 0)
 			{
 				new_arg = str_append_char(new_arg, arg[i]);
-				i++;
+				i++; 
 			}
 			else
 			{
-				char *var_name = extract_var_name(&arg[i + 1]);
 				new_arg = append_var_value(new_arg, var_name, shell);
 				i += ft_strlen(var_name) + 1;
-				free(var_name);
 			}
+			free(var_name);
 		}
 		else
 		{

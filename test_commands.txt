@@ -1,9 +1,0 @@
-pwd
-echo "hello world"
-echo -n "no newline"
-export TEST_VAR=123
-env
-echo $TEST_VAR
-unset TEST_VAR
-echo $TEST_VAR
-exit

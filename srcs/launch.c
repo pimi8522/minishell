@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/06 15:17:40 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/09 15:47:03 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,33 @@ void	execute_child(t_cmd *cmd, t_shell *shell, int input_fd, int pipe_fds[2])
 	exit(EXIT_FAILURE);
 }
 
+static int execute_single_builtin(t_cmd *cmd, t_shell *shell)
+{
+	int	original_stdin;
+	int	original_stdout;
+
+	original_stdin = dup(STDIN_FILENO);
+	original_stdout = dup(STDOUT_FILENO);
+
+	if (cmd->in != STDIN_FILENO)
+	{
+		dup2(cmd->in, STDIN_FILENO);
+		close(cmd->in);
+	}
+	if (cmd->out != STDOUT_FILENO)
+	{
+		dup2(cmd->out, STDOUT_FILENO);
+		close(cmd->out);
+	}
+	exe_builtin(cmd->flag, shell);
+	dup2(original_stdin, STDIN_FILENO);
+	dup2(original_stdout, STDOUT_FILENO);
+	close(original_stdin);
+	close(original_stdout);
+	return (shell->last_exit_status);
+}
+
+
 // função principal para executar um ou mais comandos (pipeline)
 int	execute_pipeline(t_cmd *cmds, t_shell *shell)
 {
@@ -92,9 +119,9 @@ int	execute_pipeline(t_cmd *cmds, t_shell *shell)
 		current_cmd = current_cmd->next;
 	}
 	// se for um único comando e for um builtin, executa diretamente
-	if (!cmds->next && exe_builtin(cmds->flag, shell))
+	if (!cmds->next && is_builtin(cmds->flag))
 	{
-		return (shell->last_exit_status);
+		return (execute_single_builtin(cmds, shell));
 	}
 	// configura os sinais para o modo de execução
 	setup_exec_signals();

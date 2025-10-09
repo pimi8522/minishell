@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:19:53 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/02 12:01:56 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/09 14:55:00 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ t_env	*new_env_node(char *key, char *value)
 	new_node = (t_env *)malloc(sizeof(t_env));
 	if(!new_node)
 		return(NULL);
-	new_node->key = key;
-	new_node->value = value;
+	new_node->key = ft_strdup(key);
+	if (value)
+		new_node->value = ft_strdup(value);
+	else
+		new_node->value = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -197,29 +200,24 @@ void	free_env_node(t_env *node)
 void	set_env_var(t_shell *shell, const char *key, const char *value)
 {
 	t_env	*env_node;
-	char	*new_value;
 
 	env_node = find_env_node(shell->env_list, key);
-	if (value)
-		new_value = ft_strdup(value);
-	else
-		new_value = NULL; // Permite definir valores nulos
 	if (env_node)
 	{
 		// A variável já existe, atualiza o valor.
 		free(env_node->value); // Liberta o valor antigo
-		env_node->value = new_value;
+		if (value)
+			env_node->value = ft_strdup(value);
+		else
+			env_node->value = NULL;
 	}
 	else
 	{
 		// A variável não existe, cria um novo nó.
-		env_node = new_env_node((char *)key, new_value);
+		// new_env_node now handles the duplication
+		env_node = new_env_node((char *)key, (char *)value);
 		if (!env_node)
-		{
-			// Tratar erro de alocação, se necessário
-			free(new_value);
-			return;
-		}
+			return; // Tratar erro de alocação
 		add_env_node_back(&shell->env_list, env_node);
 	}
 }
