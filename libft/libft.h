@@ -17,6 +17,7 @@ miduarte         ###   ########.fr       */
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+#include "get_next_line/get_next_line.h"
 
 typedef struct s_list
 {
@@ -68,5 +69,7 @@ void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int			ft_isascii(int c);
 char		*ft_strtrim(char const *s1, char const *set);
+
+char	*get_next_line(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/10 15:37:22 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/10 15:58:26 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,20 @@ int main(int ac, char **av, char **env)
 	shell.last_exit_status = 0;
 	shell.env_list = init_env(env);
 	
-	print_banner();
-	// configura os sinais para o modo interativo
-	setup_interactive_signals();
-	init_shell_history();
+	if (isatty(STDIN_FILENO))
+	{
+		print_banner();
+		// configura os sinais para o modo interativo
+		setup_interactive_signals();
+		init_shell_history();
+	}
 	// loop principal da shell
 	while (1)
 	{
-		line = read_line();
+		if (isatty(STDIN_FILENO))
+			line = read_line();
+		else
+			line = get_next_line(STDIN_FILENO);
 		if (!line)
 			break;
 		
@@ -95,8 +101,8 @@ int main(int ac, char **av, char **env)
 		
 		free(line); // liberta a memória da linha lida
 	}
-	
-	save_shell_history();
+	if (isatty(STDIN_FILENO))
+		save_shell_history();
 	return (shell.last_exit_status);
 }
 

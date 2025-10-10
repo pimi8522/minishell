@@ -6,7 +6,7 @@
 #    By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/21 11:35:10 by miduarte          #+#    #+#              #
-#    Updated: 2025/09/03 14:33:00 by adores & mi      ###   ########.fr        #
+#    Updated: 2025/10/10 16:06:49 by adores & mi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC := ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
 		ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c\
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-		ft_strcmp.c
+		ft_strcmp.c get_next_line/get_next_line.c \
+		get_next_line/get_next_line_utils.c
 
 OBJ := $(SRC:.c=.o)
 
