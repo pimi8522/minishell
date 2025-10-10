@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/10 15:58:26 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/10 17:23:59 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int main(int ac, char **av, char **env)
 			shell.last_exit_status = execute_pipeline(cmds, &shell);
 			free_cmds(cmds); // liberta a memória da lista de comandos
 		}
+		else
+			shell.last_exit_status = 2;
 		
 		free(line); // liberta a memória da linha lida
 	}
