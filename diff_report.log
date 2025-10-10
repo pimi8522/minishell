@@ -1,0 +1,1059 @@
+---
+COMMAND: ls
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.007243280 +0100
++++ bash_output.log	2025-10-10 15:17:40.007243280 +0100
+@@ -1,9 +1,7 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mls
+ Makefile
+ a.out
++bash_stderr.tmp
++bash_stdout.tmp
+ builtin
+ en.subject.pdf
+ libft
+@@ -15,5 +13,3 @@
+ run_tests.sh
+ srcs
+ test_suite.txt
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: ls -l
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.022971189 +0100
++++ bash_output.log	2025-10-10 15:17:40.022971189 +0100
+@@ -1,11 +1,9 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mls -l
+ total 1656
+ -rw-r--r-- 1 pimi8522 pimi8522    1709 Oct  1 16:16 Makefile
+ -rwxr-xr-x 1 pimi8522 pimi8522   16208 Sep 29 14:48 a.out
+ -rw-r--r-- 1 pimi8522 pimi8522     179 Oct 10 15:17 bash_output.log
++-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 10 15:17 bash_stderr.tmp
++-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 10 15:17 bash_stdout.tmp
+ drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 10 15:17 builtin
+ -rw-r--r-- 1 pimi8522 pimi8522     864 Oct 10 15:17 diff_report.log
+ -rw-r--r-- 1 pimi8522 pimi8522 1582893 Sep 29 14:48 en.subject.pdf
+@@ -14,10 +12,8 @@
+ -rw-r--r-- 1 pimi8522 pimi8522    4034 Oct 10 14:10 minishell.h
+ -rw-r--r-- 1 pimi8522 pimi8522     635 Oct 10 15:17 minishell_output.log
+ -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 10 15:17 minishell_stderr.tmp
+--rw-r--r-- 1 pimi8522 pimi8522     404 Oct 10 15:17 minishell_stdout.tmp
++-rw-r--r-- 1 pimi8522 pimi8522    1534 Oct 10 15:17 minishell_stdout.tmp
+ drwxr-xr-x 2 pimi8522 pimi8522    4096 Sep 29 14:48 pipex
+ -rwxr-xr-x 1 pimi8522 pimi8522    2381 Oct 10 15:10 run_tests.sh
+ drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 10 15:17 srcs
+ -rw-r--r-- 1 pimi8522 pimi8522    1726 Oct 10 15:09 test_suite.txt
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: ls -l -a
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.034767120 +0100
++++ bash_output.log	2025-10-10 15:17:40.038699096 +0100
+@@ -1,7 +1,3 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mls -l -a
+ total 1676
+ drwxr-xr-x 8 pimi8522 pimi8522    4096 Oct 10 15:17 .
+ drwxr-xr-x 9 pimi8522 pimi8522    4096 Sep 29 14:48 ..
+@@ -11,6 +7,8 @@
+ -rw-r--r-- 1 pimi8522 pimi8522    1709 Oct  1 16:16 Makefile
+ -rwxr-xr-x 1 pimi8522 pimi8522   16208 Sep 29 14:48 a.out
+ -rw-r--r-- 1 pimi8522 pimi8522    1179 Oct 10 15:17 bash_output.log
++-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 10 15:17 bash_stderr.tmp
++-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 10 15:17 bash_stdout.tmp
+ drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 10 15:17 builtin
+ -rw-r--r-- 1 pimi8522 pimi8522    2767 Oct 10 15:17 diff_report.log
+ -rw-r--r-- 1 pimi8522 pimi8522 1582893 Sep 29 14:48 en.subject.pdf
+@@ -19,10 +17,8 @@
+ -rw-r--r-- 1 pimi8522 pimi8522    4034 Oct 10 14:10 minishell.h
+ -rw-r--r-- 1 pimi8522 pimi8522    1534 Oct 10 15:17 minishell_output.log
+ -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 10 15:17 minishell_stderr.tmp
+--rw-r--r-- 1 pimi8522 pimi8522     407 Oct 10 15:17 minishell_stdout.tmp
++-rw-r--r-- 1 pimi8522 pimi8522    1826 Oct 10 15:17 minishell_stdout.tmp
+ drwxr-xr-x 2 pimi8522 pimi8522    4096 Sep 29 14:48 pipex
+ -rwxr-xr-x 1 pimi8522 pimi8522    2381 Oct 10 15:10 run_tests.sh
+ drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 10 15:17 srcs
+ -rw-r--r-- 1 pimi8522 pimi8522    1726 Oct 10 15:09 test_suite.txt
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo "Hello, world!"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.046563051 +0100
++++ bash_output.log	2025-10-10 15:17:40.046563051 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "Hello, world!"
+ Hello, world!
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo -n "No newline"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.054427004 +0100
++++ bash_output.log	2025-10-10 15:17:40.054427004 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho -n "No newline"
+-No newline[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++No newline
+\ No newline at end of file
+
+---
+COMMAND: echo "Testing" "multiple" "arguments"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.062290957 +0100
++++ bash_output.log	2025-10-10 15:17:40.062290957 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "Testing" "multiple" "arguments"
+ Testing multiple arguments
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.070154913 +0100
++++ bash_output.log	2025-10-10 15:17:40.070154913 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho
+ 
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: pwd
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.078018866 +0100
++++ bash_output.log	2025-10-10 15:17:40.078018866 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mpwd
+ /home/pimi8522/42lisboa/pimishell
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: env
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.089814797 +0100
++++ bash_output.log	2025-10-10 15:17:40.089814797 +0100
+@@ -1,7 +1,3 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0menv
+ SHELL=/bin/bash
+ COLORTERM=truecolor
+ WSL2_GUI_APPS_ENABLED=1
+@@ -40,6 +36,4 @@
+ PULSE_SERVER=unix:/mnt/wslg/PulseServer
+ TERM_PROGRAM=vscode
+ VSCODE_IPC_HOOK_CLI=/run/user/1000/vscode-ipc-25bb2132-9fef-4448-82ca-cc7330b2238d.sock
+-_=./minishell
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++_=/usr/bin/env
+
+---
+COMMAND: export TEST_VAR=123
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.097678750 +0100
++++ bash_output.log	2025-10-10 15:17:40.097678750 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mexport TEST_VAR=123
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: env | grep TEST_VAR
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.109474681 +0100
++++ bash_output.log	2025-10-10 15:17:40.109474681 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0menv | grep TEST_VAR
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: unset TEST_VAR
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.117338637 +0100
++++ bash_output.log	2025-10-10 15:17:40.117338637 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0munset TEST_VAR
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: env | grep TEST_VAR
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.125202589 +0100
++++ bash_output.log	2025-10-10 15:17:40.125202589 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0menv | grep TEST_VAR
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: export
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.133066543 +0100
++++ bash_output.log	2025-10-10 15:17:40.136998520 +0100
+@@ -1,7 +1,3 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mexport
+ declare -x COLORTERM="truecolor"
+ declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
+ declare -x DEBUGINFOD_URLS="https://debuginfod.ubuntu.com "
+@@ -15,6 +11,7 @@
+ declare -x LOGNAME="pimi8522"
+ declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:"
+ declare -x NAME="PIMI-C"
++declare -x OLDPWD
+ declare -x PAGER="cat"
+ declare -x PATH="/home/pimi8522/.vscode-server/bin/385651c938df8a906869babee516bffd0ddb9829/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Program Files/Oculus/Support/oculus-runtime:/mnt/c/Program Files/Eclipse Adoptium/jdk-17.0.6.10-hotspot/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files (x86)/Bluetooth Command Line Tools/bin:/mnt/c/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Users/Miguel/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Miguel/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Miguel/AppData/Local/Muse Hub/lib:/snap/bin:/home/pimi8522/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand"
+ declare -x PROMPT_EOL_MARK=""
+@@ -40,6 +37,3 @@
+ declare -x WSL_INTEROP="/run/WSL/458_interop"
+ declare -x XDG_DATA_DIRS="/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+ declare -x XDG_RUNTIME_DIR="/run/user/1000/"
+-declare -x _="./minishell"
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: export INVALID-VAR=123
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.140930498 +0100
++++ bash_output.log	2025-10-10 15:17:40.144862474 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mexport INVALID-VAR=123
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0mminishell: export: `INVALID-VAR=123': not a valid identifier
++./run_tests.sh: line 39: export: `INVALID-VAR=123': not a valid identifier
+
+---
+COMMAND: export _VALID_VAR=456
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.148794451 +0100
++++ bash_output.log	2025-10-10 15:17:40.152726429 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mexport _VALID_VAR=456
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: env | grep _VALID_VAR
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.160590382 +0100
++++ bash_output.log	2025-10-10 15:17:40.160590382 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0menv | grep _VALID_VAR
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: unset _VALID_VAR
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.168454336 +0100
++++ bash_output.log	2025-10-10 15:17:40.168454336 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0munset _VALID_VAR
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: mkdir test_dir
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.184182244 +0100
++++ bash_output.log	2025-10-10 15:17:40.184182244 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mmkdir test_dir
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++mkdir: cannot create directory ‘test_dir’: File exists
+
+---
+COMMAND: cd test_dir
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.192046197 +0100
++++ bash_output.log	2025-10-10 15:17:40.192046197 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcd test_dir
+-[1;31m/home/pimi8522/42lisboa/pimishell/test_dir [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: pwd
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.195978175 +0100
++++ bash_output.log	2025-10-10 15:17:40.199910152 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mpwd
+ /home/pimi8522/42lisboa/pimishell
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: cd ..
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.203842128 +0100
++++ bash_output.log	2025-10-10 15:17:40.203842128 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcd ..
+-[1;31m/home/pimi8522/42lisboa [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: rmdir test_dir
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.215638059 +0100
++++ bash_output.log	2025-10-10 15:17:40.215638059 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mrmdir test_dir
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++rmdir: failed to remove 'test_dir': No such file or directory
+
+---
+COMMAND: cd
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.223502014 +0100
++++ bash_output.log	2025-10-10 15:17:40.223502014 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcd
+-[1;31m/home/pimi8522 [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: pwd
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.227433990 +0100
++++ bash_output.log	2025-10-10 15:17:40.231365967 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mpwd
+ /home/pimi8522/42lisboa/pimishell
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: cd ~
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.239229921 +0100
++++ bash_output.log	2025-10-10 15:17:40.239229921 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcd ~
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0mminishell: cd: No such file or directory
+
+---
+COMMAND: pwd
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.243161898 +0100
++++ bash_output.log	2025-10-10 15:17:40.247093876 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mpwd
+ /home/pimi8522/42lisboa/pimishell
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: cd /tmp
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.251025852 +0100
++++ bash_output.log	2025-10-10 15:17:40.251025852 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcd /tmp
+-[1;31m/tmp [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: pwd
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.258889807 +0100
++++ bash_output.log	2025-10-10 15:17:40.262821783 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mpwd
+ /home/pimi8522/42lisboa/pimishell
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: cd -
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.266753760 +0100
++++ bash_output.log	2025-10-10 15:17:40.266753760 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcd -
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0mminishell: cd: OLDPWD not set
++./run_tests.sh: line 39: cd: OLDPWD not set
+
+---
+COMMAND: pwd
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.274617714 +0100
++++ bash_output.log	2025-10-10 15:17:40.274617714 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mpwd
+ /home/pimi8522/42lisboa/pimishell
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo $USER
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.282481669 +0100
++++ bash_output.log	2025-10-10 15:17:40.282481669 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho $USER
+ pimi8522
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo "$USER"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.290345622 +0100
++++ bash_output.log	2025-10-10 15:17:40.290345622 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "$USER"
+ pimi8522
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo '$USER'
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.298209576 +0100
++++ bash_output.log	2025-10-10 15:17:40.298209576 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho '$USER'
+ $USER
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo "Your user is $USER"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.306073531 +0100
++++ bash_output.log	2025-10-10 15:17:40.306073531 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "Your user is $USER"
+ Your user is pimi8522
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo "The last exit status is $?"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.313937484 +0100
++++ bash_output.log	2025-10-10 15:17:40.313937484 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "The last exit status is $?"
+ The last exit status is 0
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo "My PID is $$"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.317869462 +0100
++++ bash_output.log	2025-10-10 15:17:40.321801437 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "My PID is $$"
+-My PID is 13820
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++My PID is 13542
+
+---
+COMMAND: echo $NON_EXISTENT_VAR
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.325733415 +0100
++++ bash_output.log	2025-10-10 15:17:40.329665393 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho $NON_EXISTENT_VAR
+ 
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo "This is a 'single quote' inside double quotes"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.333597368 +0100
++++ bash_output.log	2025-10-10 15:17:40.337529346 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "This is a 'single quote' inside double quotes"
+ This is a 'single quote' inside double quotes
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo 'This is a "double quote" inside single quotes'
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.341461324 +0100
++++ bash_output.log	2025-10-10 15:17:40.341461324 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho 'This is a "double quote" inside single quotes'
+ This is a "double quote" inside single quotes
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo "This is an unclosed quote
+  EXIT CODES -> Minishell: 0 | Bash: 2
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.349325277 +0100
++++ bash_output.log	2025-10-10 15:17:40.349325277 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "This is an unclosed quote
+-This is an unclosed quote
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `"'
+
+---
+COMMAND: echo 'This is another unclosed quote
+  EXIT CODES -> Minishell: 0 | Bash: 2
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.357189230 +0100
++++ bash_output.log	2025-10-10 15:17:40.357189230 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho 'This is another unclosed quote
+-This is another unclosed quote
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `''
+
+---
+COMMAND: echo "Redirecting to a file" > outfile.txt
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.365053186 +0100
++++ bash_output.log	2025-10-10 15:17:40.365053186 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "Redirecting to a file" > outfile.txt
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: cat outfile.txt
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.372917138 +0100
++++ bash_output.log	2025-10-10 15:17:40.376849117 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcat outfile.txt
+ Redirecting to a file
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo "Appending to a file" >> outfile.txt
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.380781092 +0100
++++ bash_output.log	2025-10-10 15:17:40.380781092 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "Appending to a file" >> outfile.txt
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: cat outfile.txt
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.392577023 +0100
++++ bash_output.log	2025-10-10 15:17:40.392577023 +0100
+@@ -1,9 +1,3 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcat outfile.txt
+ Redirecting to a file
+ Appending to a file
+ Appending to a file
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: ls > file_list.txt
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.408304931 +0100
++++ bash_output.log	2025-10-10 15:17:40.408304931 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mls > file_list.txt
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: cat < file_list.txt
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.416168886 +0100
++++ bash_output.log	2025-10-10 15:17:40.416168886 +0100
+@@ -1,7 +1,3 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcat < file_list.txt
+ Makefile
+ a.out
+ bash_output.log
+@@ -22,5 +18,3 @@
+ run_tests.sh
+ srcs
+ test_suite.txt
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: rm outfile.txt file_list.txt
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.427964817 +0100
++++ bash_output.log	2025-10-10 15:17:40.427964817 +0100
+@@ -1,6 +1,2 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mrm outfile.txt file_list.txt
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++rm: cannot remove 'outfile.txt': No such file or directory
++rm: cannot remove 'file_list.txt': No such file or directory
+
+---
+COMMAND: cat << EOF
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.435828772 +0100
++++ bash_output.log	2025-10-10 15:17:40.435828772 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcat << EOF
+-> [1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++./run_tests.sh: line 39: warning: here-document at line 39 delimited by end-of-file (wanted `EOF')
+
+---
+COMMAND: line 1
+  EXIT CODES -> Minishell: 0 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.483012494 +0100
++++ bash_output.log	2025-10-10 15:17:40.483012494 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mline 1
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0mminishell: line: command not found
++./run_tests.sh: line 39: line: command not found
+
+---
+COMMAND: line 2
+  EXIT CODES -> Minishell: 0 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.526264242 +0100
++++ bash_output.log	2025-10-10 15:17:40.530196218 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mline 2
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0mminishell: line: command not found
++./run_tests.sh: line 39: line: command not found
+
+---
+COMMAND: EOF
+  EXIT CODES -> Minishell: 0 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.573447966 +0100
++++ bash_output.log	2025-10-10 15:17:40.573447966 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mEOF
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0mminishell: EOF: command not found
++./run_tests.sh: line 39: EOF: command not found
+
+---
+COMMAND: cat << "EOF"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.581311919 +0100
++++ bash_output.log	2025-10-10 15:17:40.581311919 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcat << "EOF"
+-> [1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++./run_tests.sh: line 39: warning: here-document at line 39 delimited by end-of-file (wanted `EOF')
+
+---
+COMMAND: $USER should not be expanded
+  EXIT CODES -> Minishell: 0 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.628495642 +0100
++++ bash_output.log	2025-10-10 15:17:40.632427621 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m$USER should not be expanded
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0mminishell: pimi8522: command not found
++./run_tests.sh: line 39: pimi8522: command not found
+
+---
+COMMAND: EOF
+  EXIT CODES -> Minishell: 0 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.675679367 +0100
++++ bash_output.log	2025-10-10 15:17:40.679611345 +0100
+@@ -1,6 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mEOF
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0mminishell: EOF: command not found
++./run_tests.sh: line 39: EOF: command not found
+
+---
+COMMAND: ls -l | grep srcs | wc -l
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.687475298 +0100
++++ bash_output.log	2025-10-10 15:17:40.691407275 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mls -l | grep srcs | wc -l
+ 1
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: cat /etc/passwd | head -n 5 | cut -d: -f1
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.699271229 +0100
++++ bash_output.log	2025-10-10 15:17:40.699271229 +0100
+@@ -1,11 +1,5 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcat /etc/passwd | head -n 5 | cut -d: -f1
+ root
+ daemon
+ bin
+ sys
+ sync
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: echo "one" > file1 | echo "two" > file2
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.707135182 +0100
++++ bash_output.log	2025-10-10 15:17:40.711067160 +0100
+@@ -1,6 +0,0 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mecho "one" > file1 | echo "two" > file2
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: cat file1 file2
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.718931113 +0100
++++ bash_output.log	2025-10-10 15:17:40.718931113 +0100
+@@ -1,8 +1,2 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcat file1 file2
+ one
+ two
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
+
+---
+COMMAND: rm file1 file2
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.726795068 +0100
++++ bash_output.log	2025-10-10 15:17:40.726795068 +0100
+@@ -1,6 +1,2 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mrm file1 file2
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0m
+\ No newline at end of file
++rm: cannot remove 'file1': No such file or directory
++rm: cannot remove 'file2': No such file or directory
+
+---
+COMMAND: cat < no_such_file
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-10 15:17:40.734659022 +0100
++++ bash_output.log	2025-10-10 15:17:40.734659022 +0100
+@@ -1,7 +1 @@
+-[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
+-┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
+-╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
+-[0m[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0mcat < no_such_file
+-[1;31m/home/pimi8522/42lisboa/pimishell [0m[1;36mminishell$ [0m[1;31mexit
+-[0mminishell: No such file or directory
+-minishell: dup2: Bad file descriptor
++./run_tests.sh: line 39: no_such_file: No such file or directory
+

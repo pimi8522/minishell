@@ -1,0 +1,98 @@
+# Simple Commands
+ls
+ls -l
+ls -l -a
+
+# Built-in: echo
+echo "Hello, world!"
+echo -n "No newline"
+echo "Testing" "multiple" "arguments"
+echo
+
+# Built-in: pwd
+pwd
+
+# Built-in: env
+env
+
+# Built-in: export & unset
+export TEST_VAR=123
+env | grep TEST_VAR
+unset TEST_VAR
+env | grep TEST_VAR
+export
+export INVALID-VAR=123
+export _VALID_VAR=456
+env | grep _VALID_VAR
+unset _VALID_VAR
+
+# Built-in: cd
+mkdir test_dir
+cd test_dir
+pwd
+cd ..
+rmdir test_dir
+cd
+pwd
+cd ~
+pwd
+cd /tmp
+pwd
+cd -
+pwd
+
+# Built-in: exit
+# exit
+# exit 42
+# exit a
+# exit 1 2
+
+# Variable Expansion
+echo $USER
+echo "$USER"
+echo '$USER'
+echo "Your user is $USER"
+echo "The last exit status is $?"
+echo "My PID is $$"
+echo $NON_EXISTENT_VAR
+
+# Quotes
+echo "This is a 'single quote' inside double quotes"
+echo 'This is a "double quote" inside single quotes'
+echo "This is an unclosed quote
+echo 'This is another unclosed quote
+
+# Redirections
+echo "Redirecting to a file" > outfile.txt
+cat outfile.txt
+echo "Appending to a file" >> outfile.txt
+cat outfile.txt
+ls > file_list.txt
+cat < file_list.txt
+rm outfile.txt file_list.txt
+
+# Here Document
+cat << EOF
+line 1
+line 2
+EOF
+
+cat << "EOF"
+$USER should not be expanded
+EOF
+
+# Pipes
+ls -l | grep srcs | wc -l
+cat /etc/passwd | head -n 5 | cut -d: -f1
+
+# Complex Cases
+# The following command creates an empty file1 and overwrites file2 with "two" in bash.
+# The pipe redirects stdout, so the first echo's output is consumed by the second echo, which ignores it.
+echo "one" > file1 | echo "two" > file2
+cat file1 file2
+rm file1 file2
+cat < no_such_file
+# This requires creating a directory without write permissions to test properly.
+# mkdir -m 555 no_write_permission
+# > no_write_permission/file
+# rmdir no_write_permission
