@@ -9,10 +9,16 @@ static void	read_heredoc(const char *delimiter, int fd, int expand,
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, delimiter) == 0)
+		if (!line)
 		{
-			if (line)
-				free(line);
+			ft_putstr_fd("minishell: warning: here-document delimited by end-of-file (wanted `", 2);
+			ft_putstr_fd((char *)delimiter, 2);
+			ft_putstr_fd("')\n", 2);
+			break ;
+		}
+		if (ft_strcmp(line, delimiter) == 0)
+		{
+			free(line);
 			break ;
 		}
 		if (expand)

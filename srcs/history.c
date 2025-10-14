@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:45 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/09/16 16:16:55 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/10 17:05:12 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,53 +18,26 @@ int	init_shell_history(void)
 	char	*home;
 	char	*history_path;
 	int		fd;
-	char	buffer[4096];
-	ssize_t	bytes_read;
-	char	*line_start;
-	char	*newline;
+	char	*line;
 
-// obter o diretório home do utilizador
 	home = getenv("HOME");
 	if (!home)
 		return (-1);
-// construir o caminho para o ficheiro de histórico
 	history_path = ft_strjoin(home, "/.minishell_history");
 	if (!history_path)
 		return (-1);
-		
-// abrir o ficheiro de histórico para leitura
 	fd = open(history_path, O_RDONLY);
 	free(history_path);
 	if (fd < 0)
 		return (-1);
-	
-// ler o conteúdo do ficheiro para um buffer
-	bytes_read = read(fd, buffer, sizeof(buffer) - 1);
-	if (bytes_read <= 0)
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		close(fd);
-		if (bytes_read < 0)
-			return (-1);
-		return (0);
+		if (line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
+		if (*line)
+			add_history(line);
+		free(line);
 	}
-	
-	buffer[bytes_read] = '\0';
-	line_start = buffer;
-	
-// processar o buffer linha por linha, adicionando cada uma ao histórico
-	while ((newline = ft_strchr(line_start, '\n')))
-	{
-		*newline = '\0';
-		if (*line_start)  /* Skip empty lines */
-			add_history(line_start);
-		line_start = newline + 1;
-	}
-	
-//adicionar a ultima linha se n acabar em newline
-	if (*line_start)
-		add_history(line_start);
-	
-//fechar o file descriptor
 	close(fd);
 	return (0);
 }

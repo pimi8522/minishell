@@ -64,6 +64,11 @@ static int	count_tokens(const char *s)
 			}
 		}
 	}
+	if (in_squote || in_dquote)
+	{
+		ft_putstr_fd("minishell: syntax error: unclosed quote\n", 2);
+		return (-1);
+	}
 	return (count);
 }
 

@@ -101,16 +101,11 @@ static char	*expand_and_unquote_arg(char *arg, t_shell *shell)
 		else if (arg[i] == '$' && !in_squote)
 		{
 			var_name = extract_var_name(&arg[i + 1]);
-			if (ft_strlen(var_name) == 0)
-			{
-				new_arg = str_append_char(new_arg, arg[i]);
-				i++; 
-			}
+			new_arg = append_var_value(new_arg, var_name, shell);
+			if (ft_strcmp(var_name, "$") == 0)
+				i += 2;
 			else
-			{
-				new_arg = append_var_value(new_arg, var_name, shell);
 				i += ft_strlen(var_name) + 1;
-			}
 			free(var_name);
 		}
 		else
