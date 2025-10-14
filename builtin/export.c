@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:59:57 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/09 14:48:06 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/14 16:38:12 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ static void	print_sorted_env(t_shell *shell)
 	i = 0;
 	while(env_array[i])
 	{
+		if (ft_strncmp(env_array[i], "_=", 2) == 0)
+		{
+			i++;
+			continue; // não imprime _ aqui, imprime no fim
+		}
 		equal_sign = ft_strchr(env_array[i], '=');
 		if (equal_sign)
 		{

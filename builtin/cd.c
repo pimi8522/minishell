@@ -6,11 +6,55 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:50:49 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/08 16:29:46 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/14 15:43:08 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*get_target_path(char **args, t_shell *shell)
+{
+	char	*path;
+	char	*home;
+	char	*original_path;
+
+	if (!args[1])
+	{
+		original_path = get_env_value(shell, "HOME");
+		if (!original_path)
+		{
+			write(2, "minishell: cd: HOME not set\n", 28);
+			return (NULL);
+		}
+		return(ft_strdup(original_path));
+	}
+	if (ft_strcmp(args[1], "-") == 0)
+	{
+		original_path = get_env_value(shell, "OLDPWD");
+		if(!original_path)
+		{
+			write(2, "minishell: cd: OLDPWD not set\n", 30);
+			return (NULL);
+		}
+		printf("%s\n", original_path);
+		return (ft_strdup(original_path));
+	}
+	if (args[1][0] == '~')
+	{
+		home = get_env_value(shell, "HOME");
+		if (!home)
+		{
+			write(2, "minishell: cd: HOME not set\n", 28);
+			return (NULL);
+		}
+		if (ft_strcmp(args[1], "~") == 0)
+			path = ft_strdup(home);
+		else
+			path = ft_strjoin(home, args[1] + 1);
+		return(path);
+	}
+	return (ft_strdup(args[1]));
+}
 
 void	ft_cd(char **args, t_shell *shell)
 {
@@ -23,56 +67,32 @@ void	ft_cd(char **args, t_shell *shell)
 	{
 		perror("cd: error retrieving current directory");
 		shell->last_exit_status = 1;
-		return;
+		return ;
 	}
+	path = get_target_path(args, shell);
 	// se não houver argumentos, o caminho é a variável de ambiente HOME
-	if (!args[1])
+	if (!path)
 	{
-		path = get_env_value(shell, "HOME");
-		if (!path)
-		{
-			write(2, "minishell: cd: HOME not set\n", 28);
-			shell->last_exit_status = 1;
-			return ;
-		}
+		shell->last_exit_status = 1;
+		return ;
 	}
-	else if (ft_strcmp(args[1], "-") == 0)
-	{
-		path = get_env_value(shell, "OLDPWD");
-		if (!path)
-		{
-			write(2, "minishell: cd: OLDPWD not set\n", 30);
-			shell->last_exit_status = 1;
-			return ;
-		}
-		printf("%s\n", path);
-	}
-	else
-		// senão, o caminho é o primeiro argumento
-		path = args[1];
 	// muda o diretório
 	if (chdir(path) != 0)
 	{
-		perror("minishell: cd");
+		write(2, "minishell: cd: ", 15);
+		write(2, path, ft_strlen(path));
+		write(2, ": No such file or directory\n", 28);
 		shell->last_exit_status = 1;
-		if (args[1] && path != args[1])
-			free(path);
-		return ;
 	}
-	// obtém o novo diretório de trabalho
-	if (getcwd(new_pwd, sizeof(new_pwd)) == NULL)
+	else
 	{
-		perror("cd: error retrieving new directory");
-		shell->last_exit_status = 1;
-		if (args[1] && path != args[1])
-			free(path);
-		return;
+		shell->last_exit_status = 0;
+		if (!find_env_node(shell->env_list, "OLDPWD"))
+			set_env_var(shell, "OLDPWD", NULL);
+		set_env_var(shell, "OLDPWD", old_pwd);
+		if (getcwd(new_pwd, sizeof(new_pwd)) != NULL)
+			set_env_var(shell, "PWD", new_pwd);
 	}
-	// atualiza as variáveis de ambiente OLDPWD e PWD
-	set_env_var(shell, "OLDPWD", old_pwd);
-	set_env_var(shell, "PWD", new_pwd);
-	shell->last_exit_status = 0;
-	if (args[1] && path != args[1])
-		free(path);
+	free(path);
 }
 

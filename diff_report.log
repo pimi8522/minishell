@@ -1,851 +1,368 @@
 ---
-COMMAND: ls
+COMMAND: echo "The last exit status is $?"
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.766855011 +0100
-+++ bash_output.log	2025-10-10 15:33:18.776855524 +0100
-@@ -1,9 +1,7 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mls
- Makefile
- a.out
-+bash_stderr.tmp
-+bash_stdout.tmp
- builtin
- en.subject.pdf
- libft
-@@ -15,5 +13,3 @@
- run_tests.sh
- srcs
- test_suite.txt
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
+--- minishell_output.log	2025-10-14 16:49:10.796720932 +0100
++++ bash_output.log	2025-10-14 16:49:10.796720932 +0100
+@@ -1 +0,0 @@
+-The last exit status is 0
 
 ---
 COMMAND: ls -l
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.796856548 +0100
-+++ bash_output.log	2025-10-10 15:33:18.796856548 +0100
-@@ -1,11 +1,9 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mls -l
- total 1656
- -rw-r--r-- 1 anarita anarita    1709 Oct  1 12:38 Makefile
- -rw-r--r-- 1 anarita anarita   16208 Sep 15 11:56 a.out
- -rw-r--r-- 1 anarita anarita     179 Oct 10 15:33 bash_output.log
-+-rw-r--r-- 1 anarita anarita       0 Oct 10 15:33 bash_stderr.tmp
-+-rw-r--r-- 1 anarita anarita       0 Oct 10 15:33 bash_stdout.tmp
- drwxr-xr-x 2 anarita anarita    4096 Oct  9 15:49 builtin
- -rw-r--r-- 1 anarita anarita     870 Oct 10 15:33 diff_report.log
- -rw-r--r-- 1 anarita anarita 1582893 Sep 15 11:56 en.subject.pdf
-@@ -14,10 +12,8 @@
- -rw-r--r-- 1 anarita anarita    4034 Oct  9 15:36 minishell.h
- -rw-r--r-- 1 anarita anarita     641 Oct 10 15:33 minishell_output.log
- -rw-r--r-- 1 anarita anarita       0 Oct 10 15:33 minishell_stderr.tmp
---rw-r--r-- 1 anarita anarita     407 Oct 10 15:33 minishell_stdout.tmp
-+-rw-r--r-- 1 anarita anarita    1508 Oct 10 15:33 minishell_stdout.tmp
- drwxr-xr-x 2 anarita anarita    4096 Sep 23 16:04 pipex
- -rwxr-xr-x 1 anarita anarita    2381 Oct 10 15:30 run_tests.sh
- drwxr-xr-x 2 anarita anarita    4096 Oct 10 15:30 srcs
- -rw-r--r-- 1 anarita anarita    1726 Oct 10 15:30 test_suite.txt
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: ls -l -a
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.806857060 +0100
-+++ bash_output.log	2025-10-10 15:33:18.816857572 +0100
-@@ -1,7 +1,3 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mls -l -a
- total 1676
- drwxr-xr-x 8 anarita anarita    4096 Oct 10 15:33 .
- drwxr-xr-x 7 anarita anarita    4096 Sep 15 11:58 ..
-@@ -11,6 +7,8 @@
- -rw-r--r-- 1 anarita anarita    1709 Oct  1 12:38 Makefile
- -rw-r--r-- 1 anarita anarita   16208 Sep 15 11:56 a.out
- -rw-r--r-- 1 anarita anarita    1143 Oct 10 15:33 bash_output.log
-+-rw-r--r-- 1 anarita anarita       0 Oct 10 15:33 bash_stderr.tmp
-+-rw-r--r-- 1 anarita anarita       0 Oct 10 15:33 bash_stdout.tmp
- drwxr-xr-x 2 anarita anarita    4096 Oct  9 15:49 builtin
- -rw-r--r-- 1 anarita anarita    2745 Oct 10 15:33 diff_report.log
- -rw-r--r-- 1 anarita anarita 1582893 Sep 15 11:56 en.subject.pdf
-@@ -19,10 +17,8 @@
- -rw-r--r-- 1 anarita anarita    4034 Oct  9 15:36 minishell.h
- -rw-r--r-- 1 anarita anarita    1508 Oct 10 15:33 minishell_output.log
- -rw-r--r-- 1 anarita anarita       0 Oct 10 15:33 minishell_stderr.tmp
---rw-r--r-- 1 anarita anarita     410 Oct 10 15:33 minishell_stdout.tmp
-+-rw-r--r-- 1 anarita anarita    1790 Oct 10 15:33 minishell_stdout.tmp
- drwxr-xr-x 2 anarita anarita    4096 Sep 23 16:04 pipex
- -rwxr-xr-x 1 anarita anarita    2381 Oct 10 15:30 run_tests.sh
- drwxr-xr-x 2 anarita anarita    4096 Oct 10 15:30 srcs
- -rw-r--r-- 1 anarita anarita    1726 Oct 10 15:30 test_suite.txt
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: echo "Hello, world!"
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.826858084 +0100
-+++ bash_output.log	2025-10-10 15:33:18.826858084 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "Hello, world!"
- Hello, world!
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: echo -n "No newline"
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.836858597 +0100
-+++ bash_output.log	2025-10-10 15:33:18.836858597 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho -n "No newline"
--No newline[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-+No newline
-\ No newline at end of file
-
----
-COMMAND: echo "Testing" "multiple" "arguments"
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.856859621 +0100
-+++ bash_output.log	2025-10-10 15:33:18.856859621 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "Testing" "multiple" "arguments"
- Testing multiple arguments
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: echo
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.866860133 +0100
-+++ bash_output.log	2025-10-10 15:33:18.866860133 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho
- 
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: pwd
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.876860645 +0100
-+++ bash_output.log	2025-10-10 15:33:18.876860645 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mpwd
- /home/anarita/trabalhos42/minishell1
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: env
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.886861157 +0100
-+++ bash_output.log	2025-10-10 15:33:18.896861670 +0100
-@@ -1,7 +1,3 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0menv
- SHELL=/bin/bash
- COLORTERM=truecolor
- WSL2_GUI_APPS_ENABLED=1
-@@ -41,6 +37,4 @@
- PULSE_SERVER=unix:/mnt/wslg/PulseServer
- TERM_PROGRAM=vscode
- VSCODE_IPC_HOOK_CLI=/run/user/1000/vscode-ipc-0f50ebf6-c4fe-4f0d-b76e-aa99e5f09035.sock
--_=./minishell
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-+_=/usr/bin/env
-
----
-COMMAND: export TEST_VAR=123
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.906862182 +0100
-+++ bash_output.log	2025-10-10 15:33:18.906862182 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mexport TEST_VAR=123
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: env | grep TEST_VAR
-  EXIT CODES -> Minishell: 0 | Bash: 1
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.916862694 +0100
-+++ bash_output.log	2025-10-10 15:33:18.916862694 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0menv | grep TEST_VAR
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: unset TEST_VAR
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.926863206 +0100
-+++ bash_output.log	2025-10-10 15:33:18.926863206 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0munset TEST_VAR
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: env | grep TEST_VAR
-  EXIT CODES -> Minishell: 0 | Bash: 1
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.946864231 +0100
-+++ bash_output.log	2025-10-10 15:33:18.946864231 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0menv | grep TEST_VAR
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: export
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.956864743 +0100
-+++ bash_output.log	2025-10-10 15:33:18.956864743 +0100
-@@ -1,7 +1,3 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mexport
- declare -x COLORTERM="truecolor"
- declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
- declare -x DEBUGINFOD_URLS="https://debuginfod.ubuntu.com "
-@@ -16,6 +12,7 @@
- declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:"
- declare -x MOTD_SHOWN="update-motd"
- declare -x NAME="omen"
-+declare -x OLDPWD
- declare -x PAGER="cat"
- declare -x PATH="/home/anarita/.vscode-server/bin/385651c938df8a906869babee516bffd0ddb9829/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/d/ProgramFiles/Git/cmd:/mnt/c/Users/anari/AppData/Local/Microsoft/WindowsApps:/mnt/d/ProgramFiles/Microsoft VS Code/bin:/snap/bin:/home/anarita/.venv/bin:/home/anarita/.venv/bin:/home/anarita/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/anarita/.venv/bin:/home/anarita/.venv/bin"
- declare -x PROMPT_EOL_MARK=""
-@@ -41,6 +38,3 @@
- declare -x WSL_INTEROP="/run/WSL/224908_interop"
- declare -x XDG_DATA_DIRS="/usr/local/share:/usr/share:/var/lib/snapd/desktop"
- declare -x XDG_RUNTIME_DIR="/run/user/1000/"
--declare -x _="./minishell"
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: export INVALID-VAR=123
-  EXIT CODES -> Minishell: 0 | Bash: 1
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.966865255 +0100
-+++ bash_output.log	2025-10-10 15:33:18.966865255 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mexport INVALID-VAR=123
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0mminishell: export: `INVALID-VAR=123': not a valid identifier
-+./run_tests.sh: line 39: export: `INVALID-VAR=123': not a valid identifier
-
----
-COMMAND: export _VALID_VAR=456
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.976865767 +0100
-+++ bash_output.log	2025-10-10 15:33:18.976865767 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mexport _VALID_VAR=456
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: env | grep _VALID_VAR
-  EXIT CODES -> Minishell: 0 | Bash: 1
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.986866279 +0100
-+++ bash_output.log	2025-10-10 15:33:18.986866279 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0menv | grep _VALID_VAR
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: unset _VALID_VAR
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:18.996866791 +0100
-+++ bash_output.log	2025-10-10 15:33:18.996866791 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0munset _VALID_VAR
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: mkdir test_dir
-  EXIT CODES -> Minishell: 0 | Bash: 1
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.006876621 +0100
-+++ bash_output.log	2025-10-10 15:33:19.016866675 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mmkdir test_dir
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-+mkdir: cannot create directory ‘test_dir’: File exists
-
----
-COMMAND: cd test_dir
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.026856729 +0100
-+++ bash_output.log	2025-10-10 15:33:19.026856729 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcd test_dir
--[1;31m/home/anarita/trabalhos42/minishell1/test_dir [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: pwd
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.036846783 +0100
-+++ bash_output.log	2025-10-10 15:33:19.036846783 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mpwd
- /home/anarita/trabalhos42/minishell1
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: cd ..
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.046836838 +0100
-+++ bash_output.log	2025-10-10 15:33:19.046836838 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcd ..
--[1;31m/home/anarita/trabalhos42 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: rmdir test_dir
-  EXIT CODES -> Minishell: 0 | Bash: 1
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.056826892 +0100
-+++ bash_output.log	2025-10-10 15:33:19.056826892 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mrmdir test_dir
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-+rmdir: failed to remove 'test_dir': No such file or directory
-
----
-COMMAND: cd
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.066816946 +0100
-+++ bash_output.log	2025-10-10 15:33:19.066816946 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcd
--[1;31m/home/anarita [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: pwd
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.076807000 +0100
-+++ bash_output.log	2025-10-10 15:33:19.076807000 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mpwd
- /home/anarita/trabalhos42/minishell1
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: cd ~
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.086797055 +0100
-+++ bash_output.log	2025-10-10 15:33:19.086797055 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcd ~
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0mminishell: cd: No such file or directory
-
----
-COMMAND: pwd
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.096787109 +0100
-+++ bash_output.log	2025-10-10 15:33:19.096787109 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mpwd
- /home/anarita/trabalhos42/minishell1
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: cd /tmp
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.106777163 +0100
-+++ bash_output.log	2025-10-10 15:33:19.106777163 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcd /tmp
--[1;31m/tmp [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: pwd
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.116767217 +0100
-+++ bash_output.log	2025-10-10 15:33:19.116767217 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mpwd
- /home/anarita/trabalhos42/minishell1
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: cd -
-  EXIT CODES -> Minishell: 0 | Bash: 1
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.126757272 +0100
-+++ bash_output.log	2025-10-10 15:33:19.126757272 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcd -
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0mminishell: cd: OLDPWD not set
-+./run_tests.sh: line 39: cd: OLDPWD not set
-
----
-COMMAND: pwd
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.136747326 +0100
-+++ bash_output.log	2025-10-10 15:33:19.136747326 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mpwd
- /home/anarita/trabalhos42/minishell1
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: echo $USER
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.146737380 +0100
-+++ bash_output.log	2025-10-10 15:33:19.156727434 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho $USER
- anarita
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: echo "$USER"
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.156727434 +0100
-+++ bash_output.log	2025-10-10 15:33:19.156727434 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "$USER"
- anarita
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: echo '$USER'
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.166717488 +0100
-+++ bash_output.log	2025-10-10 15:33:19.166717488 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho '$USER'
- $USER
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: echo "Your user is $USER"
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.176707543 +0100
-+++ bash_output.log	2025-10-10 15:33:19.176707543 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "Your user is $USER"
- Your user is anarita
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: echo "The last exit status is $?"
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.186697597 +0100
-+++ bash_output.log	2025-10-10 15:33:19.186697597 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "The last exit status is $?"
- The last exit status is 0
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
+--- minishell_output.log	2025-10-14 16:49:10.806735937 +0100
++++ bash_output.log	2025-10-14 16:49:10.806735937 +0100
+@@ -1 +1 @@
+-My PID is 43569
++My PID is 43275
 
 ---
 COMMAND: echo "My PID is $$"
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.196687651 +0100
-+++ bash_output.log	2025-10-10 15:33:19.206677705 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "My PID is $$"
--My PID is 260977
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-+My PID is 260699
+--- minishell_output.log	2025-10-14 16:49:10.806735937 +0100
++++ bash_output.log	2025-10-14 16:49:10.806735937 +0100
+@@ -1 +1 @@
+-My PID is 43569
++My PID is 43275
 
 ---
 COMMAND: echo $NON_EXISTENT_VAR
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.206677705 +0100
-+++ bash_output.log	2025-10-10 15:33:19.216667760 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho $NON_EXISTENT_VAR
- 
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
+--- minishell_output.log	2025-10-14 16:49:10.816750942 +0100
++++ bash_output.log	2025-10-14 16:49:10.816750942 +0100
+@@ -1 +1,24 @@
+-
++total 1680
++drwxr-xr-x 8 anarita anarita    4096 Oct 14 16:49 .
++drwxr-xr-x 7 anarita anarita    4096 Oct 10 16:03 ..
++drwxr-xr-x 7 anarita anarita    4096 Oct 10 16:09 .git
++-rw-r--r-- 1 anarita anarita      25 Sep 15 12:03 .gitignore
++drwxr-xr-x 2 anarita anarita    4096 Sep 15 12:03 .vscode
++-rw-r--r-- 1 anarita anarita    1709 Oct  1 12:38 Makefile
++-rw-r--r-- 1 anarita anarita   16208 Sep 15 11:56 a.out
++-rw-r--r-- 1 anarita anarita      16 Oct 14 16:49 bash_output.log
++-rw-r--r-- 1 anarita anarita       0 Oct 14 16:49 bash_stderr.tmp
++-rw-r--r-- 1 anarita anarita       0 Oct 14 16:49 bash_stdout.tmp
++drwxr-xr-x 2 anarita anarita    4096 Oct 14 16:30 builtin
++-rw-r--r-- 1 anarita anarita     748 Oct 14 16:49 diff_report.log
++-rw-r--r-- 1 anarita anarita 1582893 Sep 15 11:56 en.subject.pdf
++drwxr-xr-x 3 anarita anarita    4096 Oct 14 16:30 libft
++-rwxr-xr-x 1 anarita anarita   46752 Oct 14 16:30 minishell
++-rw-r--r-- 1 anarita anarita    4034 Oct  9 15:36 minishell.h
++-rw-r--r-- 1 anarita anarita       1 Oct 14 16:49 minishell_output.log
++-rw-r--r-- 1 anarita anarita       0 Oct 14 16:49 minishell_stderr.tmp
++-rw-r--r-- 1 anarita anarita       1 Oct 14 16:49 minishell_stdout.tmp
++drwxr-xr-x 2 anarita anarita    4096 Sep 23 16:04 pipex
++-rwxr-xr-x 1 anarita anarita    2381 Oct 10 15:30 run_tests.sh
++drwxr-xr-x 2 anarita anarita    4096 Oct 14 16:30 srcs
++-rw-r--r-- 1 anarita anarita    1726 Oct 10 15:30 test_suite.txt
 
 ---
-COMMAND: echo "This is a 'single quote' inside double quotes"
+COMMAND: ls -l -a
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.216667760 +0100
-+++ bash_output.log	2025-10-10 15:33:19.226657814 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "This is a 'single quote' inside double quotes"
- This is a 'single quote' inside double quotes
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
+--- minishell_output.log	2025-10-14 16:49:10.816750942 +0100
++++ bash_output.log	2025-10-14 16:49:10.826765947 +0100
+@@ -1 +1,24 @@
+-
++total 1680
++drwxr-xr-x 8 anarita anarita    4096 Oct 14 16:49 .
++drwxr-xr-x 7 anarita anarita    4096 Oct 10 16:03 ..
++drwxr-xr-x 7 anarita anarita    4096 Oct 10 16:09 .git
++-rw-r--r-- 1 anarita anarita      25 Sep 15 12:03 .gitignore
++drwxr-xr-x 2 anarita anarita    4096 Sep 15 12:03 .vscode
++-rw-r--r-- 1 anarita anarita    1709 Oct  1 12:38 Makefile
++-rw-r--r-- 1 anarita anarita   16208 Sep 15 11:56 a.out
++-rw-r--r-- 1 anarita anarita      16 Oct 14 16:49 bash_output.log
++-rw-r--r-- 1 anarita anarita       0 Oct 14 16:49 bash_stderr.tmp
++-rw-r--r-- 1 anarita anarita       0 Oct 14 16:49 bash_stdout.tmp
++drwxr-xr-x 2 anarita anarita    4096 Oct 14 16:30 builtin
++-rw-r--r-- 1 anarita anarita     748 Oct 14 16:49 diff_report.log
++-rw-r--r-- 1 anarita anarita 1582893 Sep 15 11:56 en.subject.pdf
++drwxr-xr-x 3 anarita anarita    4096 Oct 14 16:30 libft
++-rwxr-xr-x 1 anarita anarita   46752 Oct 14 16:30 minishell
++-rw-r--r-- 1 anarita anarita    4034 Oct  9 15:36 minishell.h
++-rw-r--r-- 1 anarita anarita       1 Oct 14 16:49 minishell_output.log
++-rw-r--r-- 1 anarita anarita       0 Oct 14 16:49 minishell_stderr.tmp
++-rw-r--r-- 1 anarita anarita       1 Oct 14 16:49 minishell_stdout.tmp
++drwxr-xr-x 2 anarita anarita    4096 Sep 23 16:04 pipex
++-rwxr-xr-x 1 anarita anarita    2381 Oct 10 15:30 run_tests.sh
++drwxr-xr-x 2 anarita anarita    4096 Oct 14 16:30 srcs
++-rw-r--r-- 1 anarita anarita    1726 Oct 10 15:30 test_suite.txt
 
 ---
-COMMAND: echo 'This is a "double quote" inside single quotes'
+COMMAND: echo "Testing" "multiple" "arguments"
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.226657814 +0100
-+++ bash_output.log	2025-10-10 15:33:19.236647868 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho 'This is a "double quote" inside single quotes'
- This is a "double quote" inside single quotes
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
+--- minishell_output.log	2025-10-14 16:49:10.846795957 +0100
++++ bash_output.log	2025-10-14 16:49:10.846795957 +0100
+@@ -1,2 +1,2 @@
+-This is an unclosed quote
+-
++Testing multiple arguments
++./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `"'
 
 ---
 COMMAND: echo "This is an unclosed quote
   EXIT CODES -> Minishell: 0 | Bash: 2
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.236647868 +0100
-+++ bash_output.log	2025-10-10 15:33:19.246637922 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "This is an unclosed quote
+--- minishell_output.log	2025-10-14 16:49:10.846795957 +0100
++++ bash_output.log	2025-10-14 16:49:10.846795957 +0100
+@@ -1,2 +1,2 @@
 -This is an unclosed quote
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
+-
++Testing multiple arguments
++./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `"'
+
+---
+COMMAND: echo
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:10.856810963 +0100
++++ bash_output.log	2025-10-14 16:49:10.856810963 +0100
+@@ -1,2 +0,0 @@
+-This is another unclosed quote
+-
+
+---
+COMMAND: echo 'This is another unclosed quote
+  EXIT CODES -> Minishell: 0 | Bash: 2
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:10.856810963 +0100
++++ bash_output.log	2025-10-14 16:49:10.856810963 +0100
+@@ -1,2 +1 @@
+-This is another unclosed quote
+-
++./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `''
+
+---
+COMMAND: export
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:10.926915999 +0100
++++ bash_output.log	2025-10-14 16:49:10.926915999 +0100
+@@ -1,53 +0,0 @@
+-Makefile
+-a.out
+-bash_output.log
+-bash_stderr.tmp
+-bash_stdout.tmp
+-builtin
+-diff_report.log
+-en.subject.pdf
+-file_list.txt
+-libft
+-minishell
+-minishell.h
+-minishell_output.log
+-minishell_stderr.tmp
+-minishell_stdout.tmp
+-outfile.txt
+-pipex
+-run_tests.sh
+-srcs
+-test_suite.txt
+-ome/anarita"
+-declare -x HOSTTYPE="x86_64"
+-declare -x LANG="en_US.UTF-8"
+-declare -x LC_ALL="en_US.UTF-8"
+-declare -x LESSCLOSE="/usr/bin/lesspipe %s %s"
+-declare -x LESSOPEN="| /usr/bin/lesspipe %s"
+-declare -x LOGNAME="anarita"
+-declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:"
+-declare -x NAME="omen"
+-declare -x OLDPWD
+-declare -x PATH="/home/anarita/.vscode-server/bin/385651c938df8a906869babee516bffd0ddb9829/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/d/ProgramFiles/Git/cmd:/mnt/c/Users/anari/AppData/Local/Microsoft/WindowsApps:/mnt/d/ProgramFiles/Microsoft VS Code/bin:/snap/bin:/home/anarita/.venv/bin:/home/anarita/.venv/bin"
+-declare -x POSTHOG_API_KEY="phc_jZKK9l8y7YXMN4J5tT0Idkmr9RMZrIUlfVSiaKyTesv"
+-declare -x PULSE_SERVER="unix:/mnt/wslg/PulseServer"
+-declare -x PWD="/home/anarita/trabalhos42/minishell1"
+-declare -x SHELL="/bin/bash"
+-declare -x SHLVL="1"
+-declare -x TERM="xterm-256color"
+-declare -x USER="anarita"
+-declare -x VSCODE_CWD="/mnt/d/ProgramFiles/Microsoft VS Code"
+-declare -x VSCODE_ESM_ENTRYPOINT="vs/workbench/api/node/extensionHostProcess"
+-declare -x VSCODE_HANDLES_SIGPIPE="true"
+-declare -x VSCODE_HANDLES_UNCAUGHT_ERRORS="true"
+-declare -x VSCODE_IPC_HOOK_CLI="/run/user/1000/vscode-ipc-a434d4ac-c890-40b4-b4a5-23651d53f2ee.sock"
+-declare -x VSCODE_L10N_BUNDLE_LOCATION=""
+-declare -x VSCODE_NLS_CONFIG="{"userLocale":"en","osLocale":"en","resolvedLanguage":"en","defaultMessagesFile":"/home/anarita/.vscode-server/bin/385651c938df8a906869babee516bffd0ddb9829/out/nls.messages.json","locale":"en","availableLanguages":{}}"
+-declare -x VSCODE_WSL_EXT_LOCATION="/mnt/c/Users/anari/.vscode/extensions/ms-vscode-remote.remote-wsl-0.104.3"
+-declare -x WAYLAND_DISPLAY="wayland-0"
+-declare -x WSL2_GUI_APPS_ENABLED="1"
+-declare -x WSLENV="VSCODE_WSL_EXT_LOCATION/up"
+-declare -x WSL_DISTRO_NAME="Ubuntu"
+-declare -x WSL_INTEROP="/run/WSL/310_interop"
+-declare -x XDG_DATA_DIRS="/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+-declare -x XDG_RUNTIME_DIR="/run/user/1000/"
+
+---
+COMMAND: cat < file_list.txt
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:10.926915999 +0100
++++ bash_output.log	2025-10-14 16:49:10.926915999 +0100
+@@ -18,36 +18,3 @@
+ run_tests.sh
+ srcs
+ test_suite.txt
+-ome/anarita"
+-declare -x HOSTTYPE="x86_64"
+-declare -x LANG="en_US.UTF-8"
+-declare -x LC_ALL="en_US.UTF-8"
+-declare -x LESSCLOSE="/usr/bin/lesspipe %s %s"
+-declare -x LESSOPEN="| /usr/bin/lesspipe %s"
+-declare -x LOGNAME="anarita"
+-declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:"
+-declare -x NAME="omen"
+-declare -x OLDPWD
+-declare -x PATH="/home/anarita/.vscode-server/bin/385651c938df8a906869babee516bffd0ddb9829/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA app/NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/d/ProgramFiles/Git/cmd:/mnt/c/Users/anari/AppData/Local/Microsoft/WindowsApps:/mnt/d/ProgramFiles/Microsoft VS Code/bin:/snap/bin:/home/anarita/.venv/bin:/home/anarita/.venv/bin"
+-declare -x POSTHOG_API_KEY="phc_jZKK9l8y7YXMN4J5tT0Idkmr9RMZrIUlfVSiaKyTesv"
+-declare -x PULSE_SERVER="unix:/mnt/wslg/PulseServer"
+-declare -x PWD="/home/anarita/trabalhos42/minishell1"
+-declare -x SHELL="/bin/bash"
+-declare -x SHLVL="1"
+-declare -x TERM="xterm-256color"
+-declare -x USER="anarita"
+-declare -x VSCODE_CWD="/mnt/d/ProgramFiles/Microsoft VS Code"
+-declare -x VSCODE_ESM_ENTRYPOINT="vs/workbench/api/node/extensionHostProcess"
+-declare -x VSCODE_HANDLES_SIGPIPE="true"
+-declare -x VSCODE_HANDLES_UNCAUGHT_ERRORS="true"
+-declare -x VSCODE_IPC_HOOK_CLI="/run/user/1000/vscode-ipc-a434d4ac-c890-40b4-b4a5-23651d53f2ee.sock"
+-declare -x VSCODE_L10N_BUNDLE_LOCATION=""
+-declare -x VSCODE_NLS_CONFIG="{"userLocale":"en","osLocale":"en","resolvedLanguage":"en","defaultMessagesFile":"/home/anarita/.vscode-server/bin/385651c938df8a906869babee516bffd0ddb9829/out/nls.messages.json","locale":"en","availableLanguages":{}}"
+-declare -x VSCODE_WSL_EXT_LOCATION="/mnt/c/Users/anari/.vscode/extensions/ms-vscode-remote.remote-wsl-0.104.3"
+-declare -x WAYLAND_DISPLAY="wayland-0"
+-declare -x WSL2_GUI_APPS_ENABLED="1"
+-declare -x WSLENV="VSCODE_WSL_EXT_LOCATION/up"
+-declare -x WSL_DISTRO_NAME="Ubuntu"
+-declare -x WSL_INTEROP="/run/WSL/310_interop"
+-declare -x XDG_DATA_DIRS="/usr/local/share:/usr/share:/var/lib/snapd/desktop"
+-declare -x XDG_RUNTIME_DIR="/run/user/1000/"
+
+---
+COMMAND: rm outfile.txt file_list.txt
+  EXIT CODES -> Minishell: 0 | Bash: 1
+
+---
+---
+COMMAND: env | grep _VALID_VAR
+COMMAND: cat << EOF
+  EXIT CODES -> Minishell: 1 | Bash: 1
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:10.946946009 +0100
++++ bash_output.log	2025-10-14 16:49:10.946946009 +0100
+@@ -0,0 +1 @@
++./run_tests.sh: line 39: warning: here-document at line 39 delimited by end-of-file (wanted `EOF')
+
+--- minishell_output.log	2025-10-14 16:49:10.946946009 +0100
++++ bash_output.log	2025-10-14 16:49:10.946946009 +0100
+@@ -0,0 +1 @@
++./run_tests.sh: line 39: warning: here-document at line 39 delimited by end-of-file (wanted `EOF')
+
+---
+COMMAND: mkdir test_dir
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:10.966976019 +0100
++++ bash_output.log	2025-10-14 16:49:10.966976019 +0100
+@@ -0,0 +1 @@
++mkdir: cannot create directory 'test_dir': File exists
+
+---
+COMMAND: rmdir test_dir
+  EXIT CODES -> Minishell: 0 | Bash: 1
+---
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:10.997021035 +0100
++++ bash_output.log	2025-10-14 16:49:10.997021035 +0100
+COMMAND: line 1
+@@ -0,0 +1 @@
++rmdir: failed to remove 'test_dir': No such file or directory
+  EXIT CODES -> Minishell: 127 | Bash: 127
+
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:10.997021035 +0100
++++ bash_output.log	2025-10-14 16:49:10.997021035 +0100
+@@ -0,0 +1 @@
++rmdir: failed to remove 'test_dir': No such file or directory
+
+---
+COMMAND: cd -
+  EXIT CODES -> Minishell: 1 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:11.047099216 +0100
++++ bash_output.log	2025-10-14 16:49:11.047099216 +0100
+@@ -0,0 +1 @@
++./run_tests.sh: line 39: cd: OLDPWD not set
+
+---
+COMMAND: EOF
+  EXIT CODES -> Minishell: 127 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:11.087162709 +0100
++++ bash_output.log	2025-10-14 16:49:11.087162709 +0100
+@@ -1 +0,0 @@
+-Your user is anarita
+
+---
+COMMAND: cat << "EOF"
+---
+  EXIT CODES -> Minishell: 0 | Bash: 0
+COMMAND: echo "My PID is $$"
+  OUTPUT DIFF:
+  EXIT CODES -> Minishell: 0 | Bash: 0
+--- minishell_output.log	2025-10-14 16:49:11.097178583 +0100
++++ bash_output.log	2025-10-14 16:49:11.097178583 +0100
+@@ -1 +1 @@
+-My PID is 43975
++My PID is 43541
+
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:11.097178583 +0100
++++ bash_output.log	2025-10-14 16:49:11.097178583 +0100
+@@ -1 +1 @@
+-My PID is 43975
++My PID is 43541
+
+---
+COMMAND: echo "This is an unclosed quote
+  EXIT CODES -> Minishell: 0 | Bash: 2
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:11.127226203 +0100
++++ bash_output.log	2025-10-14 16:49:11.127226203 +0100
+@@ -1,2 +1 @@
+-This is an unclosed quote
+-
 +./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `"'
 
 ---
 COMMAND: echo 'This is another unclosed quote
   EXIT CODES -> Minishell: 0 | Bash: 2
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.246637922 +0100
-+++ bash_output.log	2025-10-10 15:33:19.256627977 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho 'This is another unclosed quote
+--- minishell_output.log	2025-10-14 16:49:11.137242076 +0100
++++ bash_output.log	2025-10-14 16:49:11.137242076 +0100
+@@ -1,2 +1 @@
 -This is another unclosed quote
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
+-
 +./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `''
-
----
-COMMAND: echo "Redirecting to a file" > outfile.txt
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.256627977 +0100
-+++ bash_output.log	2025-10-10 15:33:19.256627977 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "Redirecting to a file" > outfile.txt
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: cat outfile.txt
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.276608085 +0100
-+++ bash_output.log	2025-10-10 15:33:19.276608085 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcat outfile.txt
- Redirecting to a file
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: echo "Appending to a file" >> outfile.txt
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.276608085 +0100
-+++ bash_output.log	2025-10-10 15:33:19.286598139 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "Appending to a file" >> outfile.txt
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: cat outfile.txt
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.296588194 +0100
-+++ bash_output.log	2025-10-10 15:33:19.296588194 +0100
-@@ -1,9 +1,3 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcat outfile.txt
- Redirecting to a file
- Appending to a file
- Appending to a file
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: ls > file_list.txt
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.306578248 +0100
-+++ bash_output.log	2025-10-10 15:33:19.306578248 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mls > file_list.txt
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: cat < file_list.txt
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.316568302 +0100
-+++ bash_output.log	2025-10-10 15:33:19.316568302 +0100
-@@ -1,7 +1,3 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcat < file_list.txt
- Makefile
- a.out
- bash_output.log
-@@ -22,5 +18,3 @@
- run_tests.sh
- srcs
- test_suite.txt
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
 
 ---
 COMMAND: rm outfile.txt file_list.txt
   EXIT CODES -> Minishell: 0 | Bash: 1
+
+---
+COMMAND: EOF
+  EXIT CODES -> Minishell: 127 | Bash: 127
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.326558356 +0100
-+++ bash_output.log	2025-10-10 15:33:19.326558356 +0100
-@@ -1,6 +1,2 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mrm outfile.txt file_list.txt
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
+--- minishell_output.log	2025-10-14 16:49:11.197337316 +0100
++++ bash_output.log	2025-10-14 16:49:11.197337316 +0100
+@@ -0,0 +1,2 @@
 +rm: cannot remove 'outfile.txt': No such file or directory
 +rm: cannot remove 'file_list.txt': No such file or directory
 
@@ -853,207 +370,119 @@ COMMAND: rm outfile.txt file_list.txt
 COMMAND: cat << EOF
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.346538465 +0100
-+++ bash_output.log	2025-10-10 15:33:19.346538465 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcat << EOF
--> [1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-+./run_tests.sh: line 39: warning: here-document at line 39 delimited by end-of-file (wanted `EOF')
+--- minishell_output.log	2025-10-14 16:49:11.207353190 +0100
++++ bash_output.log	2025-10-14 16:49:11.207353190 +0100
+@@ -1 +0,0 @@
+-1
+
+---
+COMMAND: ls -l | grep srcs | wc -l
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:11.217369063 +0100
++++ bash_output.log	2025-10-14 16:49:11.217369063 +0100
+@@ -1 +0,0 @@
+-1
 
 ---
 COMMAND: line 1
-  EXIT CODES -> Minishell: 0 | Bash: 127
+  EXIT CODES -> Minishell: 127 | Bash: 127
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.396488736 +0100
-+++ bash_output.log	2025-10-10 15:33:19.396488736 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mline 1
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0mminishell: line: command not found
-+./run_tests.sh: line 39: line: command not found
+---
+--- minishell_output.log	2025-10-14 16:49:11.257432556 +0100
++++ bash_output.log	2025-10-14 16:49:11.257432556 +0100
+@@ -0,0 +1,2 @@
++rm: cannot remove 'file1': No such file or directory
++rm: cannot remove 'file2': No such file or directory
+COMMAND: rm file1 file2
+
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:11.257432556 +0100
++++ bash_output.log	2025-10-14 16:49:11.257432556 +0100
+@@ -0,0 +1,2 @@
++rm: cannot remove 'file1': No such file or directory
++rm: cannot remove 'file2': No such file or directory
+
+---
+COMMAND: cat < no_such_file
+  EXIT CODES -> Minishell: 1 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-14 16:49:11.267448430 +0100
++++ bash_output.log	2025-10-14 16:49:11.267448430 +0100
+@@ -1,2 +1 @@
+-minishell: No such file or directory
+-minishell: dup2: Bad file descriptor
++./run_tests.sh: line 39: no_such_file: No such file or directory
 
 ---
 COMMAND: line 2
-  EXIT CODES -> Minishell: 0 | Bash: 127
+  EXIT CODES -> Minishell: 127 | Bash: 127
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.446439007 +0100
-+++ bash_output.log	2025-10-10 15:33:19.456429062 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mline 2
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0mminishell: line: command not found
+--- minishell_output.log	2025-10-14 16:49:11.307511923 +0100
++++ bash_output.log	2025-10-14 16:49:11.307511923 +0100
+@@ -0,0 +1 @@
 +./run_tests.sh: line 39: line: command not found
 
 ---
 COMMAND: EOF
-  EXIT CODES -> Minishell: 0 | Bash: 127
+  EXIT CODES -> Minishell: 127 | Bash: 127
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.536349496 +0100
-+++ bash_output.log	2025-10-10 15:33:19.536349496 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mEOF
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0mminishell: EOF: command not found
+--- minishell_output.log	2025-10-14 16:49:11.357591290 +0100
++++ bash_output.log	2025-10-14 16:49:11.357591290 +0100
+@@ -1 +1 @@
+-minishell: EOF: command not found
 +./run_tests.sh: line 39: EOF: command not found
 
 ---
 COMMAND: cat << "EOF"
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.556329604 +0100
-+++ bash_output.log	2025-10-10 15:33:19.556329604 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcat << "EOF"
--> [1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
+--- minishell_output.log	2025-10-14 16:49:11.367607163 +0100
++++ bash_output.log	2025-10-14 16:49:11.367607163 +0100
+@@ -1 +1 @@
+-> 
 \ No newline at end of file
 +./run_tests.sh: line 39: warning: here-document at line 39 delimited by end-of-file (wanted `EOF')
 
 ---
 COMMAND: $USER should not be expanded
-  EXIT CODES -> Minishell: 0 | Bash: 127
+  EXIT CODES -> Minishell: 127 | Bash: 127
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.616269930 +0100
-+++ bash_output.log	2025-10-10 15:33:19.626259984 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m$USER should not be expanded
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0mminishell: anarita: command not found
+--- minishell_output.log	2025-10-14 16:49:11.417686530 +0100
++++ bash_output.log	2025-10-14 16:49:11.417686530 +0100
+@@ -1 +1 @@
+-minishell: anarita: command not found
 +./run_tests.sh: line 39: anarita: command not found
 
 ---
 COMMAND: EOF
-  EXIT CODES -> Minishell: 0 | Bash: 127
+  EXIT CODES -> Minishell: 127 | Bash: 127
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.676210255 +0100
-+++ bash_output.log	2025-10-10 15:33:19.676210255 +0100
-@@ -1,6 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mEOF
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0mminishell: EOF: command not found
+--- minishell_output.log	2025-10-14 16:49:11.467765896 +0100
++++ bash_output.log	2025-10-14 16:49:11.467765896 +0100
+@@ -1 +1 @@
+-minishell: EOF: command not found
 +./run_tests.sh: line 39: EOF: command not found
-
----
-COMMAND: ls -l | grep srcs | wc -l
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.696190364 +0100
-+++ bash_output.log	2025-10-10 15:33:19.696190364 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mls -l | grep srcs | wc -l
- 1
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: cat /etc/passwd | head -n 5 | cut -d: -f1
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.716170472 +0100
-+++ bash_output.log	2025-10-10 15:33:19.716170472 +0100
-@@ -1,11 +1,5 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcat /etc/passwd | head -n 5 | cut -d: -f1
- root
- daemon
- bin
- sys
- sync
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: echo "one" > file1 | echo "two" > file2
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.726160526 +0100
-+++ bash_output.log	2025-10-10 15:33:19.736150581 +0100
-@@ -1,6 +0,0 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mecho "one" > file1 | echo "two" > file2
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
-
----
-COMMAND: cat file1 file2
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.746140635 +0100
-+++ bash_output.log	2025-10-10 15:33:19.746140635 +0100
-@@ -1,8 +1,2 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcat file1 file2
- one
- two
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
 
 ---
 COMMAND: rm file1 file2
   EXIT CODES -> Minishell: 0 | Bash: 1
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.756130689 +0100
-+++ bash_output.log	2025-10-10 15:33:19.756130689 +0100
-@@ -1,6 +1,2 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mrm file1 file2
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0m
-\ No newline at end of file
+--- minishell_output.log	2025-10-14 16:49:11.507829390 +0100
++++ bash_output.log	2025-10-14 16:49:11.507829390 +0100
+@@ -0,0 +1,2 @@
 +rm: cannot remove 'file1': No such file or directory
 +rm: cannot remove 'file2': No such file or directory
 
 ---
 COMMAND: cat < no_such_file
-  EXIT CODES -> Minishell: 0 | Bash: 1
+  EXIT CODES -> Minishell: 1 | Bash: 1
   OUTPUT DIFF:
---- minishell_output.log	2025-10-10 15:33:19.766120743 +0100
-+++ bash_output.log	2025-10-10 15:33:19.766120743 +0100
-@@ -1,7 +1 @@
--[1;36m┏┳┓╻┏┓╻╻┏━┓╻ ╻┏━╸╻  ╻     ┏━┓╻ ╻┏━╸╻┏ ┏━┓
--┃┃┃┃┃┗┫┃┗━┓┣━┫┣╸ ┃  ┃     ┗━┓┃ ┃┃  ┣┻┓┗━┓
--╹ ╹╹╹ ╹╹┗━┛╹ ╹┗━╸┗━╸┗━╸   ┗━┛┗━┛┗━╸╹ ╹┗━┛
--[0m[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0mcat < no_such_file
--[1;31m/home/anarita/trabalhos42/minishell1 [0m[1;36mminishell$ [0m[1;31mexit
--[0mminishell: No such file or directory
+--- minishell_output.log	2025-10-14 16:49:11.517845263 +0100
++++ bash_output.log	2025-10-14 16:49:11.517845263 +0100
+@@ -1,2 +1 @@
+-minishell: No such file or directory
 -minishell: dup2: Bad file descriptor
 +./run_tests.sh: line 39: no_such_file: No such file or directory
 

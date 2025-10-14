@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:19:53 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/09 14:55:00 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/14 15:50:02 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,16 @@ char	**convert_env_to_array(t_env *env_list)
 	i = 0;
 	while(env_list)
 	{
-		temp = ft_strjoin(env_list->key, "=");
-		env_array[i] = ft_strjoin(temp, env_list->value);
-		free(temp);
+		if (env_list->value)
+		{
+			temp = ft_strjoin(env_list->key, "=");
+			env_array[i] = ft_strjoin(temp, env_list->value);
+			free(temp);
+		}
+		else
+		{
+			env_array[i] = ft_strdup(env_list->key);
+		}
 		env_list = env_list->next;
 		i++;
 	}

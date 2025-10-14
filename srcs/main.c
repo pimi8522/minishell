@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/10 15:58:26 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/14 15:48:11 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int main(int ac, char **av, char **env)
 	shell.pid = getpid();
 	shell.last_exit_status = 0;
 	shell.env_list = init_env(env);
-	
+	if (!find_env_node(shell.env_list, "OLDPWD"))
+		set_env_var(&shell, "OLDPWD", NULL);
 	if (isatty(STDIN_FILENO))
 	{
 		print_banner();
