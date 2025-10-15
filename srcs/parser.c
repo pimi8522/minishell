@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/06 15:07:07 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/15 15:37:55 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,12 @@ t_cmd	*parse_line(char *line, t_shell *shell)
 	if (!line)
 		return (NULL);
 	tokens = shell_split(line);
-	if (!tokens || !tokens[0])
+	if (!tokens)
+	{
+		shell->last_exit_status = 2;
+		return (NULL);
+	}
+	if (!tokens[0])
 	{
 		free(tokens);
 		return (NULL);

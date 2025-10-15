@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 12:30:19 by anarita           #+#    #+#             */
-/*   Updated: 2025/09/03 14:51:20 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/15 16:32:18 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ void	execute_command(char **args, char *envp[])
 	execve(path, args, envp);
 	free(path);
 	perror("minishell");
-	exit(EXIT_FAILURE);
+	exit(errno);
 }
