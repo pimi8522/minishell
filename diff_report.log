@@ -1,0 +1,257 @@
+---
+COMMAND: ls
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:55.769962636 +0100
++++ bash_output.log	2025-10-15 15:26:55.769962636 +0100
+@@ -1,6 +1,8 @@
+ Makefile
+ a.out
+ bash_export.txt
++bash_stderr.tmp
++bash_stdout.tmp
+ builtin
+ en.subject.pdf
+ libft
+
+---
+COMMAND: ls -l
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:55.779962638 +0100
++++ bash_output.log	2025-10-15 15:26:55.779962638 +0100
+@@ -1,8 +1,10 @@
+-total 1664
++total 1668
+ -rw-r--r-- 1 anarita anarita    1709 Oct  1 12:38 Makefile
+ -rw-r--r-- 1 anarita anarita   16208 Sep 15 11:56 a.out
+ -rw-r--r-- 1 anarita anarita    3380 Oct 14 17:05 bash_export.txt
+ -rw-r--r-- 1 anarita anarita     216 Oct 15 15:26 bash_output.log
++-rw-r--r-- 1 anarita anarita       0 Oct 15 15:26 bash_stderr.tmp
++-rw-r--r-- 1 anarita anarita       0 Oct 15 15:26 bash_stdout.tmp
+ drwxr-xr-x 2 anarita anarita    4096 Oct 14 17:03 builtin
+ -rw-r--r-- 1 anarita anarita     304 Oct 15 15:26 diff_report.log
+ -rw-r--r-- 1 anarita anarita 1582893 Sep 15 11:56 en.subject.pdf
+@@ -12,7 +14,7 @@
+ -rw-r--r-- 1 anarita anarita    3351 Oct 14 17:04 minishell_export.txt
+ -rw-r--r-- 1 anarita anarita     184 Oct 15 15:26 minishell_output.log
+ -rw-r--r-- 1 anarita anarita       0 Oct 15 15:26 minishell_stderr.tmp
+--rw-r--r-- 1 anarita anarita       0 Oct 15 15:26 minishell_stdout.tmp
++-rw-r--r-- 1 anarita anarita    1148 Oct 15 15:26 minishell_stdout.tmp
+ drwxr-xr-x 2 anarita anarita    4096 Sep 23 16:04 pipex
+ -rwxr-xr-x 1 anarita anarita    2381 Oct 10 15:30 run_tests.sh
+ drwxr-xr-x 2 anarita anarita    4096 Oct 14 17:03 srcs
+
+---
+COMMAND: ls -l -a
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:55.789962639 +0100
++++ bash_output.log	2025-10-15 15:26:55.799962641 +0100
+@@ -1,4 +1,4 @@
+-total 1684
++total 1688
+ drwxr-xr-x 8 anarita anarita    4096 Oct 15 15:26 .
+ drwxr-xr-x 7 anarita anarita    4096 Oct 10 16:03 ..
+ drwxr-xr-x 7 anarita anarita    4096 Oct 14 17:02 .git
+@@ -8,6 +8,8 @@
+ -rw-r--r-- 1 anarita anarita   16208 Sep 15 11:56 a.out
+ -rw-r--r-- 1 anarita anarita    3380 Oct 14 17:05 bash_export.txt
+ -rw-r--r-- 1 anarita anarita    1280 Oct 15 15:26 bash_output.log
++-rw-r--r-- 1 anarita anarita       0 Oct 15 15:26 bash_stderr.tmp
++-rw-r--r-- 1 anarita anarita       0 Oct 15 15:26 bash_stdout.tmp
+ drwxr-xr-x 2 anarita anarita    4096 Oct 14 17:03 builtin
+ -rw-r--r-- 1 anarita anarita    1668 Oct 15 15:26 diff_report.log
+ -rw-r--r-- 1 anarita anarita 1582893 Sep 15 11:56 en.subject.pdf
+@@ -17,7 +19,7 @@
+ -rw-r--r-- 1 anarita anarita    3351 Oct 14 17:04 minishell_export.txt
+ -rw-r--r-- 1 anarita anarita    1148 Oct 15 15:26 minishell_output.log
+ -rw-r--r-- 1 anarita anarita       0 Oct 15 15:26 minishell_stderr.tmp
+--rw-r--r-- 1 anarita anarita       0 Oct 15 15:26 minishell_stdout.tmp
++-rw-r--r-- 1 anarita anarita    1427 Oct 15 15:26 minishell_stdout.tmp
+ drwxr-xr-x 2 anarita anarita    4096 Sep 23 16:04 pipex
+ -rwxr-xr-x 1 anarita anarita    2381 Oct 10 15:30 run_tests.sh
+ drwxr-xr-x 2 anarita anarita    4096 Oct 14 17:03 srcs
+
+---
+COMMAND: env
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:55.849962650 +0100
++++ bash_output.log	2025-10-15 15:26:55.849962650 +0100
+@@ -36,4 +36,4 @@
+ PULSE_SERVER=unix:/mnt/wslg/PulseServer
+ TERM_PROGRAM=vscode
+ VSCODE_IPC_HOOK_CLI=/run/user/1000/vscode-ipc-805699c5-8d40-4fe1-86a3-0f56dedd7bb0.sock
+-_=./minishell
++_=/usr/bin/env
+
+---
+COMMAND: export INVALID-VAR=123
+  EXIT CODES -> Minishell: 1 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:55.909962660 +0100
++++ bash_output.log	2025-10-15 15:26:55.909962660 +0100
+@@ -1 +1 @@
+-minishell: export: `INVALID-VAR=123': not a valid identifier
++./run_tests.sh: line 39: export: `INVALID-VAR=123': not a valid identifier
+
+---
+COMMAND: mkdir test_dir
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:55.949962667 +0100
++++ bash_output.log	2025-10-15 15:26:55.949962667 +0100
+@@ -0,0 +1 @@
++mkdir: cannot create directory ‘test_dir’: File exists
+
+---
+COMMAND: rmdir test_dir
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:55.979962672 +0100
++++ bash_output.log	2025-10-15 15:26:55.979962672 +0100
+@@ -0,0 +1 @@
++rmdir: failed to remove 'test_dir': No such file or directory
+
+---
+COMMAND: cd -
+  EXIT CODES -> Minishell: 1 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.039962683 +0100
++++ bash_output.log	2025-10-15 15:26:56.039962683 +0100
+@@ -1 +1 @@
+-minishell: cd: OLDPWD not set
++./run_tests.sh: line 39: cd: OLDPWD not set
+
+---
+COMMAND: echo "My PID is $$"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.109962695 +0100
++++ bash_output.log	2025-10-15 15:26:56.109962695 +0100
+@@ -1 +1 @@
+-My PID is 64310
++My PID is 64032
+
+---
+COMMAND: echo "This is an unclosed quote
+  EXIT CODES -> Minishell: 2 | Bash: 2
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.149962702 +0100
++++ bash_output.log	2025-10-15 15:26:56.149962702 +0100
+@@ -1 +1 @@
+-minishell: syntax error: unclosed quote
++./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `"'
+
+---
+COMMAND: echo 'This is another unclosed quote
+  EXIT CODES -> Minishell: 2 | Bash: 2
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.159962704 +0100
++++ bash_output.log	2025-10-15 15:26:56.159962704 +0100
+@@ -1 +1 @@
+-minishell: syntax error: unclosed quote
++./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `''
+
+---
+COMMAND: rm outfile.txt file_list.txt
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.229962716 +0100
++++ bash_output.log	2025-10-15 15:26:56.229962716 +0100
+@@ -0,0 +1,2 @@
++rm: cannot remove 'outfile.txt': No such file or directory
++rm: cannot remove 'file_list.txt': No such file or directory
+
+---
+COMMAND: cat << EOF
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.249962719 +0100
++++ bash_output.log	2025-10-15 15:26:56.249962719 +0100
+@@ -1 +1 @@
+-> minishell: warning: here-document delimited by end-of-file (wanted `EOF')
++./run_tests.sh: line 39: warning: here-document at line 39 delimited by end-of-file (wanted `EOF')
+
+---
+COMMAND: line 1
+  EXIT CODES -> Minishell: 127 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.319962732 +0100
++++ bash_output.log	2025-10-15 15:26:56.319962732 +0100
+@@ -1 +1 @@
+-minishell: line: command not found
++./run_tests.sh: line 39: line: command not found
+
+---
+COMMAND: line 2
+  EXIT CODES -> Minishell: 127 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.409962748 +0100
++++ bash_output.log	2025-10-15 15:26:56.409962748 +0100
+@@ -1 +1 @@
+-minishell: line: command not found
++./run_tests.sh: line 39: line: command not found
+
+---
+COMMAND: EOF
+  EXIT CODES -> Minishell: 127 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.509962765 +0100
++++ bash_output.log	2025-10-15 15:26:56.509962765 +0100
+@@ -1 +1 @@
+-minishell: EOF: command not found
++./run_tests.sh: line 39: EOF: command not found
+
+---
+COMMAND: cat << "EOF"
+  EXIT CODES -> Minishell: 0 | Bash: 0
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.519962767 +0100
++++ bash_output.log	2025-10-15 15:26:56.519962767 +0100
+@@ -1 +1 @@
+-> minishell: warning: here-document delimited by end-of-file (wanted `EOF')
++./run_tests.sh: line 39: warning: here-document at line 39 delimited by end-of-file (wanted `EOF')
+
+---
+COMMAND: $USER should not be expanded
+  EXIT CODES -> Minishell: 127 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.579962777 +0100
++++ bash_output.log	2025-10-15 15:26:56.579962777 +0100
+@@ -1 +1 @@
+-minishell: anarita: command not found
++./run_tests.sh: line 39: anarita: command not found
+
+---
+COMMAND: EOF
+  EXIT CODES -> Minishell: 127 | Bash: 127
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.669962793 +0100
++++ bash_output.log	2025-10-15 15:26:56.669962793 +0100
+@@ -1 +1 @@
+-minishell: EOF: command not found
++./run_tests.sh: line 39: EOF: command not found
+
+---
+COMMAND: rm file1 file2
+  EXIT CODES -> Minishell: 0 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.779962813 +0100
++++ bash_output.log	2025-10-15 15:26:56.779962813 +0100
+@@ -0,0 +1,2 @@
++rm: cannot remove 'file1': No such file or directory
++rm: cannot remove 'file2': No such file or directory
+
+---
+COMMAND: cat < no_such_file
+  EXIT CODES -> Minishell: 1 | Bash: 1
+  OUTPUT DIFF:
+--- minishell_output.log	2025-10-15 15:26:56.799962816 +0100
++++ bash_output.log	2025-10-15 15:26:56.799962816 +0100
+@@ -1,2 +1 @@
+-minishell: No such file or directory
+-minishell: dup2: Bad file descriptor
++./run_tests.sh: line 39: no_such_file: No such file or directory
+

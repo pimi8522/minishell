@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:50:49 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/14 16:59:53 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/15 15:25:57 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*get_target_path(char **args, t_shell *shell)
 	if (ft_strcmp(args[1], "-") == 0)
 	{
 		original_path = get_env_value(shell, "OLDPWD");
-		if(!original_path)
+		if(!original_path || !*original_path)
 		{
 			write(2, "minishell: cd: OLDPWD not set\n", 30);
 			return (NULL);
