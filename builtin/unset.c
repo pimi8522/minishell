@@ -6,17 +6,38 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:58:22 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/02 10:33:17 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/16 12:11:08 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	unset_builtin(char **args, t_shell *shell)
+static void	remove_env_var(t_shell *shell, char *key)
 {
 	t_env	*current;
 	t_env	*prev;
-	int		i;
+
+	current = shell->env_list;
+	prev = NULL;
+	while(current)
+	{
+		if(ft_strcmp(current->key, key) == 0)
+		{
+			if (prev == NULL)
+				shell->env_list = current->next;
+			else
+				prev->next = current->next;
+			free_env_node(current);
+			return;
+		}
+		prev = current;
+		current = current->next;
+	}
+}
+
+void	unset_builtin(char **args, t_shell *shell)
+{
+	int	i;
 
 	shell->last_exit_status = 0;
 	if (!args[1])
@@ -32,24 +53,7 @@ void	unset_builtin(char **args, t_shell *shell)
 			shell->last_exit_status = 1;
 		}
 		else
-		{
-			current = shell->env_list;
-			prev = NULL;
-			while(current)
-			{
-				if(ft_strcmp(current->key, args[i]) == 0)
-				{
-					if (prev == NULL)
-						shell->env_list = current->next;
-					else
-						prev->next = current->next;
-					free_env_node(current);
-					break;
-				}
-				prev = current;
-				current = current->next;
-			}
-		}
+			remove_env_var(shell, args[i]);
 		i++;
 	}
 }

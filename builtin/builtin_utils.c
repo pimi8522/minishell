@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:19:53 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/14 15:50:02 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/16 11:47:45 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,42 @@ t_env	*new_env_node(char *key, char *value)
 	return (new_node);
 }
 
+static void add_env_var(t_env **head, t_env **current, char *env)
+{
+	char 	*equal_sign;
+	char	*key;
+	char	*value;
+
+	equal_sign = ft_strchr(env, '=');
+	if (!equal_sign)
+		return ;
+	key = ft_substr(env, 0, equal_sign - env);
+	value = ft_strdup(equal_sign + 1);
+	if (!*head)
+	{
+		*head = new_env_node(key, value);
+		*current = *head;
+	}
+	else
+	{
+		(*current)->next = new_env_node(key, value);
+		*current = (*current)->next;
+	}
+}
+
 t_env	*init_env(char **envp)
 {
 	t_env	*head;
 	t_env	*current;
-	char	*equal_sign;
-	char	*key;
-	char	*value;
 	int		i;
 
 	if (!envp || !*envp)
 		return (NULL);
 	head = NULL;
-	i = 0;
-	while(envp[i])
-	{
-		equal_sign = ft_strchr(envp[i], '=');
-		if (equal_sign)
-		{
-			key = ft_substr(envp[i], 0, equal_sign - envp[i]);
-			value = ft_strdup(equal_sign + 1);
-			if (!head)
-			{
-				head = new_env_node(key, value);
-				current = head;
-			}
-			else
-			{
-				current->next = new_env_node(key, value);
-				current = current->next;
-			}
-		}
-		i++;
-	}
+	current = NULL;
+	i = -1;
+	while(envp[++i])
+		add_env_var(&head, &current, envp[i]);
 	return (head);
 }
 
@@ -77,10 +80,25 @@ static int	count_env_nodes(t_env *env_list)
 	return (count);
 }
 
+static char *make_env_entry(t_env *node)
+{
+	char 	*temp;
+	char	*entry;
+
+	if (node->value)
+	{
+		temp = ft_strjoin(node->key, "=");
+		entry = ft_strjoin(temp, node->value);
+		free(temp);
+	}
+	else
+		entry = ft_strdup(node->key);
+	return (entry);
+}
+
 char	**convert_env_to_array(t_env *env_list)
 {
 	char	**env_array;
-	char	*temp;
 	int		count;
 	int		i;
 
@@ -91,18 +109,8 @@ char	**convert_env_to_array(t_env *env_list)
 	i = 0;
 	while(env_list)
 	{
-		if (env_list->value)
-		{
-			temp = ft_strjoin(env_list->key, "=");
-			env_array[i] = ft_strjoin(temp, env_list->value);
-			free(temp);
-		}
-		else
-		{
-			env_array[i] = ft_strdup(env_list->key);
-		}
+		env_array[i++] = make_env_entry(env_list);
 		env_list = env_list->next;
-		i++;
 	}
 	env_array[i] = NULL;
 	return(env_array);
