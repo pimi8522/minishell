@@ -6,70 +6,65 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:45 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/10 17:05:12 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/16 13:14:03 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//comandos ficam guardados em minishell.history
-int	init_shell_history(void)
+static char	*get_history_path(void)
 {
 	char	*home;
 	char	*history_path;
-	int		fd;
-	char	*line;
 
 	home = getenv("HOME");
 	if (!home)
-		return (-1);
+		return (NULL);
 	history_path = ft_strjoin(home, "/.minishell_history");
-	if (!history_path)
-		return (-1);
-	fd = open(history_path, O_RDONLY);
-	free(history_path);
-	if (fd < 0)
-		return (-1);
-	while ((line = get_next_line(fd)) != NULL)
+	return (history_path);
+}
+
+static void	load_history_from_fd(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		if (line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		if (*line)
 			add_history(line);
 		free(line);
+		line = get_next_line(fd);
 	}
+}
+
+int	init_shell_history(void)
+{
+	char	*history_path;
+	int		fd;
+
+	history_path = get_history_path();
+	if (!history_path)
+		return (-1);
+	fd = open(history_path, O_RDONLY);
+	free(history_path);
+	if (fd < 0)
+		return (-1);
+	load_history_from_fd(fd);
 	close(fd);
 	return (0);
 }
 
-//guardar no actual ficheiro
-void	save_shell_history(void)
+static void	write_history_to_fd(int fd)
 {
-	char		*home;
-	char		*history_path;
-	int			fd;
 	int			i;
 	HIST_ENTRY	*entry;
 
-	i = 1; //history starts at index 1
-// obter o diretório home do utilizador
-	home = getenv("HOME");
-	if (!home)
-		return ;
-// construir o caminho para o ficheiro de histórico
-	history_path = ft_strjoin(home, "/.minishell_history");
-	if (!history_path)
-		return ;
-	
-// abrir/criar o ficheiro para escrita, apagando o conteúdo anterior
-	fd = open(history_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	free(history_path);
-	if (fd < 0)
-		return ;
-	
-
-//escrever cada entrada do historico no ficheiro	
-	while ((entry = history_get(i)) != NULL)
+	i = 1;
+	entry = history_get(i);
+	while (entry != NULL)
 	{
 		if (entry->line)
 		{
@@ -77,8 +72,22 @@ void	save_shell_history(void)
 			write(fd, "\n", 1);
 		}
 		i++;
+		entry = history_get(i);
 	}
-	
-// Fechar o file descriptor
+}
+
+void	save_shell_history(void)
+{
+	char	*history_path;
+	int		fd;
+
+	history_path = get_history_path();
+	if (!history_path)
+		return ;
+	fd = open(history_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	free(history_path);
+	if (fd < 0)
+		return ;
+	write_history_to_fd(fd);
 	close(fd);
 }
