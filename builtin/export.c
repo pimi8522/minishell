@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:59:57 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/17 10:51:19 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/17 14:25:38 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	handle_export_assignment(t_shell *shell, char *arg)
 	char	*value;
 
 	equal_sign = ft_strchr(arg, '=');
-	key = ft_substr(arg, 0, equal_sign);
+	key = ft_substr(arg, 0, equal_sign - arg);
 	value = ft_strdup(equal_sign + 1);
 	set_env_var(shell, key, value);
 }
@@ -54,10 +54,7 @@ static void	handle_export_no_value(t_shell *shell, char *arg)
 
 void	export_builtin(char **args, t_shell *shell)
 {
-	int		i;
-	char	*equal_sign;
-	char	*key;
-	char	*value;
+	int	i;
 
 	shell->last_exit_status = 0;
 	// se não houver argumentos, imprime as variáveis de ambiente

@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:56:31 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/17 11:03:05 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/17 14:21:52 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ static void	print_env_array(char **env_array)
 void	print_sorted_env(t_shell *shell)
 {
 	char	**env_array;
-	int		i;
-	char	*equal_sign;
-	char	*key;
 
 	env_array = convert_env_to_array(shell->env_list);
 	if (!env_array)
