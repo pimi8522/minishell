@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:59:57 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/14 16:38:12 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/17 10:51:19 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,43 +26,30 @@ int	is_valid_identifier(const char *str)
 	return (1);
 }
 
-// imprime as variáveis de ambiente por ordem alfabética
-static void	print_sorted_env(t_shell *shell)
+static void	export_error(t_shell *shell, char *arg)
 {
-	char	**env_array;
-	int		i;
+	ft_putstr_fd("minishell: export: `", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+	shell->last_exit_status = 1;
+}
+
+static void	handle_export_assignment(t_shell *shell, char *arg)
+{
 	char	*equal_sign;
 	char	*key;
+	char	*value;
 
-	env_array = convert_env_to_array(shell->env_list);
-	if (!env_array)
-		return;
-	bubble_sort_array(env_array);
-	i = 0;
-	while(env_array[i])
-	{
-		if (ft_strncmp(env_array[i], "_=", 2) == 0)
-		{
-			i++;
-			continue; // não imprime _ aqui, imprime no fim
-		}
-		equal_sign = ft_strchr(env_array[i], '=');
-		if (equal_sign)
-		{
-			key = ft_substr(env_array[i], 0, equal_sign - env_array[i]);
-			if (key)
-			{
-				// imprime no formato: declare -x KEY="value"
-				printf("declare -x %s=\"%s\"\n", key, equal_sign + 1);
-				free(key);
-			}
-		}
-		else
-			// imprime variáveis sem valor, ex: declare -x VAR
-			printf("declare -x %s\n", env_array[i]);
-		i++;
-	}
-	free_str(env_array);
+	equal_sign = ft_strchr(arg, '=');
+	key = ft_substr(arg, 0, equal_sign);
+	value = ft_strdup(equal_sign + 1);
+	set_env_var(shell, key, value);
+}
+
+static void	handle_export_no_value(t_shell *shell, char *arg)
+{
+	if(!find_env_node(shell->env_list, arg))
+		set_env_var(shell, arg, NULL);
 }
 
 void	export_builtin(char **args, t_shell *shell)
@@ -83,31 +70,11 @@ void	export_builtin(char **args, t_shell *shell)
 	while (args[i])
 	{
 		if(!is_valid_identifier(args[i]))
-		{
-			ft_putstr_fd("minishell: export: `", 2);
-			ft_putstr_fd(args[i], 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
-			shell->last_exit_status = 1;
-		}
+			export_error(shell, args[i]);
+		else if(ft_strchr(args[i], '='))
+			handle_export_assignment(shell, args[i]);
 		else
-		{
-			equal_sign = ft_strchr(args[i], '=');
-			if(equal_sign)
-			{
-				// caso: export VAR=value
-				key = ft_substr(args[i], 0, equal_sign - args[i]);
-				value = ft_strdup(equal_sign + 1);
-				set_env_var(shell, key, value);
-			}
-			else
-			{
-				// caso: export VAR
-				// adiciona a variável apenas se ela não existir, com um valor nulo
-				// para evitar que `set_env_var` falhe com `strdup(NULL)`
-				if(!find_env_node(shell->env_list, args[i]))
-					set_env_var(shell, args[i], NULL);
-			}
-		}
+			handle_export_no_value(shell, args[i]);
 		i++;
 	}
 }
