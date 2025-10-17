@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/16 13:11:40 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/17 14:18:19 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,12 +208,31 @@ static t_cmd	*finalize_parsing(t_cmd *cmd_list, char **tokens,
 	return (cmd_list);
 }
 
-t_cmd	*parse_line(char *line, t_shell *shell)
+static t_cmd	*process_tokens(char **tokens, t_shell *shell)
 {
-	char	**tokens;
 	t_cmd	*cmd_list;
 	int		i;
 	int		start;
+
+	cmd_list = NULL;
+	start = 0;
+	i = 0;
+	while (tokens[i])
+	{
+		if (ft_strcmp(tokens[i], "|") == 0)
+		{
+			if (!process_pipe_token(&cmd_list, tokens, &start, i,
+					shell))
+				return (NULL);
+		}
+		i++;
+	}
+	return (finalize_parsing(cmd_list, tokens, start, i, shell));
+}
+
+t_cmd	*parse_line(char *line, t_shell *shell)
+{
+	char	**tokens;
 
 	if (!line)
 		return (NULL);
@@ -228,17 +247,5 @@ t_cmd	*parse_line(char *line, t_shell *shell)
 		free(tokens);
 		return (NULL);
 	}
-	cmd_list = NULL;
-	start = 0;
-	i = 0;
-	while (tokens[i])
-	{
-		if (ft_strcmp(tokens[i], "|") == 0)
-		{
-			if (!process_pipe_token(&cmd_list, tokens, &start, i, shell))
-				return (NULL);
-		}
-		i++;
-	}
-	return (finalize_parsing(cmd_list, tokens, start, i, shell));
+	return (process_tokens(tokens, shell));
 }
