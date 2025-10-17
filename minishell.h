@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/17 10:44:30 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/17 14:54:50 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	print_sorted_env(t_shell *shell);
 void	unset_builtin(char **args, t_shell *shell);
 void	export_builtin(char **args, t_shell *shell);
 int		is_builtin(char **args);
+char	*get_target_path(char **args, t_shell *shell);
 
 void	set_env_var(t_shell *shell, const char *key, const char *value);
 char	*get_env_value(t_shell *shell, const char *key);
