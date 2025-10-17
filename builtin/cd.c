@@ -6,16 +6,35 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:50:49 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/17 14:57:00 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/17 15:13:54 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	update_pwd_vars(t_shell *shell, char *old_pwd)
+{
+	char	new_pwd[PATH_MAX];
+
+	if (!find_env_node(shell->env_list, "OLDPWD"))
+		set_env_var(shell, "OLDPWD", NULL);
+	set_env_var(shell, "OLDPWD", old_pwd);
+	if (getcwd(new_pwd, sizeof(new_pwd)) != NULL)
+		set_env_var(shell, "PWD", new_pwd);
+	return (0);
+}
+
+static void	cd_error(t_shell *shell, char *path)
+{
+	write(2, "minishell: cd: ", 15);
+	write(2, path, ft_strlen(path));
+	write(2, ": No such file or directory\n", 28);
+	shell->last_exit_status = 1;
+}
+
 void	ft_cd(char **args, t_shell *shell)
 {
 	char	old_pwd[PATH_MAX];
-	char	new_pwd[PATH_MAX];
 	char	*path;
 
 	// guarda o diretório de trabalho atual (pwd)
@@ -32,22 +51,12 @@ void	ft_cd(char **args, t_shell *shell)
 		shell->last_exit_status = 1;
 		return ;
 	}
-	// muda o diretório
 	if (chdir(path) != 0)
-	{
-		write(2, "minishell: cd: ", 15);
-		write(2, path, ft_strlen(path));
-		write(2, ": No such file or directory\n", 28);
-		shell->last_exit_status = 1;
-	}
+		cd_error(shell, path);
 	else
 	{
+		update_pwd_vars(shell, old_pwd);
 		shell->last_exit_status = 0;
-		if (!find_env_node(shell->env_list, "OLDPWD"))
-			set_env_var(shell, "OLDPWD", NULL);
-		set_env_var(shell, "OLDPWD", old_pwd);
-		if (getcwd(new_pwd, sizeof(new_pwd)) != NULL)
-			set_env_var(shell, "PWD", new_pwd);
 	}
 	free(path);
 }
