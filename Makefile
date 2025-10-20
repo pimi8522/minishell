@@ -6,7 +6,7 @@
 #    By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/10/20 11:35:26 by adores & mi      ###   ########.fr        #
+#    Updated: 2025/10/20 15:35:23 by adores & mi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = \
 	srcs/utils.c \
 	srcs/shell_split.c \
 	srcs/execute.c \
+	srcs/execute_pipeline.c \
 	srcs/launch.c \
 	srcs/signals.c \
 	srcs/history.c \

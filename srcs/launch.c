@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/20 13:50:09 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/20 15:37:05 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	execute_child(t_cmd *cmd, t_shell *shell, int input_fd, int pipe_fds[2])
 	exit(EXIT_FAILURE);
 }
 
-static int execute_single_builtin(t_cmd *cmd, t_shell *shell)
+int execute_single_builtin(t_cmd *cmd, t_shell *shell)
 {
 	int	original_stdin;
 	int	original_stdout;
@@ -97,81 +97,4 @@ static int execute_single_builtin(t_cmd *cmd, t_shell *shell)
 	close(original_stdin);
 	close(original_stdout);
 	return (shell->last_exit_status);
-}
-
-
-// função principal para executar um ou mais comandos (pipeline)
-int	execute_pipeline(t_cmd *cmds, t_shell *shell)
-{
-	pid_t	last_pid;
-	int		status;
-	t_cmd	*current_cmd;
-	int		pipe_fds[2];
-	int		input_fd;
-
-	if (!cmds)
-		return (0);
-	// primeiro, expande as variáveis para todos os comandos
-	current_cmd = cmds;
-	while (current_cmd) 
-	{
-		expand_variables(current_cmd, shell);
-		current_cmd = current_cmd->next;
-	}
-	// se for um único comando e for um builtin, executa diretamente
-	if (!cmds->next && is_builtin(cmds->flag))
-	{
-		return (execute_single_builtin(cmds, shell));
-	}
-	// configura os sinais para o modo de execução
-	setup_exec_signals();
-	last_pid = -1;
-	status = 0;
-	current_cmd = cmds;
-	input_fd = STDIN_FILENO;
-	// itera sobre a lista de comandos
-	while(current_cmd)
-	{
-		// se houver um próximo comando, cria um pipe
-		if(current_cmd->next)
-		{
-			if(pipe(pipe_fds) == -1)
-			{
-				perror("minishell: pipe");
-				return (1);
-			}
-		}
-		// cria um processo filho
-		last_pid = fork();
-		if (last_pid == -1)
-		{
-			perror("minishell: fork");
-			return (1);
-		}
-		// no processo filho, chama a função execute_child
-		if(last_pid == 0)
-			execute_child(current_cmd, shell, input_fd, pipe_fds);
-		// no processo pai, fecha os descritores apropriados
-		if(current_cmd->next)
-			close(pipe_fds[1]);
-		if (input_fd != STDIN_FILENO)
-			close(input_fd);
-		// o input do próximo comando será o output do pipe atual
-		if (current_cmd->next)
-			input_fd = pipe_fds[0];
-		current_cmd = current_cmd->next;
-	}
-	// espera pelo último processo filho
-	if(last_pid != -1)
-		waitpid(last_pid, &status, 0);
-	// espera por todos os outros processos filhos
-	while (wait(NULL) > 0);
-	// restaura os sinais para o modo interativo
-	setup_interactive_signals();
-	// retorna o status de saída do último comando
-	if (WIFEXITED(status))
-		return(WEXITSTATUS(status));
-	if (WIFSIGNALED(status))
-		return (128 + WTERMSIG(status));
-	return (127);
 }
