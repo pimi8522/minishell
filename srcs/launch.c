@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/09 15:47:03 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/20 13:50:09 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	execute_pipeline(t_cmd *cmds, t_shell *shell)
 		return (0);
 	// primeiro, expande as variáveis para todos os comandos
 	current_cmd = cmds;
-	while (current_cmd)
+	while (current_cmd) 
 	{
 		expand_variables(current_cmd, shell);
 		current_cmd = current_cmd->next;

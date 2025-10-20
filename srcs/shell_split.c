@@ -15,72 +15,36 @@
 // verifica se um caractere é um metacaractere (|, <, >)
 static int	is_meta_char(char c)
 {
-	return (c == '|' || c == '<' || c == '>');
+	if (c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
 }
 
-// avança o índice `i` para ignorar o whitespace
 static void	skip_whitespace(const char *s, size_t *i)
 {
 	while (s[*i] && ft_strchr(WHITESPACE, s[*i]))
 		(*i)++;
 }
 
-// conta o número de tokens na string de input
-static int	count_tokens(const char *s)
+static void	handle_quotes(char c, int *in_squote, int *in_dquote)
 {
-	int		count;
-	size_t	i;
-	int		in_squote;
-	int		in_dquote;
-
-	count = 0;
-	i = 0;
-	while (s[i])
-	{
-		skip_whitespace(s, &i);
-		if (!s[i])
-			break ;
-		count++;
-		if (is_meta_char(s[i]))
-		{
-			if ((s[i] == '<' && s[i + 1] == '<')
-				|| (s[i] == '>' && s[i + 1] == '>'))
-				i += 2;
-			else
-				i++;
-		}
-		else
-		{
-			in_squote = 0;
-			in_dquote = 0;
-			while (s[i] && (in_squote || in_dquote || \
-				(!ft_strchr(WHITESPACE, s[i]) && !is_meta_char(s[i]))))
-			{
-				if (s[i] == '\'' && !in_dquote)
-					in_squote = !in_squote;
-				else if (s[i] == '"' && !in_squote)
-					in_dquote = !in_dquote;
-				i++;
-			}
-		}
-	}
-	if (in_squote || in_dquote)
-	{
-		ft_putstr_fd("minishell: syntax error: unclosed quote\n", 2);
-		return (-1);
-	}
-	return (count);
+	if (c == '\'' && !*in_dquote)
+		*in_squote = !*in_squote;
+	else if (c == '"' && !*in_squote)
+		*in_dquote = !*in_dquote;
 }
 
-// extrai o próximo token da string de input
-static char	*get_next_token(const char *s, size_t *i)
+static int	is_token_char(char c, int in_s, int in_d)
 {
-	size_t	start;
-	int		in_squote;
-	int		in_dquote;
+	if (in_s || in_d)
+		return (1);
+	if (!ft_strchr(WHITESPACE, c) && !is_meta_char(c))
+		return (1);
+	return (0);
+}
 
-	skip_whitespace(s, i);
-	start = *i;
+static void	process_token(const char *s, size_t *i, int *in_s, int *in_d)
+{
 	if (is_meta_char(s[*i]))
 	{
 		if ((s[*i] == '<' && s[*i + 1] == '<')
@@ -91,37 +55,68 @@ static char	*get_next_token(const char *s, size_t *i)
 	}
 	else
 	{
-		in_squote = 0;
-		in_dquote = 0;
-		while (s[*i] && (in_squote || in_dquote || \
-			(!ft_strchr(WHITESPACE, s[*i]) && !is_meta_char(s[*i]))))
+		*in_s = 0;
+		*in_d = 0;
+		while (s[*i] && is_token_char(s[*i], *in_s, *in_d))
 		{
-			if (s[*i] == '\'' && !in_dquote)
-				in_squote = !in_squote;
-			else if (s[*i] == '"' && !in_squote)
-				in_dquote = !in_dquote;
+			handle_quotes(s[*i], in_s, in_d);
 			(*i)++;
 		}
 	}
-	return (ft_substr(s, start, *i - start));
 }
 
-// função principal que divide a string de input num array de tokens
-char	**shell_split(char const *s)
+static int	count_tokens(const char *s)
 {
 	size_t	i;
 	int		count;
-	char	**tokens;
-	int		t;
+	int		in_squote;
+	int		in_dquote;
 
-	if (!s)
-		return (NULL);
-	count = count_tokens(s);
-	if (count < 0)
-		return (NULL);
+	i = 0;
+	count = 0;
+	in_squote = 0;
+	in_dquote = 0;
+	while (s[i])
+	{
+		skip_whitespace(s, &i);
+		if (!s[i])
+			break ;
+		count++;
+		process_token(s, &i, &in_squote, &in_dquote);
+	}
+	if (in_squote || in_dquote)
+	{
+		ft_putstr_fd("minishell: unclosed quote\n", 2);
+		return (-1);
+	}
+	return (count);
+}
+
+static char	*get_next_token(const char *s, size_t *i)
+{
+	size_t	start;
+	int		in_squote;
+	int		in_dquote;
+
+	skip_whitespace(s, i);
+	start = *i;
+	process_token(s, i, &in_squote, &in_dquote);
+	return (ft_substr(s, start, *i - start));
+}
+
+static char	**allocate_tokens(int count)
+{
+	char	**tokens;
+
 	tokens = (char **)malloc(sizeof(char *) * (count + 1));
-	if (!tokens)
-		return (NULL);
+	return (tokens);
+}
+
+static int	fill_tokens(char **tokens, const char *s, int count)
+{
+	int		t;
+	size_t	i;
+
 	t = 0;
 	i = 0;
 	while (t < count)
@@ -130,10 +125,28 @@ char	**shell_split(char const *s)
 		if (!tokens[t])
 		{
 			free_str(tokens);
-			return (NULL);
+			return (0);
 		}
 		t++;
 	}
 	tokens[t] = NULL;
+	return (1);
+}
+
+char	**shell_split(char const *s)
+{
+	int		count;
+	char	**tokens;
+
+	if (!s)
+		return (NULL);
+	count = count_tokens(s);
+	if (count < 0)
+		return (NULL);
+	tokens = allocate_tokens(count);
+	if (!tokens)
+		return (NULL);
+	if (!fill_tokens(tokens, s, count))
+		return (NULL);
 	return (tokens);
 }
