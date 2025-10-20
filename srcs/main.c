@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/14 16:58:33 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/20 14:46:32 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,46 +28,72 @@ static int	is_blank_line(const char *s)
 }
 
 // lê a linha de input do utilizador e mostra o prompt
-char *read_line(void)
+static char	*create_prompt(void)
+{
+	char	*prompt_part;
+	char	*full_prompt;
+	char	cwd[BUFSIZ];
+
+	get_cwd(cwd, sizeof(cwd));
+	prompt_part = ft_strjoin(RED, cwd);
+	if (!prompt_part)
+		return (NULL);
+	full_prompt = ft_strjoin(prompt_part, " "RST""C"minishell$ "RST);
+	free(prompt_part);
+	return (full_prompt);
+}
+
+char	*read_line(t_shell *shell)
 {
 	char	*buf;
 	char	*prompt;
-	char	cwd[BUFSIZ];
 
-	// obtém o diretório atual para mostrar no prompt
-	get_cwd(cwd, sizeof(cwd));
-	prompt = ft_strjoin(RED, cwd);
+	prompt = create_prompt();
 	if (!prompt)
 		return (NULL);
-	buf = ft_strjoin(prompt, " "RST""C"minishell$ "RST);
-	free(prompt);
-	if (!buf)
-		return (NULL);
-	prompt = buf;
-	// lê a linha de input
 	buf = readline(prompt);
 	free(prompt);
-	// se o readline retornar NULL (ctrl-D), sai da shell
 	if (!buf)
 	{
 		printf(RED"exit\n"RST);
-		exit(EXIT_SUCCESS);
+		exit(shell->last_exit_status);
 	}
-	// adiciona a linha ao histórico se não estiver em branco
 	if (!is_blank_line(buf))
 		add_history(buf);
 	return (buf);
 }
 
-int main(int ac, char **av, char **env)
+static void	run_shell(t_shell *shell)
 {
 	char	*line;
 	t_cmd	*cmds;
+
+	while (1)
+	{
+		if (isatty(STDIN_FILENO))
+			line = read_line(shell);
+		else
+			line = get_next_line(STDIN_FILENO);
+		if (!line)
+			break ;
+		cmds = parse_line(line, shell);
+		if (cmds)
+		{
+			shell->last_exit_status = execute_pipeline(cmds, shell);
+			free_cmds(cmds);
+		}
+		else
+			shell->last_exit_status = 2;
+		free(line);
+	}
+}
+
+int	main(int ac, char **av, char **env)
+{
 	t_shell	shell;
 
 	(void)ac;
 	(void)av;
-	// inicializa a estrutura da shell
 	shell.pid = getpid();
 	shell.last_exit_status = 0;
 	shell.env_list = init_env(env);
@@ -76,59 +102,11 @@ int main(int ac, char **av, char **env)
 	if (isatty(STDIN_FILENO))
 	{
 		print_banner();
-		// configura os sinais para o modo interativo
 		setup_interactive_signals();
 		init_shell_history();
 	}
-	// loop principal da shell
-	while (1)
-	{
-		if (isatty(STDIN_FILENO))
-			line = read_line();
-		else
-			line = get_next_line(STDIN_FILENO);
-		if (!line)
-			break;
-		
-		// faz o parsing da linha para uma lista de comandos
-		cmds = parse_line(line, &shell);
-		
-		// se o parsing for bem sucedido, executa o pipeline
-		if (cmds)
-		{
-			shell.last_exit_status = execute_pipeline(cmds, &shell);
-			free_cmds(cmds); // liberta a memória da lista de comandos
-		}
-		else
-			shell.last_exit_status = 2;
-		
-		free(line); // liberta a memória da linha lida
-	}
+	run_shell(&shell);
 	if (isatty(STDIN_FILENO))
 		save_shell_history();
 	return (shell.last_exit_status);
 }
-
-
-//facilitar
-
-// ls -l | hvxjvjl | echo "|ola"
-
-//ls/2-l/2\3\2echo\2" OLA SOU O HENRIQUE"
-
-//FAZER UM SPLIT SUPER CHIQUE 
-//flags de in_aspas e in_nao  me lembro
-
-//linked lists
-
-//definir variaveis de environment com export e ler com echo
-
-//handle sinais aqui (SIGINT CTRL D, CTRL C, CTRL \)
-
-//figure out o que sao env e como manda las junto com os tokens???????????
-
-//fazer o comando export e env (EXPORT MOSTRA ENVS SEM VALOR bobao)
-
-//descobrir como expandir variaveis (detetar dollar sign como ir buscar ao env o valor)
-
-//Todo: descobrir se é suposto entrar em modo dquote se as aspas tiverem abertas
