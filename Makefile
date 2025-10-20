@@ -6,7 +6,7 @@
 #    By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/10/17 14:18:32 by adores & mi      ###   ########.fr        #
+#    Updated: 2025/10/20 11:35:26 by adores & mi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,12 @@ SRCS = \
 	srcs/heredoc.c \
 	srcs/expansion.c \
 	builtin/builtin.c \
-	builtin/builtin_utils.c\
 	builtin/cd.c\
 	builtin/echo.c\
 	builtin/env.c\
+	builtin/env_convert.c\
+	builtin/env_create.c\
+	builtin/env_utils.c\
 	builtin/exit.c\
 	builtin/export.c\
 	builtin/pwd.c\
