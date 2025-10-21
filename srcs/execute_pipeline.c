@@ -27,7 +27,10 @@ static void	expand_all_variables(t_cmd *cmds, t_shell *shell)
 static int	handle_single_builtin(t_cmd *cmds, t_shell *shell)
 {
 	if (!cmds->next && is_builtin(cmds->flag))
-		return (execute_single_builtin(cmds, shell));
+	{
+		shell->last_exit_status = execute_single_builtin(cmds, shell);
+		return (1);
+	}
 	return (0);
 }
 
@@ -84,8 +87,8 @@ int	execute_pipeline(t_cmd *cmds, t_shell *shell)
 	// primeiro, expande as variáveis para todos os comandos
 	expand_all_variables(cmds, shell);
 	// se for um único comando e for um builtin, executa diretamente
-	if(handle_single_builtin(cmds, shell))
-		return (0);
+	if (handle_single_builtin(cmds, shell))
+		return (shell->last_exit_status);
 	// configura os sinais para o modo de execução
 	setup_exec_signals();
 	last_pid = -1;
@@ -94,6 +97,7 @@ int	execute_pipeline(t_cmd *cmds, t_shell *shell)
 	while(cmds)
 	{
 		if (create_and_fork_process(cmds, shell, &input_fd, &last_pid))
+			break ;
 		cmds = cmds->next;
 	}
 	return (wait_for_children(last_pid));
