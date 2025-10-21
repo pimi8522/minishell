@@ -70,6 +70,23 @@ static char	*append_var_value(char *current_str, char *var_name, t_shell *shell)
 	return (new_str);
 }
 
+char	*expand_tilde(char *arg, t_shell *shell)
+{
+	char	*home;
+	char	*result;
+
+	if (arg && arg[0] == '~' && (arg[1] == '/' || arg[1] == '\0'))
+	{
+		home = get_env_value(shell, "HOME");
+		if (!home)
+			return (ft_strdup(arg));
+		result = ft_strjoin(home, arg + 1);
+		free(arg);
+		return(result);
+	}
+	return(arg);
+}
+
 // função principal que expande variáveis e remove aspas de um argumento
 static char	*expand_and_unquote_arg(char *arg, t_shell *shell)
 {
@@ -129,6 +146,7 @@ void	expand_variables(t_cmd *cmd, t_shell *shell)
 	i = 0;
 	while (cmd->flag[i])
 	{
+		cmd->flag[i] = expand_tilde(cmd->flag[i], shell);
 		if (ft_strchr(cmd->flag[i], '$') || ft_strchr(cmd->flag[i], '\'')
 			|| ft_strchr(cmd->flag[i], '"'))
 		{
