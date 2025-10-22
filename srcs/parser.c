@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/17 14:18:19 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/22 11:40:37 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,10 @@ static t_cmd	*create_cmd_from_tokens(char **tokens, int start, int end,
 		return (NULL);
 	argc = count_args(tokens, start, end);
 	if (argc == 0)
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
 		return (NULL);
+	}
 	cmd = init_cmd(argc);
 	if (!cmd)
 		return (NULL);

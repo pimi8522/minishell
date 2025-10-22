@@ -98,6 +98,8 @@ static char	*get_next_token(const char *s, size_t *i)
 	int		in_squote;
 	int		in_dquote;
 
+	in_dquote = 0;
+	in_squote = 0;
 	skip_whitespace(s, i);
 	start = *i;
 	process_token(s, i, &in_squote, &in_dquote);
