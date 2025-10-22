@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:50:49 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/17 15:13:54 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/22 15:36:25 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static int	update_pwd_vars(t_shell *shell, char *old_pwd)
 {
 	char	new_pwd[PATH_MAX];
 
-	if (!find_env_node(shell->env_list, "OLDPWD"))
-		set_env_var(shell, "OLDPWD", NULL);
 	set_env_var(shell, "OLDPWD", old_pwd);
 	if (getcwd(new_pwd, sizeof(new_pwd)) != NULL)
 		set_env_var(shell, "PWD", new_pwd);
+	else
+		set_env_var(shell, "PWD", "");
 	return (0);
 }
 

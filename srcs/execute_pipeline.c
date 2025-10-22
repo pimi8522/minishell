@@ -66,7 +66,7 @@ static int	wait_for_children(pid_t last_pid)
 	if(last_pid != -1)
 		waitpid(last_pid, &status, 0);
 	// espera por todos os outros processos filhos
-	while (wait(NULL) > 0);
+	(void)0;
 	// restaura os sinais para o modo interativo
 	setup_interactive_signals();
 	// retorna o status de saída do último comando
@@ -100,5 +100,6 @@ int	execute_pipeline(t_cmd *cmds, t_shell *shell)
 			break ;
 		cmds = cmds->next;
 	}
-	return (wait_for_children(last_pid));
+	shell->last_exit_status = wait_for_children(last_pid);
+	return (shell->last_exit_status);
 }

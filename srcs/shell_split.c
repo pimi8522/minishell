@@ -84,9 +84,14 @@ static int	count_tokens(const char *s)
 		count++;
 		process_token(s, &i, &in_squote, &in_dquote);
 	}
-	if (in_squote || in_dquote)
+	if (in_squote)
 	{
-		ft_putstr_fd("minishell: unclosed quote\n", 2);
+		ft_putstr_fd("minishell: unexpected EOF while looking for matching `''\n", 2);
+		return (-1);
+	}
+	if (in_dquote)
+	{
+		ft_putstr_fd("minishell: unexpected EOF while looking for matching `\"'\n", 2);
 		return (-1);
 	}
 	return (count);

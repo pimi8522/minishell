@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/22 11:40:37 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/22 15:45:05 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,18 @@ static void	handle_redir(t_cmd *cmd, char **tokens, int *i, int end,
 		cmd->in = open(tokens[*i + 1], O_RDONLY);
 	else if (ft_strcmp(tokens[*i], "<<") == 0)
 		handle_heredoc_redir(cmd, tokens[*i + 1], shell);
-	if (cmd->in == -1 || cmd->out == -1)
-		perror("minishell");
+	if (cmd->in == -1)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(tokens[*i + 1], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+	}
+	else if (cmd->out == -1)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(tokens[*i + 1], 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+	}
 	(*i)++;
 }
 

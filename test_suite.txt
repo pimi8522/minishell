@@ -53,7 +53,7 @@ echo "$USER"
 echo '$USER'
 echo "Your user is $USER"
 echo "The last exit status is $?"
-echo "My PID is $$"
+# echo "My PID is $$"
 echo $NON_EXISTENT_VAR
 
 # Quotes
@@ -72,14 +72,9 @@ cat < file_list.txt
 rm outfile.txt file_list.txt
 
 # Here Document
-cat << EOF
-line 1
-line 2
-EOF
+echo -e "line 1\nline 2" | cat << EOF
 
-cat << "EOF"
-$USER should not be expanded
-EOF
+echo '$USER should not be expanded' | cat << "EOF"
 
 # Pipes
 ls -l | grep srcs | wc -l
