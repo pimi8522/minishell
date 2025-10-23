@@ -75,14 +75,21 @@ char	*expand_tilde(char *arg, t_shell *shell)
 	char	*home;
 	char	*result;
 
-	if (arg && arg[0] == '~' && (arg[1] == '/' || arg[1] == '\0'))
+	if (!arg || arg[0] != '~')
+		return (arg);
+	home = get_env_value(shell, "HOME");
+	if (!home)
+		return (arg);
+	if (arg[1] == '\0')
 	{
-		home = get_env_value(shell, "HOME");
-		if (!home)
-			return (ft_strdup(arg));
+		free(arg);
+		return (ft_strdup(home));
+	}
+	if (arg[1] == '/')
+	{
 		result = ft_strjoin(home, arg + 1);
 		free(arg);
-		return(result);
+		return (result);
 	}
 	return(arg);
 }
@@ -117,13 +124,23 @@ static char	*expand_and_unquote_arg(char *arg, t_shell *shell)
 		// se for um '$' e não estiver dentro de plicas, expande a variável
 		else if (arg[i] == '$' && !in_squote)
 		{
-			var_name = extract_var_name(&arg[i + 1]);
-			new_arg = append_var_value(new_arg, var_name, shell);
-			if (ft_strcmp(var_name, "$") == 0)
-				i += 2;
+			if (!ft_isalnum(arg[i + 1]) && arg[i + 1] != '_' 
+				&& arg[i + 1] != '?' && arg[i + 1] != '$')
+			{
+				// Not a valid variable, treat $ as literal
+				new_arg = str_append_char(new_arg, arg[i]);
+				i++;
+			}
 			else
-				i += ft_strlen(var_name) + 1;
-			free(var_name);
+			{
+				var_name = extract_var_name(&arg[i + 1]);
+				new_arg = append_var_value(new_arg, var_name, shell);
+				if (ft_strcmp(var_name, "$") == 0)
+					i += 2;
+				else
+					i += ft_strlen(var_name) + 1;
+				free(var_name);
+			}
 		}
 		else
 		{

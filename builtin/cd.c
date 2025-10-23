@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:50:49 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/22 15:36:25 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/23 15:08:41 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ static void	cd_error(t_shell *shell, char *path)
 	write(2, path, ft_strlen(path));
 	write(2, ": No such file or directory\n", 28);
 	shell->last_exit_status = 1;
+}
+
+static void	change_directory(t_shell *shell, char *path, char *old_pwd)
+{
+	if (chdir(path) != 0)
+		cd_error(shell, path);
+	else
+	{
+		update_pwd_vars(shell, old_pwd);
+		shell->last_exit_status = 0;
+	}
 }
 
 void	ft_cd(char **args, t_shell *shell)
@@ -58,6 +69,7 @@ void	ft_cd(char **args, t_shell *shell)
 		update_pwd_vars(shell, old_pwd);
 		shell->last_exit_status = 0;
 	}
+	change_directory(shell, path, old_pwd);
 	free(path);
 }
 

@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 12:30:19 by anarita           #+#    #+#             */
-/*   Updated: 2025/10/15 16:32:18 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/23 16:33:01 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,13 @@ static char	*find_path(char *envp[], char *cmd)
 void	execute_command(char **args, char *envp[])
 {
 	char	*path;
+
+	if (!args[0] || !args[0][0])
+	{
+		write(2, "minishell: ", 11);
+		 write(2, ": command not found\n", 20);
+		exit(127);
+	}
 	path = find_path(envp, args[0]);
 	if (!path)
 	{
@@ -94,5 +101,10 @@ void	execute_command(char **args, char *envp[])
 	execve(path, args, envp);
 	free(path);
 	perror("minishell");
-	exit(errno);
+	if (errno == EACCES)
+		exit(126);
+	else if (errno == ENOENT)
+		exit(127);
+	else
+		exit(1);
 }
