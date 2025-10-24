@@ -124,6 +124,11 @@ static char	*expand_and_unquote_arg(char *arg, t_shell *shell)
 		// se for um '$' e não estiver dentro de plicas, expande a variável
 		else if (arg[i] == '$' && !in_squote)
 		{
+			if(arg[i + 1] == '"')
+			{
+				i++;
+				continue;
+			}
 			if (!ft_isalnum(arg[i + 1]) && arg[i + 1] != '_' 
 				&& arg[i + 1] != '?' && arg[i + 1] != '$')
 			{
