@@ -1,2 +1,2 @@
-minishell: No such file or directory
+minishell: no_such_file: No such file or directory
 minishell: dup2: Bad file descriptor

@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:56:31 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/22 15:35:55 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/24 15:04:15 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,21 @@ static void	print_env_var(char *entry)
 		if (key)
 		{
 			// imprime no formato: declare -x KEY="value"
-			printf("declare -x %s=\"%s\"\n", key, equal_sign + 1);
+			ft_putstr_fd("declare -x ", 1);
+			ft_putstr_fd(key, 1);
+			ft_putstr_fd("=\"", 1);
+			ft_putstr_fd(equal_sign + 1, 1);
+			ft_putstr_fd("\"\n", 1);
 			free(key);
 		}
-		}
-		else
-			// imprime variáveis sem valor, ex: declare -x VAR
-			printf("declare -x %s\n", entry);
+	}
+	else
+	{
+		// imprime variáveis sem valor, ex: declare -x VAR
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(entry, 1);
+		ft_putstr_fd("\n", 1);
+	}
 }
 
 static void	print_env_array(char **env_array)
@@ -38,10 +46,10 @@ static void	print_env_array(char **env_array)
 	int	i;
 
 	i = 0;
-	while(env_array[i])
+	while (env_array[i])
 	{
-		if (ft_strncmp(env_array[i], "_=", 2) == 0)
-			print_env_var(env_array[i]); // não imprime _ aqui, imprime no fim
+		if (ft_strncmp(env_array[i], "_=", 2) != 0)
+			print_env_var(env_array[i]);
 		i++;
 	}
 }

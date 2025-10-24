@@ -2,147 +2,99 @@
 COMMAND: ls
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.320541768 +0100
-+++ bash_output.log	2025-10-22 15:47:06.324152380 +0100
-@@ -5,6 +5,8 @@
+--- minishell_output.log	2025-10-24 15:14:11.592355070 +0100
++++ bash_output.log	2025-10-24 15:14:11.592355070 +0100
+@@ -6,6 +6,8 @@
  Makefile
  \nint
  a.out
 +bash_stderr.tmp
 +bash_stdout.tmp
  builtin
- echo
  en.subject.pdf
+ libft
 
 ---
 COMMAND: ls -l
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.331373605 +0100
-+++ bash_output.log	2025-10-22 15:47:06.334984219 +0100
+--- minishell_output.log	2025-10-24 15:14:11.604344256 +0100
++++ bash_output.log	2025-10-24 15:14:11.604344256 +0100
 @@ -1,4 +1,4 @@
 -total 1656
 +total 1660
  -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 21 16:07 "
- -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:03 ">"
+ -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 16:32 ">"
  -rw-r--r-- 1 pimi8522 pimi8522      20 Oct 21 16:07 '
-@@ -7,6 +7,8 @@
+@@ -8,6 +8,8 @@
  -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 21 16:07 \nint
  -rw-r--r-- 1 pimi8522 pimi8522     416 Oct 22 14:12 a.out
- -rw-r--r-- 1 pimi8522 pimi8522     200 Oct 22 15:47 bash_output.log
-+-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:47 bash_stderr.tmp
-+-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:47 bash_stdout.tmp
- drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 22 15:34 builtin
- -rw-r--r-- 1 pimi8522 pimi8522     293 Oct 22 15:47 diff_report.log
- -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:03 echo
+ -rw-r--r-- 1 pimi8522 pimi8522     197 Oct 24 15:14 bash_output.log
++-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 24 15:14 bash_stderr.tmp
++-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 24 15:14 bash_stdout.tmp
+ drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 24 15:13 builtin
+ -rw-r--r-- 1 pimi8522 pimi8522     294 Oct 24 15:14 diff_report.log
+ -rw-r--r-- 1 pimi8522 pimi8522 1582893 Sep 29 14:48 en.subject.pdf
 @@ -16,7 +18,7 @@
  -rw-r--r-- 1 pimi8522 pimi8522    4261 Oct 21 14:02 minishell.h
- -rw-r--r-- 1 pimi8522 pimi8522     168 Oct 22 15:47 minishell_output.log
- -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:47 minishell_stderr.tmp
---rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:47 minishell_stdout.tmp
-+-rw-r--r-- 1 pimi8522 pimi8522    1376 Oct 22 15:47 minishell_stdout.tmp
+ -rw-r--r-- 1 pimi8522 pimi8522     165 Oct 24 15:14 minishell_output.log
+ -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 24 15:14 minishell_stderr.tmp
+--rw-r--r-- 1 pimi8522 pimi8522       0 Oct 24 15:14 minishell_stdout.tmp
++-rw-r--r-- 1 pimi8522 pimi8522    1373 Oct 24 15:14 minishell_stdout.tmp
  drwxr-xr-x 2 pimi8522 pimi8522    4096 Sep 29 14:48 pipex
  -rwxr-xr-x 1 pimi8522 pimi8522    2381 Oct 15 17:02 run_tests.sh
- drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 22 15:34 srcs
+ drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 24 14:51 srcs
 
 ---
 COMMAND: ls -l -a
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.345816055 +0100
-+++ bash_output.log	2025-10-22 15:47:06.345816055 +0100
+--- minishell_output.log	2025-10-24 15:14:11.612337048 +0100
++++ bash_output.log	2025-10-24 15:14:11.616333443 +0100
 @@ -1,4 +1,4 @@
 -total 1676
 +total 1680
  -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 21 16:07 "
- -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:03 ">"
+ -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 16:32 ">"
  -rw-r--r-- 1 pimi8522 pimi8522      20 Oct 21 16:07 '
-@@ -12,6 +12,8 @@
+@@ -13,6 +13,8 @@
  -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 21 16:07 \nint
  -rw-r--r-- 1 pimi8522 pimi8522     416 Oct 22 14:12 a.out
- -rw-r--r-- 1 pimi8522 pimi8522    1512 Oct 22 15:47 bash_output.log
-+-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:47 bash_stderr.tmp
-+-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:47 bash_stdout.tmp
- drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 22 15:34 builtin
- -rw-r--r-- 1 pimi8522 pimi8522    1782 Oct 22 15:47 diff_report.log
- -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:03 echo
+ -rw-r--r-- 1 pimi8522 pimi8522    1509 Oct 24 15:14 bash_output.log
++-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 24 15:14 bash_stderr.tmp
++-rw-r--r-- 1 pimi8522 pimi8522       0 Oct 24 15:14 bash_stdout.tmp
+ drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 24 15:13 builtin
+ -rw-r--r-- 1 pimi8522 pimi8522    1793 Oct 24 15:14 diff_report.log
+ -rw-r--r-- 1 pimi8522 pimi8522 1582893 Sep 29 14:48 en.subject.pdf
 @@ -21,7 +23,7 @@
  -rw-r--r-- 1 pimi8522 pimi8522    4261 Oct 21 14:02 minishell.h
- -rw-r--r-- 1 pimi8522 pimi8522    1376 Oct 22 15:47 minishell_output.log
- -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:47 minishell_stderr.tmp
---rw-r--r-- 1 pimi8522 pimi8522       0 Oct 22 15:47 minishell_stdout.tmp
-+-rw-r--r-- 1 pimi8522 pimi8522    1665 Oct 22 15:47 minishell_stdout.tmp
+ -rw-r--r-- 1 pimi8522 pimi8522    1373 Oct 24 15:14 minishell_output.log
+ -rw-r--r-- 1 pimi8522 pimi8522       0 Oct 24 15:14 minishell_stderr.tmp
+--rw-r--r-- 1 pimi8522 pimi8522       0 Oct 24 15:14 minishell_stdout.tmp
++-rw-r--r-- 1 pimi8522 pimi8522    1662 Oct 24 15:14 minishell_stdout.tmp
  drwxr-xr-x 2 pimi8522 pimi8522    4096 Sep 29 14:48 pipex
  -rwxr-xr-x 1 pimi8522 pimi8522    2381 Oct 15 17:02 run_tests.sh
- drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 22 15:34 srcs
+ drwxr-xr-x 2 pimi8522 pimi8522    4096 Oct 24 14:51 srcs
 
 ---
 COMMAND: env
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.389143406 +0100
-+++ bash_output.log	2025-10-22 15:47:06.389143406 +0100
+--- minishell_output.log	2025-10-24 15:14:11.656297397 +0100
++++ bash_output.log	2025-10-24 15:14:11.656297397 +0100
 @@ -36,4 +36,4 @@
  PULSE_SERVER=unix:/mnt/wslg/PulseServer
  TERM_PROGRAM=vscode
- VSCODE_IPC_HOOK_CLI=/run/user/1000/vscode-ipc-149c2518-b368-4642-ad9f-853b05eb0962.sock
+ VSCODE_IPC_HOOK_CLI=/run/user/1000/vscode-ipc-8f02d560-c7a7-4164-b7ce-5a93375e7175.sock
 -_=./minishell
 +_=/usr/bin/env
-
----
-COMMAND: export
-  EXIT CODES -> Minishell: 0 | Bash: 0
-  OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.432470755 +0100
-+++ bash_output.log	2025-10-22 15:47:06.432470755 +0100
-@@ -1 +1,39 @@
--declare -x _="./minishell"
-+declare -x COLORTERM="truecolor"
-+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
-+declare -x DEBUGINFOD_URLS="https://debuginfod.ubuntu.com "
-+declare -x DISPLAY=":0"
-+declare -x GIT_ASKPASS="/home/pimi8522/.vscode-server/bin/7d842fb85a0275a4a8e4d7e040d2625abbf7f084/extensions/git/dist/askpass.sh"
-+declare -x HOME="/home/pimi8522"
-+declare -x HOSTTYPE="x86_64"
-+declare -x LANG="C.UTF-8"
-+declare -x LESSCLOSE="/usr/bin/lesspipe %s %s"
-+declare -x LESSOPEN="| /usr/bin/lesspipe %s"
-+declare -x LOGNAME="pimi8522"
-+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:"
-+declare -x NAME="PIMI-C"
-+declare -x OLDPWD
-+declare -x PAGER="cat"
-+declare -x PATH="/home/pimi8522/.vscode-server/bin/7d842fb85a0275a4a8e4d7e040d2625abbf7f084/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Program Files/Oculus/Support/oculus-runtime:/mnt/c/Program Files/Eclipse Adoptium/jdk-17.0.6.10-hotspot/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files (x86)/Bluetooth Command Line Tools/bin:/mnt/c/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/:/mnt/c/Users/Miguel/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Miguel/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Miguel/AppData/Local/Muse Hub/lib:/snap/bin:/home/pimi8522/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand"
-+declare -x PROMPT_EOL_MARK=""
-+declare -x PULSE_SERVER="unix:/mnt/wslg/PulseServer"
-+declare -x PWD="/home/pimi8522/42lisboa/pimishell"
-+declare -x SHELL="/bin/bash"
-+declare -x SHLVL="2"
-+declare -x TERM="xterm-256color"
-+declare -x TERM_PROGRAM="vscode"
-+declare -x TERM_PROGRAM_VERSION="1.105.1"
-+declare -x USER="pimi8522"
-+declare -x VSCODE_GIT_ASKPASS_EXTRA_ARGS=""
-+declare -x VSCODE_GIT_ASKPASS_MAIN="/home/pimi8522/.vscode-server/bin/7d842fb85a0275a4a8e4d7e040d2625abbf7f084/extensions/git/dist/askpass-main.js"
-+declare -x VSCODE_GIT_ASKPASS_NODE="/home/pimi8522/.vscode-server/bin/7d842fb85a0275a4a8e4d7e040d2625abbf7f084/node"
-+declare -x VSCODE_GIT_IPC_HANDLE="/run/user/1000/vscode-git-f4edb70982.sock"
-+declare -x VSCODE_IPC_HOOK_CLI="/run/user/1000/vscode-ipc-149c2518-b368-4642-ad9f-853b05eb0962.sock"
-+declare -x VSCODE_PYTHON_AUTOACTIVATE_GUARD="1"
-+declare -x VTE_VERSION="0"
-+declare -x WAYLAND_DISPLAY="wayland-0"
-+declare -x WSL2_GUI_APPS_ENABLED="1"
-+declare -x WSLENV="VSCODE_WSL_EXT_LOCATION/up"
-+declare -x WSL_DISTRO_NAME="Ubuntu"
-+declare -x WSL_INTEROP="/run/WSL/476_interop"
-+declare -x XDG_DATA_DIRS="/usr/local/share:/usr/share:/var/lib/snapd/desktop"
-+declare -x XDG_RUNTIME_DIR="/run/user/1000/"
 
 ---
 COMMAND: export INVALID-VAR=123
   EXIT CODES -> Minishell: 1 | Bash: 1
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.439691978 +0100
-+++ bash_output.log	2025-10-22 15:47:06.439691978 +0100
+--- minishell_output.log	2025-10-24 15:14:11.712246934 +0100
++++ bash_output.log	2025-10-24 15:14:11.716243330 +0100
 @@ -1 +1 @@
 -minishell: export: `INVALID-VAR=123': not a valid identifier
 +./run_tests.sh: line 39: export: `INVALID-VAR=123': not a valid identifier
@@ -151,8 +103,8 @@ COMMAND: export INVALID-VAR=123
 COMMAND: mkdir test_dir
   EXIT CODES -> Minishell: 0 | Bash: 1
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.472187490 +0100
-+++ bash_output.log	2025-10-22 15:47:06.472187490 +0100
+--- minishell_output.log	2025-10-24 15:14:11.744218098 +0100
++++ bash_output.log	2025-10-24 15:14:11.744218098 +0100
 @@ -0,0 +1 @@
 +mkdir: cannot create directory ‘test_dir’: File exists
 
@@ -160,8 +112,8 @@ COMMAND: mkdir test_dir
 COMMAND: rmdir test_dir
   EXIT CODES -> Minishell: 0 | Bash: 1
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.501072390 +0100
-+++ bash_output.log	2025-10-22 15:47:06.504683003 +0100
+--- minishell_output.log	2025-10-24 15:14:11.772192866 +0100
++++ bash_output.log	2025-10-24 15:14:11.776189262 +0100
 @@ -0,0 +1 @@
 +rmdir: failed to remove 'test_dir': No such file or directory
 
@@ -169,8 +121,8 @@ COMMAND: rmdir test_dir
 COMMAND: cd -
   EXIT CODES -> Minishell: 1 | Bash: 1
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.548010353 +0100
-+++ bash_output.log	2025-10-22 15:47:06.548010353 +0100
+--- minishell_output.log	2025-10-24 15:14:11.820149613 +0100
++++ bash_output.log	2025-10-24 15:14:11.820149613 +0100
 @@ -1 +1 @@
 -minishell: cd: OLDPWD not set
 +./run_tests.sh: line 39: cd: OLDPWD not set
@@ -179,28 +131,28 @@ COMMAND: cd -
 COMMAND: echo "This is an unclosed quote
   EXIT CODES -> Minishell: 2 | Bash: 2
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.620222601 +0100
-+++ bash_output.log	2025-10-22 15:47:06.623833213 +0100
+--- minishell_output.log	2025-10-24 15:14:11.888088336 +0100
++++ bash_output.log	2025-10-24 15:14:11.888088336 +0100
 @@ -1 +1 @@
--minishell: unclosed quote
+-minishell: unexpected EOF while looking for matching `"'
 +./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `"'
 
 ---
 COMMAND: echo 'This is another unclosed quote
   EXIT CODES -> Minishell: 2 | Bash: 2
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.627443827 +0100
-+++ bash_output.log	2025-10-22 15:47:06.627443827 +0100
+--- minishell_output.log	2025-10-24 15:14:11.896081127 +0100
++++ bash_output.log	2025-10-24 15:14:11.896081127 +0100
 @@ -1 +1 @@
--minishell: unclosed quote
+-minishell: unexpected EOF while looking for matching `''
 +./run_tests.sh: eval: line 39: unexpected EOF while looking for matching `''
 
 ---
 COMMAND: rm outfile.txt file_list.txt
   EXIT CODES -> Minishell: 0 | Bash: 1
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.685213626 +0100
-+++ bash_output.log	2025-10-22 15:47:06.688824239 +0100
+--- minishell_output.log	2025-10-24 15:14:11.952030664 +0100
++++ bash_output.log	2025-10-24 15:14:11.952030664 +0100
 @@ -0,0 +1,2 @@
 +rm: cannot remove 'outfile.txt': No such file or directory
 +rm: cannot remove 'file_list.txt': No such file or directory
@@ -209,8 +161,8 @@ COMMAND: rm outfile.txt file_list.txt
 COMMAND: echo -e "line 1\nline 2" | cat << EOF
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.696045464 +0100
-+++ bash_output.log	2025-10-22 15:47:06.699656076 +0100
+--- minishell_output.log	2025-10-24 15:14:11.960023455 +0100
++++ bash_output.log	2025-10-24 15:14:11.964019850 +0100
 @@ -1 +1 @@
 -> minishell: warning: here-document delimited by end-of-file (wanted `EOF')
 +./run_tests.sh: line 39: warning: here-document at line 39 delimited by end-of-file (wanted `EOF')
@@ -219,8 +171,8 @@ COMMAND: echo -e "line 1\nline 2" | cat << EOF
 COMMAND: echo '$USER should not be expanded' | cat << "EOF"
   EXIT CODES -> Minishell: 0 | Bash: 0
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.706877301 +0100
-+++ bash_output.log	2025-10-22 15:47:06.706877301 +0100
+--- minishell_output.log	2025-10-24 15:14:11.972012641 +0100
++++ bash_output.log	2025-10-24 15:14:11.976009036 +0100
 @@ -1 +1 @@
 -> minishell: warning: here-document delimited by end-of-file (wanted `EOF')
 +./run_tests.sh: line 39: warning: here-document at line 39 delimited by end-of-file (wanted `EOF')
@@ -229,8 +181,8 @@ COMMAND: echo '$USER should not be expanded' | cat << "EOF"
 COMMAND: rm file1 file2
   EXIT CODES -> Minishell: 0 | Bash: 1
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.753815263 +0100
-+++ bash_output.log	2025-10-22 15:47:06.757425875 +0100
+--- minishell_output.log	2025-10-24 15:14:12.019975228 +0100
++++ bash_output.log	2025-10-24 15:14:12.019975228 +0100
 @@ -0,0 +1,2 @@
 +rm: cannot remove 'file1': No such file or directory
 +rm: cannot remove 'file2': No such file or directory
@@ -239,10 +191,10 @@ COMMAND: rm file1 file2
 COMMAND: cat < no_such_file
   EXIT CODES -> Minishell: 1 | Bash: 1
   OUTPUT DIFF:
---- minishell_output.log	2025-10-22 15:47:06.764647099 +0100
-+++ bash_output.log	2025-10-22 15:47:06.764647099 +0100
+--- minishell_output.log	2025-10-24 15:14:12.027971149 +0100
++++ bash_output.log	2025-10-24 15:14:12.027971149 +0100
 @@ -1,2 +1 @@
--minishell: No such file or directory
+-minishell: no_such_file: No such file or directory
 -minishell: dup2: Bad file descriptor
 +./run_tests.sh: line 39: no_such_file: No such file or directory
 
