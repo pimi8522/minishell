@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:58:22 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/16 12:11:08 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/29 15:48:12 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,7 @@ void	unset_builtin(char **args, t_shell *shell)
 	i = 1;
 	while (args[i])
 	{
-		if(!is_valid_identifier(args[i]))
-		{
-			ft_putstr_fd("minishell: unset: `", 2);
-			ft_putstr_fd(args[i], 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
-			shell->last_exit_status = 1;
-		}
-		else
+		if (get_env_value(shell, args[i]))
 			remove_env_var(shell, args[i]);
 		i++;
 	}

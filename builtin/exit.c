@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:54:56 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/02 10:15:50 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/29 14:50:32 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ static int	is_numeric(const char *s)
 
 void	exit_builtin(char **args, t_shell *shell)
 {
-	int	exit_code;
+	long long	exit_code;
 
+	ft_putstr_fd("exit\n", 2);
 	if(!args[1])
 		exit(shell->last_exit_status);
 	if(!is_numeric(args[1]))
@@ -54,3 +55,7 @@ void	exit_builtin(char **args, t_shell *shell)
 	exit_code = ft_atoi(args[1]);
 	exit((unsigned char)exit_code);
 }
+
+/*exit se receber um valor acima de long long ele trata como uma string
+fazer atoll que verifique que o valor é acima do long long max
+função para limpar tudo antes de dar exit*/

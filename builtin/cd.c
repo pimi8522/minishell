@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:50:49 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/24 15:13:24 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/29 16:51:24 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_cd(char **args, t_shell *shell)
 
 	if (getcwd(old_pwd, sizeof(old_pwd)) == NULL)
 	{
-		perror("cd: error retrieving current directory");
+		ft_putendl_fd("cd: error retrieving current directory", 2);
 		shell->last_exit_status = 1;
 		return ;
 	}
