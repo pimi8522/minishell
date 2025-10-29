@@ -109,8 +109,14 @@ static char	*expand_and_unquote_arg(char *arg, t_shell *shell)
 	in_dquote = 0;
 	while (arg[i])
 	{
+		if (arg[i] == '$' && arg[i + 1] == '"')
+		{
+			in_dquote = !in_dquote;
+			i += 2;
+			continue;
+		}
 		// se for uma plica e não estiver dentro de aspas, muda o estado de in_squote
-		if (arg[i] == '\'' && !in_dquote)
+		else if (arg[i] == '\'' && !in_dquote)
 		{
 			in_squote = !in_squote;
 			i++;
@@ -124,16 +130,12 @@ static char	*expand_and_unquote_arg(char *arg, t_shell *shell)
 		// se for um '$' e não estiver dentro de plicas, expande a variável
 		else if (arg[i] == '$' && !in_squote)
 		{
-			if(arg[i + 1] == '"')
-			{
-				i++;
-				continue;
-			}
-			if (!ft_isalnum(arg[i + 1]) && arg[i + 1] != '_' 
-				&& arg[i + 1] != '?' && arg[i + 1] != '$')
+			if (arg[i + 1] == '\0' || arg[i + 1] == '"' ||
+				(!ft_isalnum(arg[i + 1]) && arg[i + 1] != '_' 
+				 && arg[i + 1] != '?' && arg[i + 1] != '$'))
 			{
 				// Not a valid variable, treat $ as literal
-				new_arg = str_append_char(new_arg, arg[i]);
+				new_arg = str_append_char(new_arg, '$');
 				i++;
 			}
 			else
