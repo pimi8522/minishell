@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:48:54 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/29 12:08:20 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/29 12:11:29 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	is_n_option(char *arg)
 void	echo_builtin(char **args, t_shell *shell)
 {
 	int	i;
-	int	j;
 	int	newline;
 
 	i = 1;
