@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/20 15:40:38 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/30 16:45:44 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,14 @@ t_cmd	*new_cmd_node(char *cmd, char **flags);
 void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
 int		handle_heredoc(const char *delimiter, int expand, t_shell *shell);
 
-void	echo_builtin(char **args, t_shell *shell);
-void	ft_cd(char **args, t_shell *shell);
-void	pwd_builtin(t_shell *shell);
-void	exit_builtin(char **args, t_shell *shell);
-void	env_builtin(t_shell *shell);
+int		echo_builtin(char **args, t_shell *shell);
+int		ft_cd(char **args, t_shell *shell);
+int		pwd_builtin(t_shell *shell);
+int		exit_builtin(char **args, t_shell *shell);
+int		env_builtin(t_shell *shell);
 void	print_sorted_env(t_shell *shell);
-void	unset_builtin(char **args, t_shell *shell);
-void	export_builtin(char **args, t_shell *shell);
+int		unset_builtin(char **args, t_shell *shell);
+int		export_builtin(char **args, t_shell *shell);
 int		is_builtin(char **args);
 char	*get_target_path(char **args, t_shell *shell);
 

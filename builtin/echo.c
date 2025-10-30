@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:48:54 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/29 12:11:29 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/30 14:42:46 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_n_option(char *arg)
 	return (1);
 }
 
-void	echo_builtin(char **args, t_shell *shell)
+int	echo_builtin(char **args, t_shell *shell)
 {
 	int	i;
 	int	newline;
@@ -48,4 +48,5 @@ void	echo_builtin(char **args, t_shell *shell)
 	if(newline == 1)
 		ft_putstr_fd("\n", 1);
 	shell->last_exit_status = 0;
+	return (0);
 }

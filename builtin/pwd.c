@@ -6,13 +6,13 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:53:15 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/29 16:35:04 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/30 14:54:18 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	pwd_builtin(t_shell *shell)
+int	pwd_builtin(t_shell *shell)
 {
 	char	*cwd;
 
@@ -25,7 +25,7 @@ void	pwd_builtin(t_shell *shell)
 		{
 			ft_putstr_fd("pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 2);
 			shell->last_exit_status = 1;
-			return ;
+			return (1);
 		}
 		else
 			printf("%s\n", cwd);
@@ -35,6 +35,5 @@ void	pwd_builtin(t_shell *shell)
 		printf("%s\n", cwd);
 		free(cwd);
 	}
+	return (0);
 }
-
-/*se tiver argumentos dá erro*/

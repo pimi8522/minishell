@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:56:31 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/24 15:04:15 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/10/30 15:01:20 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	print_sorted_env(t_shell *shell)
 	free_str(env_array);
 }
 
-void	env_builtin(t_shell *shell)
+int	env_builtin(t_shell *shell)
 {
 	t_env	*current;
 
@@ -79,4 +79,5 @@ void	env_builtin(t_shell *shell)
 		current = current->next;
 	}
 	shell->last_exit_status = 0;
+	return (0);
 }

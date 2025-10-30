@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:54:56 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/29 14:50:32 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/30 16:45:10 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,44 @@ static int	is_numeric(const char *s)
 	return(1);
 }
 
-void	exit_builtin(char **args, t_shell *shell)
+static bool	ft_exitatoll(const char	*str, long long *exit_code)
+{
+	int	i;
+	int	sign;
+	int	digit;
+
+	sign = 1;
+	i = 0;
+	while ((str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)) && str[i] != '\0')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i++] == '-')
+			sign = -1;
+	}
+	while (str[i])
+	{
+		digit = str[i] - '0';
+		if (sign == -1 && (-(*exit_code) < (LLONG_MIN + digit) / 10))
+			return (false);
+		if (sign == 1 && (*exit_code > (LLONG_MAX - digit) / 10))
+			return (false);
+		*exit_code = (*exit_code * 10) + digit;
+		i++;
+	}
+	*exit_code *= sign;
+	return (true);
+}
+
+
+int	exit_builtin(char **args, t_shell *shell)
 {
 	long long	exit_code;
 
 	ft_putstr_fd("exit\n", 2);
 	if(!args[1])
 		exit(shell->last_exit_status);
-	if(!is_numeric(args[1]))
+	if(!is_numeric(args[1]) || !ft_exitatoll(args[1], &exit_code))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(args[1], 2);
@@ -50,12 +80,10 @@ void	exit_builtin(char **args, t_shell *shell)
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		shell->last_exit_status = 1;
-		return ;
+		return (1);
 	}
-	exit_code = ft_atoi(args[1]);
 	exit((unsigned char)exit_code);
+	return (0);
 }
 
-/*exit se receber um valor acima de long long ele trata como uma string
-fazer atoll que verifique que o valor é acima do long long max
-função para limpar tudo antes de dar exit*/
+//falta dar free

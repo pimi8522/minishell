@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:58:22 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/29 15:48:12 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/30 14:57:43 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,11 @@ static void	remove_env_var(t_shell *shell, char *key)
 	}
 }
 
-void	unset_builtin(char **args, t_shell *shell)
+int	unset_builtin(char **args, t_shell *shell)
 {
 	int	i;
 
 	shell->last_exit_status = 0;
-	if (!args[1])
-		return ;
 	i = 1;
 	while (args[i])
 	{
@@ -49,4 +47,5 @@ void	unset_builtin(char **args, t_shell *shell)
 			remove_env_var(shell, args[i]);
 		i++;
 	}
+	return (0);
 }

@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Minishell",
+            "type": "shell",
+            "command": "make",
+            "group": { "kind": "build", "isDefault": true },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "Clean Minishell",
+            "type": "shell",
+            "command": "make fclean",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Close Debug Terminal",
+            "type": "shell",
+            "command": "exit",
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:39:56 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/20 15:37:05 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/30 15:20:52 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	execute_child(t_cmd *cmd, t_shell *shell, int input_fd, int pipe_fds[2])
 	}
 	env_array = convert_env_to_array(shell->env_list);
 	// se for um builtin, executa e sai
-	if (exe_builtin(cmd->flag, shell))
+	if (!exe_builtin(cmd->flag, shell))
 		exit(shell->last_exit_status);
 	// senão, executa o comando externo
 	execute_command(cmd->flag, env_array);

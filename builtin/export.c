@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:59:57 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/29 15:31:04 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/30 15:09:25 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ int	is_valid_identifier(const char *str)
 	return (1);
 }
 
-static void	export_error(t_shell *shell, char *arg)
+static void	export_error(t_shell *shell, char *arg, int *exit_code)
 {
+	*exit_code = 1;
 	ft_putstr_fd("minishell: export: `", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd("': not a valid identifier\n", 2);
@@ -52,26 +53,29 @@ static void	handle_export_no_value(t_shell *shell, char *arg)
 		set_env_var(shell, arg, NULL);
 }
 
-void	export_builtin(char **args, t_shell *shell)
+int	export_builtin(char **args, t_shell *shell)
 {
 	int	i;
+	int	exit_code;
 
 	shell->last_exit_status = 0;
+	exit_code = 0;
 	// se não houver argumentos, imprime as variáveis de ambiente
 	if (!args[1])
 	{
 		print_sorted_env(shell);
-		return ;
+		return (0);
 	}
 	i = 1;
 	while (args[i])
 	{
 		if(!is_valid_identifier(args[i]))
-			export_error(shell, args[i]);
+			export_error(shell, args[i], &exit_code);
 		else if(ft_strchr(args[i], '='))
 			handle_export_assignment(shell, args[i]);
 		else
 			handle_export_no_value(shell, args[i]);
 		i++;
 	}
+	return(exit_code);
 }
