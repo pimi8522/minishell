@@ -6,11 +6,13 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:56:31 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/30 15:01:20 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/10/31 15:06:14 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//fazer funçao do shell level
 
 static void	print_env_var(char *entry)
 {
@@ -30,6 +32,11 @@ static void	print_env_var(char *entry)
 			ft_putstr_fd(equal_sign + 1, 1);
 			ft_putstr_fd("\"\n", 1);
 			free(key);
+		}
+		else
+		{
+			ft_putstr_fd("minishell: Cannot allocate memory", 2);
+			
 		}
 	}
 	else
