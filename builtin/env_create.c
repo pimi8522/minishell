@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+void free_env_list(t_env *head)
+{
+	t_env	*next;
+
+	while (head)
+	{
+		next = head->next;
+		free_env_node(head);
+		head = next;
+	}
+}
+
 t_env	*new_env_node(char *key, char *value)
 {
 	t_env	*new_node;
@@ -20,35 +32,59 @@ t_env	*new_env_node(char *key, char *value)
 	if(!new_node)
 		return(NULL);
 	new_node->key = ft_strdup(key);
+	if(!new_node->key)
+	{
+		free_env_node(new_node);
+		return (NULL);
+	}
 	if (value)
 		new_node->value = ft_strdup(value);
 	else
+	{
 		new_node->value = NULL;
+	}
+		
 	new_node->next = NULL;
 	return (new_node);
 }
 
-static void add_env_var(t_env **head, t_env **current, char *env)
+static int add_env_var(t_env **head, t_env **current, char *env)
 {
 	char 	*equal_sign;
 	char	*key;
 	char	*value;
+	t_env	*new_node;
 
 	equal_sign = ft_strchr(env, '=');
 	if (!equal_sign)
-		return ;
+		return (0);
 	key = ft_substr(env, 0, equal_sign - env);
+	if(!key)
+		return (1);
 	value = ft_strdup(equal_sign + 1);
+	if(!value)
+	{
+		free(key);
+		return (1);
+	}
+	new_node = new_env_node(key, value);
+	if(!new_node)
+	{
+		free(key);
+		free(value);
+		return (1);
+	}
 	if (!*head)
 	{
-		*head = new_env_node(key, value);
-		*current = *head;
+		*head = new_node;
+		*current = new_node;
 	}
 	else
 	{
-		(*current)->next = new_env_node(key, value);
-		*current = (*current)->next;
+		(*current)->next = new_node;
+		*current = new_node;
 	}
+	return(0);
 }
 
 t_env	*init_env(char **envp)
@@ -63,8 +99,15 @@ t_env	*init_env(char **envp)
 	current = NULL;
 	i = -1;
 	while(envp[++i])
-		add_env_var(&head, &current, envp[i]);
-	return (head);
+	{
+		if(add_env_var(&head, &current, envp[i]) == 1)
+		{
+			ft_putendl_fd("minishell: Cannot allocate memory", 2);
+			free_env_list(head);
+			return (NULL);
+		}
+	}
+	return(head);
 }
 
 
