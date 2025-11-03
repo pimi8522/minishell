@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+         #
+#    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/10/20 15:35:23 by adores & mi      ###   ########.fr        #
+#    Updated: 2025/11/03 12:34:27 by miduarte &       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,14 @@ CFLAGS = -Wall -Wextra -Werror -I. -Ilibft -Ipipex
 SRCS = \
 	srcs/main.c \
 	srcs/utils.c \
-	srcs/shell_split.c \
+	srcs/lexer/shell_split.c \
 	srcs/execute.c \
 	srcs/execute_pipeline.c \
 	srcs/launch.c \
 	srcs/signals.c \
-	srcs/history.c \
+	srcs/parser/history.c \
 	srcs/cmd_utils.c \
-	srcs/parser.c \
+	srcs/parser/parser.c \
 	srcs/heredoc.c \
 	srcs/expansion.c \
 	builtin/builtin.c \
