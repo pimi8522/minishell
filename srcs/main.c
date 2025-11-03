@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 12:59:11 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/03 15:52:23 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int main(int ac, char **av, char **env)
 	// inicializa a estrutura da shell
 	shell.last_exit_status = 0;
 	shell.env_list = init_env(env); // 
-	if (!find_env_node(shell.env_list, "OLDPWD"))
-		set_env_var(&shell, "OLDPWD", NULL);
 	if (isatty(STDIN_FILENO))
 	{
 		print_banner();
@@ -87,7 +85,11 @@ int main(int ac, char **av, char **env)
 		else
 			line = get_next_line(STDIN_FILENO);
 		if (!line)
+		{
+			free_env_list(shell.env_list);
 			break;
+		}
+			
 		
 		// faz o parsing da linha para uma lista de comandos
 		cmds = parse_line(line, &shell);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 14:24:40 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/03 14:50:10 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ t_env	*new_env_node(char *key, char *value);
 void	bubble_sort_array(char **arr);
 void	free_str(char **str);
 void	free_env_node(t_env *node);
+void	free_env_list(t_env *head);
 t_cmd	*parse_line(char *line, t_shell *shell);
 void	free_cmds(t_cmd *cmd_list);
 t_cmd	*new_cmd_node(char *cmd, char **flags);

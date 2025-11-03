@@ -29,26 +29,15 @@ t_env	*new_env_node(char *key, char *value)
 	t_env	*new_node;
 
 	new_node = (t_env *)malloc(sizeof(t_env));
-	if(!new_node)
-		return(NULL);
-	new_node->key = ft_strdup(key);
-	if(!new_node->key)
-	{
-		free_env_node(new_node);
+	if (!new_node)
 		return (NULL);
-	}
-	if (value)
-		new_node->value = ft_strdup(value);
-	else
-	{
-		new_node->value = NULL;
-	}
-		
+	new_node->key = key;
+	new_node->value = value;
 	new_node->next = NULL;
 	return (new_node);
 }
 
-static int add_env_var(t_env **head, t_env **current, char *env)
+static int 	add_env_var(t_env **head, char *env)
 {
 	char 	*equal_sign;
 	char	*key;
@@ -56,71 +45,49 @@ static int add_env_var(t_env **head, t_env **current, char *env)
 	t_env	*new_node;
 
 	equal_sign = ft_strchr(env, '=');
-	if (!equal_sign)
-		return (0);
 	key = ft_substr(env, 0, equal_sign - env);
-	if(!key)
-		return (1);
 	value = ft_strdup(equal_sign + 1);
-	if(!value)
-	{
-		free(key);
-		return (1);
-	}
+	if(!key || !value)
+		return (free(key), free(value), 1);
 	new_node = new_env_node(key, value);
 	if(!new_node)
-	{
-		free(key);
-		free(value);
-		return (1);
-	}
-	if (!*head)
-	{
-		*head = new_node;
-		*current = new_node;
-	}
-	else
-	{
-		(*current)->next = new_node;
-		*current = new_node;
-	}
+		return (free(key), free(value), 1);
+	add_env_node_back(head, new_node);
 	return(0);
 }
 
 t_env	*init_env(char **envp)
 {
 	t_env	*head;
-	t_env	*current;
 	int		i;
 
 	if (!envp || !*envp)
 		return (NULL);
 	head = NULL;
-	current = NULL;
 	i = -1;
-	while(envp[++i])
+	while (envp[++i])
 	{
-		if(add_env_var(&head, &current, envp[i]) == 1)
+		if(add_env_var(&head, envp[i]) == 1)
 		{
 			ft_putendl_fd("minishell: Cannot allocate memory", 2);
 			free_env_list(head);
 			return (NULL);
 		}
 	}
-	return(head);
+	return (head);
 }
 
 
-void	add_env_node_back(t_env **env_list_head, t_env *new_node)
+void	add_env_node_back(t_env **head, t_env *new_node)
 {
 	t_env	*current;
 
-	if(!*env_list_head)
+	if(!*head)
 	{
-		*env_list_head = new_node;
+		*head = new_node;
 		return;
 	}
-	current = *env_list_head;
+	current = *head;
 	while(current->next)
 		current = current->next;
 	current->next = new_node;
