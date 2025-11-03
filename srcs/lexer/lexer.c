@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:18:46 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 15:53:41 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/03 18:32:19 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,23 +125,26 @@ static int	handle_word(const char **line_ptr, t_token **token_list)
 t_token	*lexer(const char *s)
 {
     t_token	*token_list;
-    int		error;
+    int		erro_check;
 
     if (!s)
         return (NULL);
     token_list = NULL;
-    error = 0;
+    erro_check = 0;
     while (*s)
     {
-        if (error)
-            return (ft_clear_token_list(&token_list), NULL);
         skip_whitespace(s, (size_t *) &s);
         if (!*s)
             break ;
         if (is_separator_char(*s))
-            error = !handle_separator(&s, &token_list);
+            erro_check = handle_separator(&s, &token_list);
         else
-            error = !handle_word(&s, &token_list);
+            erro_check = handle_word(&s, &token_list);
+        if (erro_check == 0)
+        {
+            ft_clear_token_list(&token_list);
+            return (NULL);
+        }
     }
     return (token_list);
 }
