@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/31 15:30:53 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/11/03 12:59:11 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int main(int ac, char **av, char **env)
 	(void)av;
 	// inicializa a estrutura da shell
 	shell.last_exit_status = 0;
-	shell.env_list = init_env(env);
+	shell.env_list = init_env(env); // 
 	if (!find_env_node(shell.env_list, "OLDPWD"))
 		set_env_var(&shell, "OLDPWD", NULL);
 	if (isatty(STDIN_FILENO))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/31 15:31:12 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/11/03 14:24:40 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,4 +140,16 @@ void	expand_variables(t_cmd *cmd, t_shell *shell);
 char	*expand_line_for_heredoc(char *line, t_shell *shell);
 int		execute_pipeline(t_cmd *cmds, t_shell *shell);
 int		is_valid_identifier(const char *str);
+
+/*
+** Lexer
+*/
+char	**lexer(char const *s);
+int		is_separator_char(char c);
+void	skip_whitespace(const char *s, size_t *i);
+int		is_quote(char c);
+bool	ft_skip_quotes(const char *line, size_t *i);
+void	ft_print_quote_err(char c);
+void	free_str_array(char **arr);
+
 #endif

@@ -54,8 +54,6 @@ static char	*append_var_value(char *current_str, char *var_name, t_shell *shell)
 
 	if (ft_strcmp(var_name, "?") == 0)
 		var_value = ft_itoa(shell->last_exit_status);
-	else if (ft_strcmp(var_name, "$") == 0)
-		var_value = ft_itoa(shell->pid);
 	else
 		var_value = get_env_value(shell, var_name);
 	if (var_value)

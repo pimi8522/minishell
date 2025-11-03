@@ -6,7 +6,7 @@
 #    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/11/03 12:34:27 by miduarte &       ###   ########.fr        #
+#    Updated: 2025/11/03 14:22:08 by miduarte &       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CFLAGS = -Wall -Wextra -Werror -I. -Ilibft -Ipipex
 SRCS = \
 	srcs/main.c \
 	srcs/utils.c \
-	srcs/lexer/shell_split.c \
+	srcs/lexer/lexer_utils.c \
+	srcs/lexer/lexer.c \
 	srcs/execute.c \
 	srcs/execute_pipeline.c \
 	srcs/launch.c \

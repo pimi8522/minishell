@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/10/22 15:45:05 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/03 14:16:30 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,7 @@ t_cmd	*parse_line(char *line, t_shell *shell)
 
 	if (!line)
 		return (NULL);
-	tokens = shell_split(line);
+	tokens = lexer(line);
 	if (!tokens)
 	{
 		shell->last_exit_status = 2;
