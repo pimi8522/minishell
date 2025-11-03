@@ -6,103 +6,142 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:18:46 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 14:21:41 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/03 15:53:41 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static size_t	get_token_len_and_skip(const char *s, size_t *i)
+static t_token	*new_token(char *value, t_token_type type)
 {
-    size_t	start;
-    char	c;
+    t_token	*token;
 
-    start = *i;
-    c = s[*i];
-    if (is_separator_char(c) && !is_quote(c))
+    token = (t_token *)malloc(sizeof(t_token));
+    if (!token)
+        return (NULL);
+    token->value = value;
+    token->type = type;
+    token->next = NULL;
+    return (token);
+}
+
+static void	add_token_back(t_token **list, t_token *new)
+{
+    t_token	*current;
+
+    if (!list || !new)
+        return;
+    if (!*list)
     {
-        if ((c == '<' && s[*i + 1] == '<') || (c == '>' && s[*i + 1] == '>'))
-            *i += 2;
-        else
-            (*i)++;
+        *list = new;
+        return;
     }
-    else if (is_quote(c))
+    current = *list;
+    while (current->next)
+        current = current->next;
+    current->next = new;
+}
+
+void	ft_clear_token_list(t_token **list)
+{
+    t_token	*current;
+    t_token	*next;
+
+    if (!list)
+        return;
+    current = *list;
+    while (current)
     {
-        if (!ft_skip_quotes(s, i))
-        {
-            ft_print_quote_err(c);
-            return (0);
-        }
+        next = current->next;
+        free(current->value);
+        free(current);
+        current = next;
     }
+    *list = NULL;
+}
+
+static int	handle_separator(const char **line_ptr, t_token **token_list)
+{
+    const char	*line = *line_ptr;
+    t_token_type	type;
+    char		*value;
+    int			len;
+
+    len = 1;
+    if (!ft_strncmp(line, "<<", 2))
+        (void)(len = 2, type = T_DLESS);
+    else if (!ft_strncmp(line, ">>", 2))
+        (void)(len = 2, type = T_DGREAT);
+    else if (!ft_strncmp(line, "&&", 2))
+        (void)(len = 2, type = T_AND);
+    else if (!ft_strncmp(line, "||", 2))
+        (void)(len = 2, type = T_OR);
+    else if (*line == '<')
+        type = T_LESS;
+    else if (*line == '>')
+        type = T_GREAT;
+    else if (*line == '|')
+        type = T_PIPE;
+    else if (*line == '(')
+        type = T_O_PARENT;
+    else if (*line == ')')
+        type = T_C_PARENT;
     else
-    {
-        while (s[*i] && !is_separator_char(s[*i]))
-            (*i)++;
-    }
-    return (*i - start);
-}
-
-static int	count_tokens(const char *s)
-{
-    size_t	i;
-    int		count;
-
-    i = 0;
-    count = 0;
-    while (s[i])
-    {
-        skip_whitespace(s, &i);
-        if (!s[i])
-            break ;
-        if (get_token_len_and_skip(s, &i) == 0)
-            return (-1);
-        count++;
-    }
-    return (count);
-}
-
-static int	fill_tokens(char **tokens, const char *s, int count)
-{
-    int		t;
-    size_t	i;
-    size_t	start;
-    size_t	len;
-
-    t = 0;
-    i = 0;
-    while (t < count)
-    {
-        skip_whitespace(s, &i);
-        start = i;
-        len = get_token_len_and_skip(s, &i);
-        if (len == 0)
-            continue ;
-        tokens[t] = ft_substr(s, start, len);
-        if (!tokens[t])
-        {
-            free_str_array(tokens);
-            return (0);
-        }
-        t++;
-    }
-    tokens[t] = NULL;
+        return (0);
+    value = ft_substr(line, 0, len);
+    if (!value || !new_token(value, type))
+        return (free(value), 0);
+    add_token_back(token_list, new_token(value, type));
+    *line_ptr += len;
     return (1);
 }
 
-char	**lexer(char const *s)
+static int	handle_word(const char **line_ptr, t_token **token_list)
 {
-    int		count;
-    char	**tokens;
+    const char	*start;
+    size_t		i;
+    char		*value;
+
+    start = *line_ptr;
+    i = 0;
+    while (start[i] && !is_separator_char(start[i]))
+    {
+        if (is_quote(start[i]))
+        {
+            if (!ft_skip_quotes(start, &i))
+                return (ft_print_quote_err(start[i]), 0);
+        }
+        else
+            i++;
+    }
+    value = ft_substr(start, 0, i);
+    if (!value || !new_token(value, T_WORD))
+        return (free(value), 0);
+    add_token_back(token_list, new_token(value, T_WORD));
+    *line_ptr += i;
+    return (1);
+}
+
+t_token	*lexer(const char *s)
+{
+    t_token	*token_list;
+    int		error;
 
     if (!s)
         return (NULL);
-    count = count_tokens(s);
-    if (count < 0)
-        return (NULL);
-    tokens = (char **)malloc(sizeof(char *) * (count + 1));
-    if (!tokens)
-        return (NULL);
-    if (!fill_tokens(tokens, s, count))
-        return (NULL);
-    return (tokens);
+    token_list = NULL;
+    error = 0;
+    while (*s)
+    {
+        if (error)
+            return (ft_clear_token_list(&token_list), NULL);
+        skip_whitespace(s, (size_t *) &s);
+        if (!*s)
+            break ;
+        if (is_separator_char(*s))
+            error = !handle_separator(&s, &token_list);
+        else
+            error = !handle_word(&s, &token_list);
+    }
+    return (token_list);
 }

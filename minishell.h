@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 14:50:10 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/11/03 16:42:57 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,53 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 } t_cmd;
 
+// structs para o lexer
+typedef enum e_token_type
+{
+    T_WORD,      // A regular word or quoted string
+    T_PIPE,      // |
+    T_LESS,      // < (redirect in)
+    T_GREAT,     // > (redirect out)
+    T_DLESS,     // << (heredoc)
+    T_DGREAT,    // >> (append out)
+	T_AND,       // && (for parser)
+    T_OR,        // || (for parser)
+    T_O_PARENT,  // (  (for parser)
+    T_C_PARENT,  // )  (for parser)
+}	t_token_type;
 
+typedef struct s_token
+{
+    char			*value;
+    t_token_type	type;
+    struct s_token	*next;
+}	t_token;
 
-//structs para o shell split line
-typedef struct s_tokbuf {
-	char   *buf;
-	size_t  len;
-	size_t  cap;
-}   t_tokbuf;
+// - ------------ -- --- Para o parser
 
-typedef struct s_split {
-	const char *s;
-	size_t      i;
-	int         in_squote;
-	int         in_dquote;
-	char      **tokens;
-	size_t      tcount;
-	size_t      tcap;
-	t_tokbuf    tok;
-}   t_split;
+typedef enum e_node_type
+{
+    N_PIPE,
+    N_AND,
+    N_OR,
+    N_CMD
+}	t_node_type;
 
+typedef struct s_simple_cmd
+{
+    char	**args;
+    t_list	*redir_list; // Use libft list for redirections
+}	t_simple_cmd;
+
+// This is the main AST node
+typedef struct s_node
+{
+    t_node_type		type;
+    t_simple_cmd	*simple_cmd; // Only used if type is N_CMD
+    struct s_node	*left;
+    struct s_node	*right;
+}	t_node;
+// ------------------------------------
 
 typedef struct s_env
 {
@@ -117,8 +144,8 @@ t_env	*new_env_node(char *key, char *value);
 void	bubble_sort_array(char **arr);
 void	free_str(char **str);
 void	free_env_node(t_env *node);
-void	free_env_list(t_env *head);
-t_cmd	*parse_line(char *line, t_shell *shell);
+void free_env_list(t_env *head);
+t_cmd	*parser(char *line, t_shell *shell);
 void	free_cmds(t_cmd *cmd_list);
 t_cmd	*new_cmd_node(char *cmd, char **flags);
 void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
@@ -145,12 +172,20 @@ int		is_valid_identifier(const char *str);
 /*
 ** Lexer
 */
-char	**lexer(char const *s);
+t_token	*lexer(char const *s);
+void	ft_clear_token_list(t_token **list);
 int		is_separator_char(char c);
 void	skip_whitespace(const char *s, size_t *i);
 int		is_quote(char c);
 bool	ft_skip_quotes(const char *line, size_t *i);
 void	ft_print_quote_err(char c);
 void	free_str_array(char **arr);
+
+/*
+** Parser
+*/
+t_cmd	*parser(t_token *tokens, t_shell *shell);
+void	free_cmds(t_cmd *cmd_list);
+void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
 
 #endif

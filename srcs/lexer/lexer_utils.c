@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:39:47 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 14:20:52 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/03 15:53:56 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 // verifica se um caractere é um metacaractere (|, <, >, espaço, tab, parênteses)
 int	is_separator_char(char c)
 {
-	if (c == '|' || c == '<' || c == '>' 
-        || c == ' ' || c == '\t' || c == ')' || c == '(')
-		return (1);
-	return (0);
+    if (c == '|' || c == '<' || c == '>' || c == '&' || c == '(' || c == ')')
+        return (1);
+    return (0);
 }
 
 void	skip_whitespace(const char *s, size_t *i)

@@ -1,29 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 16:44:24 by miduarte &       ###   ########.fr       */
+/*   Created: 2025/11/03 16:44:45 by miduarte &        #+#    #+#             */
+/*   Updated: 2025/11/03 16:44:57 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_cmd	*parser(char *line, t_shell *shell)
-{
-    t_token	*tokens;
-    t_cmd	*cmds;
-
-    // faz o lexer para obter a lista de tokens
-    tokens = lexer(line);
-    if (!tokens)
-        return (NULL);
-    // faz o parser para obter a lista de comandos
-    cmds = parse_tokens(tokens, shell);
-    // liberta a lista de tokens
-    ft_clear_token_list(&tokens);
-    return (cmds);
-}

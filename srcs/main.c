@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 15:52:23 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/11/03 16:41:03 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int main(int ac, char **av, char **env)
 			
 		
 		// faz o parsing da linha para uma lista de comandos
-		cmds = parse_line(line, &shell);
+		cmds = parser(line, &shell);
 		
 		// se o parsing for bem sucedido, executa o pipeline
 		if (cmds)
@@ -110,6 +110,29 @@ int main(int ac, char **av, char **env)
 	return (shell.last_exit_status);
 }
 
+
+//facilitar
+
+// ls -l | hvxjvjl | echo "|ola"
+
+//ls/2-l/2\3\2echo\2" OLA SOU O HENRIQUE"
+
+//FAZER UM SPLIT SUPER CHIQUE 
+//flags de in_aspas e in_nao  me lembro
+
+//linked lists
+
+//definir variaveis de environment com export e ler com echo
+
+//handle sinais aqui (SIGINT CTRL D, CTRL C, CTRL \)
+
+//figure out o que sao env e como manda las junto com os tokens???????????
+
+//fazer o comando export e env (EXPORT MOSTRA ENVS SEM VALOR bobao)
+
+//descobrir como expandir variaveis (detetar dollar sign como ir buscar ao env o valor)
+
+//Todo: descobrir se é suposto entrar em modo dquote se as aspas tiverem abertas
 
 //facilitar
 
