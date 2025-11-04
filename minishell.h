@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 16:42:57 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/04 11:02:36 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void	free_str_array(char **arr);
 /*
 ** Parser
 */
-t_cmd	*parser(t_token *tokens, t_shell *shell);
+t_cmd	*parse_line(char *line, t_shell *shell);
 void	free_cmds(t_cmd *cmd_list);
 void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
 

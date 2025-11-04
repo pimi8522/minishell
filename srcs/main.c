@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 16:41:03 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/04 10:55:57 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int main(int ac, char **av, char **env)
 			
 		
 		// faz o parsing da linha para uma lista de comandos
-		cmds = parser(line, &shell);
+		cmds = parse_line(line, &shell);
 		
 		// se o parsing for bem sucedido, executa o pipeline
 		if (cmds)
