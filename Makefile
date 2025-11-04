@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
+#    By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/11/03 14:22:08 by miduarte &       ###   ########.fr        #
+#    Updated: 2025/11/04 11:59:04 by adores & mi      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I. -Ilibft -Ipipex
+CFLAGS = -g -Wall -Wextra -Werror -I. -Ilibft
 
 SRCS = \
 	srcs/main.c \

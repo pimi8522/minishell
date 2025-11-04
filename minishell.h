@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/04 11:51:42 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/04 11:59:54 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include <linux/limits.h>
 
 # include "libft/libft.h"
-# include "pipex/pipex.h"
 #define WHITESPACE	"\t\n\v\f\r "
 
 typedef struct s_cmd
@@ -209,7 +208,7 @@ int		execute_single_builtin(t_cmd *cmd, t_shell *shell);
 int		exe_builtin(char **args, t_shell *shell);
 
 /*
-** srcs/builtins/*.c
+** srcs/builtins/
 */
 int		echo_builtin(char **args, t_shell *shell);
 int		ft_cd(char **args, t_shell *shell);
