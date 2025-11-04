@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 16:44:24 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/04 14:57:13 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,11 @@ t_cmd	*parser(char *line, t_shell *shell)
     // liberta a lista de tokens
     ft_clear_token_list(&tokens);
     return (cmds);
+}
+
+t_cmd	*parse_tokens(t_token *token_list, t_shell *shell)
+{
+	// if token is token we dont want send error
+	// if toekn list sends a leading or trailing pipe we error
+	//return head 
 }
