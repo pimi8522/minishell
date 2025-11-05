@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:44:45 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/05 15:05:13 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/05 15:43:48 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,32 @@ bool	validate_parentheses(t_token *token_list, t_shell *shell)
 	{
 		print_syn_error(")", shell);
 		return (true);
+	}
+	return (false);
+}
+
+
+bool	validate_redirections(t_token *token_list, t_shell *shell)
+{
+	t_token	*current;
+
+	current = token_list;
+	while (current)
+	{
+		if (is_redir_token(current->type))
+		{
+			if (!current->next)
+			{
+				print_syn_error("newline", shell);
+				return (true);
+			}
+			if (current->next->type != T_WORD)
+			{
+				print_syn_error(current->next->value, shell);
+				return (true);
+			}
+		}
+		current = current->next;
 	}
 	return (false);
 }

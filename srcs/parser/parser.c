@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/05 15:05:34 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/05 15:44:32 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_cmd	*parse_tokens(t_token *token_list, t_shell *shell)
 	if (check_and_or(token_list, shell))
 		return (NULL);
 	if (validate_parentheses(token_list, shell))
+		return (NULL);
+	if (validate_redirections(token_list, shell))
 		return (NULL);
 	return (NULL);
 }
