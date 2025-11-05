@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/04 11:59:54 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/11/05 15:50:35 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void	free_env_list(t_env *head);
 /*
 ** srcs/env/env_utils.c
 */
+int 	env_lstsize(t_env *lst);
 void	bubble_sort_array(char **arr);
 void	set_env_var(t_shell *shell, const char *key, const char *value);
 char	*get_env_value(t_shell *shell, const char *key);

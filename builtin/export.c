@@ -6,11 +6,75 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:59:57 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/11/04 14:29:13 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/11/05 17:11:27 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	bubble_sort_array(t_env **node_array)
+{
+	int		i;
+	int		j;
+	t_env	*temp;
+
+	i = 0;
+	while (node_array[i])
+	{
+		j = 0;
+		while(node_array[j + 1])
+		{
+			if (ft_strcmp(node_array[j]->key, node_array[j + 1]->key) > 0)
+			{
+				temp = node_array[j];
+				node_array[j] = node_array[j + 1];
+				node_array[j + 1] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+static t_env	**list_to_array(t_env	*env_list)
+{
+	int		i;
+	t_env	**node_array;
+
+	i = 0;
+	node_array = malloc((1 + env_lstsize(env_list)) * sizeof(t_env));
+	if (!node_array)
+		return (NULL);
+	while (env_list)
+	{
+		node_array[i] = env_list;
+		i++;
+		env_list = env_list->next;
+	}
+	node_array[i] = NULL;
+	return (node_array);
+}
+
+
+// imprime as variáveis de ambiente por ordem alfabética
+void	print_sorted_env(t_shell *shell)
+{
+	t_env	**node_array;
+	int		i;
+
+	node_array = list_to_array (shell->env_list);
+	if (!node_array)
+		return;
+	bubble_sort_array(node_array);
+	i = 0;
+	while (node_array[i])
+	{
+		if (ft_strncmp(node_array[i]->key, "_", 2) != 0)
+			printf("declare -x %s=\"%s\"", node_array[i]->key, node_array[i]->value);
+		i++;
+	}
+	free(node_array);
+}
 
 int	is_valid_identifier(const char *str)
 {
@@ -49,12 +113,6 @@ static void	handle_export_assignment(t_shell *shell, char *arg)
 	free(value);
 }
 
-static void	handle_export_no_value(t_shell *shell, char *arg)
-{
-	if(!find_env_node(shell->env_list, arg))
-		set_env_var(shell, arg, NULL);
-}
-
 int	export_builtin(char **args, t_shell *shell)
 {
 	int	i;
@@ -75,8 +133,8 @@ int	export_builtin(char **args, t_shell *shell)
 			export_error(shell, args[i], &exit_code);
 		else if(ft_strchr(args[i], '='))
 			handle_export_assignment(shell, args[i]);
-		else
-			handle_export_no_value(shell, args[i]);
+		else if(!find_env_node(shell->env_list, args[i]))
+				set_env_var(shell, args[i], NULL);
 		i++;
 	}
 	return(exit_code);

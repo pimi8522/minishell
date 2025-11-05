@@ -73,31 +73,3 @@ static int	count_array_strings(char **arr)
 		count++;
 	return(count);
 }
-
-void	bubble_sort_array(char **arr)
-{
-	int		i;
-	int		j;
-	int		n;
-	char	*temp;
-
-	n = count_array_strings(arr);
-	if (n < 2)
-		return ;
-	i = 0;
-	while (i < n - 1)
-	{
-		j = 0;
-		while(j < n -i - 1)
-		{
-			if (ft_strcmp(arr[j], arr[j + 1]) > 0)
-			{
-				temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
-			}
-			j++;
-		}
-		i++;
-	}
-}

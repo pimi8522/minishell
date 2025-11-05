@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:56:31 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/11/05 15:04:53 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/11/05 15:26:32 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,62 +14,6 @@
 
 //fazer funçao do shell level
 
-static void	print_env_var(char *entry)
-{
-	char	*equal_sign;
-	char	*key;
-
-	equal_sign = ft_strchr(entry, '=');
-	if (equal_sign)
-	{
-		key = ft_substr(entry, 0, equal_sign - entry);
-		if (key)
-		{
-			// imprime no formato: declare -x KEY="value"
-			ft_putstr_fd("declare -x ", 1);
-			ft_putstr_fd(key, 1);
-			ft_putstr_fd("=\"", 1);
-			ft_putstr_fd(equal_sign + 1, 1);
-			ft_putstr_fd("\"\n", 1);
-			free(key);
-		}
-		else
-			ft_putstr_fd("minishell: Cannot allocate memory", 2);
-	}
-	else
-	{
-		// imprime variáveis sem valor, ex: declare -x VAR
-		ft_putstr_fd("declare -x ", 1);
-		ft_putstr_fd(entry, 1);
-		ft_putstr_fd("\n", 1);
-	}
-}
-
-static void	print_env_array(char **env_array)
-{
-	int	i;
-
-	i = 0;
-	while (env_array[i])
-	{
-		if (ft_strncmp(env_array[i], "_=", 2) != 0)
-			print_env_var(env_array[i]);
-		i++;
-	}
-}
-
-// imprime as variáveis de ambiente por ordem alfabética
-void	print_sorted_env(t_shell *shell)
-{
-	char	**env_array;
-
-	env_array = convert_env_to_array(shell->env_list);
-	if (!env_array)
-		return;
-	bubble_sort_array(env_array);
-	print_env_array(env_array);
-	free_str(env_array);
-}
 
 int	env_builtin(t_shell *shell)
 {

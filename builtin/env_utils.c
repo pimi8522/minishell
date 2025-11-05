@@ -6,11 +6,28 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 15:19:53 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/20 11:33:50 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/11/05 15:50:07 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	env_lstsize(t_env *lst)
+{
+	int	count;
+	t_env	*temp;
+
+	if (lst == NULL)
+		return (0);
+	temp = lst;
+	count = 1;
+	while (temp->next != NULL)
+	{
+		count++;
+		temp = temp->next;
+	}
+	return (count);
+}
 
 char	*get_env_value(t_shell *shell, const char *key)
 {
