@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:54:56 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/30 16:45:10 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/11/04 14:56:47 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ static bool	ft_exitatoll(const char	*str, long long *exit_code)
 	return (true);
 }
 
+int	exitclean(t_shell *shell, unsigned char exit_code)
+{
+	free_env_list(shell->env_list);
+	exit(exit_code);
+}
 
 int	exit_builtin(char **args, t_shell *shell)
 {
@@ -68,13 +73,17 @@ int	exit_builtin(char **args, t_shell *shell)
 
 	ft_putstr_fd("exit\n", 2);
 	if(!args[1])
-		exit(shell->last_exit_status);
+	{
+		free_str_array(args);
+		exitclean(shell, (unsigned char)shell->last_exit_status);
+	}	
 	if(!is_numeric(args[1]) || !ft_exitatoll(args[1], &exit_code))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(args[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
-		exit(2);
+		free_str_array(args);
+		exitclean(shell, 2);
 	}
 	if(args[2])
 	{
@@ -82,7 +91,8 @@ int	exit_builtin(char **args, t_shell *shell)
 		shell->last_exit_status = 1;
 		return (1);
 	}
-	exit((unsigned char)exit_code);
+	free_str_array(args);
+	exitclean(shell, (unsigned char)exit_code);
 	return (0);
 }
 

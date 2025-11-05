@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/04 10:55:57 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/04 15:14:10 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ char *read_line(void)
 	// se o readline retornar NULL (ctrl-D), sai da shell
 	if (!buf)
 	{
-		printf(RED"exit\n"RST);
-		exit(EXIT_SUCCESS);
+		printf("exit\n");
+		//exit(EXIT_SUCCESS);
+		return (NULL);
 	}
 	// adiciona a linha ao histórico se não estiver em branco
 	if (!is_blank_line(buf))
@@ -81,16 +82,18 @@ int main(int ac, char **av, char **env)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
+		{
 			line = read_line();
+		}
 		else
+		{
 			line = get_next_line(STDIN_FILENO);
+		}
 		if (!line)
 		{
 			free_env_list(shell.env_list);
 			break;
 		}
-			
-		
 		// faz o parsing da linha para uma lista de comandos
 		cmds = parse_line(line, &shell);
 		

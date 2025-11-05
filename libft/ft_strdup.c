@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:43:01 by miduarte          #+#    #+#             */
-/*   Updated: 2025/04/21 15:02:43 by miduarte         ###   ########.fr       */
+/*   Updated: 2025/11/05 14:58:27 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *src)
 	char	*dest;
 	int		i;
 
+	if (!src)
+		return (NULL);
 	i = 0;
 	srclen = ft_strlen(src);
 	dest = malloc(sizeof(char) * srclen + 1);

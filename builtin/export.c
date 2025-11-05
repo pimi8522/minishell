@@ -6,7 +6,7 @@
 /*   By: adores & miduarte <adores & miduarte@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 10:59:57 by adores & mi       #+#    #+#             */
-/*   Updated: 2025/10/30 15:09:25 by adores & mi      ###   ########.fr       */
+/*   Updated: 2025/11/04 14:29:13 by adores & mi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	handle_export_assignment(t_shell *shell, char *arg)
 	key = ft_substr(arg, 0, equal_sign - arg);
 	value = ft_strdup(equal_sign + 1);
 	set_env_var(shell, key, value);
+	free(key);
+	free(value);
 }
 
 static void	handle_export_no_value(t_shell *shell, char *arg)
