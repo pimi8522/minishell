@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/04 14:57:13 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/05 15:05:34 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ t_cmd	*parser(char *line, t_shell *shell)
     // faz o lexer para obter a lista de tokens
     tokens = lexer(line);
     if (!tokens)
+ 	{
+ 		shell->last_exit_status = 2;
         return (NULL);
+ 	}
     // faz o parser para obter a lista de comandos
     cmds = parse_tokens(tokens, shell);
     // liberta a lista de tokens
@@ -28,9 +31,18 @@ t_cmd	*parser(char *line, t_shell *shell)
     return (cmds);
 }
 
+
 t_cmd	*parse_tokens(t_token *token_list, t_shell *shell)
 {
-	// if token is token we dont want send error
-	// if toekn list sends a leading or trailing pipe we error
-	//return head 
+	if (!token_list)
+		return (NULL);
+	if (check_leading_pipe(token_list, shell))
+		return (NULL);
+	if (check_trailing_pipe(token_list, shell))
+		return (NULL);
+	if (check_and_or(token_list, shell))
+		return (NULL);
+	if (validate_parentheses(token_list, shell))
+		return (NULL);
+	return (NULL);
 }
