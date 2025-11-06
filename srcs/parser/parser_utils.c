@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:44:45 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/05 15:43:48 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/06 15:48:48 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,12 @@ bool	validate_redirections(t_token *token_list, t_shell *shell)
 		current = current->next;
 	}
 	return (false);
+}
+
+t_cmd parse_into_commands (t_token **tok, t_shell shell)
+{
+	t_cmd *cmd;
+	
+	//while token_list =! de pipe, meter no cmd i would assume
+	//cada node da cmd probably eh um comando diferente
 }
