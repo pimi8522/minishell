@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+        */
+/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/04 13:33:31 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/07 18:01:12 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,10 +182,15 @@ void	ft_print_quote_err(char c);
 ** srcs/parser/parser.c
 */
 t_cmd	*parser(char *line, t_shell *shell);
-t_cmd	*parse_line(char *line, t_shell *shell);
+t_cmd	*parse_tokens(t_token *tokens, t_shell *shell);
 t_cmd	*new_cmd_node(char *cmd, char **flags);
 void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
 void	free_cmds(t_cmd *cmd_list);
+int		check_syntax(t_token *tokens, t_shell *shell);
+int		count_args(t_token *tokens);
+int		print_syn_error(char *str, t_shell *shell);
+int		is_redir_token(t_token_type t);
+t_token	*get_last_token(t_token *token_list);
 
 /*
 ** srcs/heredoc/heredoc.c

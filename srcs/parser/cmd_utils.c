@@ -55,6 +55,7 @@ void	free_cmds(t_cmd *cmd_list)
 	{
 		next = current->next;
 		i = 0;
+		free(current->cmd);
 		while (current->flag && current->flag[i])
 		{
 			free(current->flag[i]);

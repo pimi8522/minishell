@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: miduarte & adores <miduarte & adores@st    +#+  +:+       +#+         #
+#    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/11/06 13:58:39 by miduarte &       ###   ########.fr        #
+#    Updated: 2025/11/07 18:47:21 by miduarte &       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS = \
 	srcs/parser/history.c \
 	srcs/parser/cmd_utils.c \
 	srcs/parser/parser.c \
+	srcs/parser/parser_utils.c \
 	srcs/heredoc.c \
 	srcs/expansion.c \
 	builtin/builtin.c \
