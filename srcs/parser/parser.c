@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/07 18:52:22 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/07 19:00:16 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ static t_cmd	*parse_command(t_token **current, t_shell *shell)
 		*current = (*current)->next;
 	}
 	if (cmd->flag[0])
-		cmd->cmd = ft_strdup(cmd->flag[0]);
+		cmd->cmd = cmd->flag[0];
 	return (cmd);
 }
