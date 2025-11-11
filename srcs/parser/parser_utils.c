@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:44:45 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/07 18:46:28 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/11 17:58:31 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ int	count_args(t_token *tokens)
 		else if (is_redir_token(tokens->type))
 		{
 			if (tokens->next)
+			{
 				tokens = tokens->next;
+			}
 		}
-		tokens = tokens->next;
+		if (tokens)
+			tokens = tokens->next;
 	}
 	return (count);
 }

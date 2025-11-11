@@ -6,7 +6,7 @@
 #    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/11/07 18:47:21 by miduarte &       ###   ########.fr        #
+#    Updated: 2025/11/11 17:59:30 by miduarte &       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS = \
 	srcs/parser/cmd_utils.c \
 	srcs/parser/parser.c \
 	srcs/parser/parser_utils.c \
+	srcs/parser/redirs.c \
 	srcs/heredoc.c \
 	srcs/expansion.c \
 	builtin/builtin.c \

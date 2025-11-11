@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/07 18:01:12 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/11 17:57:40 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,12 @@ int		count_args(t_token *tokens);
 int		print_syn_error(char *str, t_shell *shell);
 int		is_redir_token(t_token_type t);
 t_token	*get_last_token(t_token *token_list);
+
+/*
+** srcs/parser/redirs.c
+*/
+int		handle_redirection(t_cmd *cmd, t_token **current, t_shell *shell);
+int		open_file(char *filename, t_token_type type);
 
 /*
 ** srcs/heredoc/heredoc.c
