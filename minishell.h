@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/11 17:57:40 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/12 16:37:27 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,6 @@ void	*do_malloc(size_t size);
 void	print_banner(void);
 
 /*
-** srcs/utils/split.c
-*/
-char	**shell_split(char const *s);
-void	free_str_array(char **arr);
-void	free_str(char **str);
-
-/*
 ** srcs/signals.c
 */
 void	sigint_handler(int signo);
@@ -147,25 +140,6 @@ void	heredoc_sigint_handler(int signo);
 */
 int		init_shell_history(void);
 void	save_shell_history(void);
-
-/*
-** srcs/env/env.c
-*/
-t_env	*init_env(char **envp);
-char	**convert_env_to_array(t_env *env_list);
-t_env	*find_env_node(t_env *env_list, const char *key);
-void	add_env_node_back(t_env **env_list_head, t_env *new_node);
-t_env	*new_env_node(char *key, char *value);
-void	free_env_node(t_env *node);
-void	free_env_list(t_env *head);
-
-/*
-** srcs/env/env_utils.c
-*/
-void	bubble_sort_array(char **arr);
-void	set_env_var(t_shell *shell, const char *key, const char *value);
-char	*get_env_value(t_shell *shell, const char *key);
-int		is_valid_identifier(const char *str);
 
 /*
 ** srcs/lexer/lexer.c
@@ -192,44 +166,5 @@ int		print_syn_error(char *str, t_shell *shell);
 int		is_redir_token(t_token_type t);
 t_token	*get_last_token(t_token *token_list);
 
-/*
-** srcs/parser/redirs.c
-*/
-int		handle_redirection(t_cmd *cmd, t_token **current, t_shell *shell);
-int		open_file(char *filename, t_token_type type);
-
-/*
-** srcs/heredoc/heredoc.c
-*/
-int		handle_heredoc(const char *delimiter, int expand, t_shell *shell);
-
-/*
-** srcs/expansion/expand.c
-*/
-void	expand_variables(t_cmd *cmd, t_shell *shell);
-char	*expand_line_for_heredoc(char *line, t_shell *shell);
-
-/*
-** srcs/exec/exec.c
-*/
-int		execute_pipeline(t_cmd *cmds, t_shell *shell);
-void	execute_child(t_cmd *cmd, t_shell *shell, int input_fd, int pipe_fds[2]);
-void	execute_command(char **args, char *envp[]);
-int		execute_single_builtin(t_cmd *cmd, t_shell *shell);
-int		exe_builtin(char **args, t_shell *shell);
-
-/*
-** srcs/builtins/
-*/
-int		echo_builtin(char **args, t_shell *shell);
-int		ft_cd(char **args, t_shell *shell);
-int		pwd_builtin(t_shell *shell);
-int		exit_builtin(char **args, t_shell *shell);
-int		env_builtin(t_shell *shell);
-void	print_sorted_env(t_shell *shell);
-int		unset_builtin(char **args, t_shell *shell);
-int		export_builtin(char **args, t_shell *shell);
-int		is_builtin(char **args);
-char	*get_target_path(char **args, t_shell *shell);
 
 #endif

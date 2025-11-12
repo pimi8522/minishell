@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../minishell_new"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"ft_printf.h": "c",
+			"minishell.h": "c"
+		}
+	}
+}

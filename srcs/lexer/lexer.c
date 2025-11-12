@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:18:46 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 18:32:19 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/12 16:53:21 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ t_token	*lexer(const char *s)
 {
     t_token	*token_list;
     int		erro_check;
+	size_t	i;
 
     if (!s)
         return (NULL);
@@ -133,7 +134,9 @@ t_token	*lexer(const char *s)
     erro_check = 0;
     while (*s)
     {
-        skip_whitespace(s, (size_t *) &s);
+		i = 0;
+        skip_whitespace(s, &i);
+		s += i;
         if (!*s)
             break ;
         if (is_separator_char(*s))

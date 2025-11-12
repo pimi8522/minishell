@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:39:47 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 15:53:56 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/12 15:53:41 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	is_separator_char(char c)
 
 void	skip_whitespace(const char *s, size_t *i)
 {
+    if (!s)
+    {
+        return;
+    }
 	while (s[*i] && ft_strchr(WHITESPACE, s[*i]))
 		(*i)++;
 }

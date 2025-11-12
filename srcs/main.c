@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/03 16:41:03 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/12 16:43:15 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,35 @@ char *read_line(void)
 	return (buf);
 }
 
+void	print_cmds(t_cmd *cmds)
+{
+	t_cmd	*current_cmd;
+	int		i;
+	int		j;
+
+	current_cmd = cmds;
+	i = 1;
+	while (current_cmd)
+	{
+		printf("--- Command %d ---\n", i++);
+		printf("Cmd: %s\n", current_cmd->cmd);
+		printf("Args:\n");
+		j = 0;
+		if (current_cmd->flag)
+		{
+			while (current_cmd->flag[j])
+			{
+				printf("  arg[%d]: %s\n", j, current_cmd->flag[j]);
+				j++;
+			}
+		}
+		printf("In: %d\n", current_cmd->in);
+		printf("Out: %d\n", current_cmd->out);
+		printf("-------------------\n");
+		current_cmd = current_cmd->next;
+	}
+}
+
 int main(int ac, char **av, char **env)
 {
 	char	*line;
@@ -67,15 +96,16 @@ int main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+	(void)env;
 	// inicializa a estrutura da shell
 	shell.last_exit_status = 0;
-	shell.env_list = init_env(env); // 
+	// shell.env_list = init_env(env); // separação do pars4re
+	shell.env_list = NULL;
 	if (isatty(STDIN_FILENO))
 	{
 		print_banner();
 		// configura os sinais para o modo interativo
-		setup_interactive_signals();
-		init_shell_history();
+		// setup_interactive_signals(); // separação do pars4er
 	}
 	// loop principal da shell
 	while (1)
@@ -86,22 +116,22 @@ int main(int ac, char **av, char **env)
 			line = get_next_line(STDIN_FILENO);
 		if (!line)
 		{
-			free_env_list(shell.env_list);
+			// free_env_list(shell.env_list);
 			break;
 		}
-			
 		
 		// faz o parsing da linha para uma lista de comandos
 		cmds = parser(line, &shell);
 		
-		// se o parsing for bem sucedido, executa o pipeline
+		// se o parsing for bem sucedido, imprime a estrutura de comandos
 		if (cmds)
 		{
-			shell.last_exit_status = execute_pipeline(cmds, &shell);
+			printf("\n--- Parser Output ---\n");
+			print_cmds(cmds);
 			free_cmds(cmds); // liberta a memória da lista de comandos
 		}
 		else
-			shell.last_exit_status = 2;
+			printf("Parser retornou NULL\n");
 		
 		free(line); // liberta a memória da linha lida
 	}

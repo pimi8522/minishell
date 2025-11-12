@@ -6,42 +6,24 @@
 #    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/11/11 17:59:30 by miduarte &       ###   ########.fr        #
+#    Updated: 2025/11/12 16:46:12 by miduarte &       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I. -Ilibft -Ipipex
+CFLAGS = -g -Wall -Wextra -Werror -I. -Ilibft -Ipipex
 
 SRCS = \
 	srcs/main.c \
 	srcs/utils.c \
 	srcs/lexer/lexer_utils.c \
 	srcs/lexer/lexer.c \
-	srcs/execute.c \
-	srcs/execute_pipeline.c \
-	srcs/launch.c \
 	srcs/signals.c \
 	srcs/parser/history.c \
 	srcs/parser/cmd_utils.c \
 	srcs/parser/parser.c \
-	srcs/parser/parser_utils.c \
-	srcs/parser/redirs.c \
-	srcs/heredoc.c \
-	srcs/expansion.c \
-	builtin/builtin.c \
-	builtin/cd.c\
-	builtin/echo.c\
-	builtin/env.c\
-	builtin/env_convert.c\
-	builtin/env_create.c\
-	builtin/env_utils.c\
-	builtin/exit.c\
-	builtin/export.c\
-	builtin/pwd.c\
-	builtin/unset.c\
-	builtin/cd_utils.c
+	srcs/parser/parser_utils.c
 	
 
 OBJS = $(SRCS:.c=.o)
@@ -68,4 +50,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+rec: re clean
+
+valgrind: all clean
+	valgrind --suppressions=rlbad.supp --show-leak-kinds=all --leak-check=full --track-origins=yes ./minishell
+
+.PHONY: all clean fclean re re_clean valgrind
