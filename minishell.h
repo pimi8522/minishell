@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/12 16:37:27 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/17 16:49:52 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,14 @@
 
 typedef struct s_cmd
 {
-	char	*cmd;
-	char	**flag; //os comandos em si separados
-	int		in;
-	int		out;
-	int		fd[2];
-	int		heredoc_expand;
+	char			*cmd;
+	char			**flag; //os comandos em si separados
+	t_list			*redirs;
+	int				fd[2];
+	int				heredoc_expand;
 	struct s_cmd	*next;
 } t_cmd;
 
-// structs para o lexer
 typedef enum e_token_type
 {
     T_WORD,      // A regular word or quoted string
@@ -56,6 +54,17 @@ typedef enum e_token_type
     T_O_PARENT,  // (  (for parser)
     T_C_PARENT,  // )  (for parser)
 }	t_token_type;
+
+
+typedef struct s_redir
+{
+	t_token_type	type;
+	char			*file;
+}	t_redir;
+
+
+
+// structs para o lexer
 
 typedef struct s_token
 {
@@ -165,6 +174,12 @@ int		count_args(t_token *tokens);
 int		print_syn_error(char *str, t_shell *shell);
 int		is_redir_token(t_token_type t);
 t_token	*get_last_token(t_token *token_list);
+
+/*
+** srcs/parser/redirs.c
+*/
+int		handle_redirection(t_cmd *cmd, t_token **current, t_shell *shell);
+void	free_redirs(void *content);
 
 
 #endif

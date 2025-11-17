@@ -6,7 +6,7 @@
 /*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/12 16:43:15 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/17 16:48:19 by miduarte &       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,24 @@ char *read_line(void)
 	return (buf);
 }
 
+static char	*get_redir_type_str(t_token_type type)
+{
+	if (type == T_LESS)
+		return ("< (T_LESS)");
+	if (type == T_GREAT)
+		return ("> (T_GREAT)");
+	if (type == T_DLESS)
+		return ("<< (T_DLESS)");
+	if (type == T_DGREAT)
+		return (">> (T_DGREAT)");
+	return ("UNKNOWN");
+}
+
 void	print_cmds(t_cmd *cmds)
 {
 	t_cmd	*current_cmd;
+	t_list	*redir_list;
+	t_redir	*redir;
 	int		i;
 	int		j;
 
@@ -81,8 +96,17 @@ void	print_cmds(t_cmd *cmds)
 				j++;
 			}
 		}
-		printf("In: %d\n", current_cmd->in);
-		printf("Out: %d\n", current_cmd->out);
+		printf("Redirections:\n");
+		redir_list = current_cmd->redirs;
+		if (!redir_list)
+			printf("  (none)\n");
+		while (redir_list)
+		{
+			redir = (t_redir *)redir_list->content;
+			printf("  - Type: %s, File: %s\n", \
+					get_redir_type_str(redir->type), redir->file);
+			redir_list = redir_list->next;
+		}
 		printf("-------------------\n");
 		current_cmd = current_cmd->next;
 	}

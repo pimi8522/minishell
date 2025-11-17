@@ -21,8 +21,7 @@ t_cmd	*new_cmd_node(char *cmd, char **flags)
 		return (NULL);
 	new_node->cmd = cmd;
 	new_node->flag = flags;
-	new_node->in = STDIN_FILENO;
-	new_node->out = STDOUT_FILENO;
+	new_node->redirs = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -55,6 +54,8 @@ void	free_cmds(t_cmd *cmd_list)
 	{
 		next = current->next;
 		i = 0;
+		if (current->redirs)
+			ft_lstclear(&current->redirs, free_redirs);
 		while (current->flag && current->flag[i])
 		{
 			free(current->flag[i]);

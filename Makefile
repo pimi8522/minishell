@@ -6,7 +6,7 @@
 #    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/11/12 16:46:12 by miduarte &       ###   ########.fr        #
+#    Updated: 2025/11/17 16:52:43 by miduarte &       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = \
 	srcs/signals.c \
 	srcs/parser/history.c \
 	srcs/parser/cmd_utils.c \
+	srcs/parser/redirs.c \
 	srcs/parser/parser.c \
 	srcs/parser/parser_utils.c
 	
@@ -35,7 +36,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) bonus -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lreadline
