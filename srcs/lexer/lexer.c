@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:18:46 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/12 16:53:21 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/21 16:10:39 by miduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static t_token	*new_token(char *value, t_token_type type)
+static t_lex_token	*new_token(char *value, t_token_type type)
 {
-    t_token	*token;
+    t_lex_token	*token;
 
-    token = (t_token *)malloc(sizeof(t_token));
+    token = (t_lex_token *)malloc(sizeof(t_lex_token));
     if (!token)
         return (NULL);
     token->value = value;
@@ -25,9 +25,9 @@ static t_token	*new_token(char *value, t_token_type type)
     return (token);
 }
 
-static void	add_token_back(t_token **list, t_token *new)
+static void	add_token_back(t_lex_token **list, t_lex_token *new)
 {
-    t_token	*current;
+    t_lex_token	*current;
 
     if (!list || !new)
         return;
@@ -42,10 +42,10 @@ static void	add_token_back(t_token **list, t_token *new)
     current->next = new;
 }
 
-void	ft_clear_token_list(t_token **list)
+void	ft_clear_token_list(t_lex_token **list)
 {
-    t_token	*current;
-    t_token	*next;
+    t_lex_token	*current;
+    t_lex_token	*next;
 
     if (!list)
         return;
@@ -60,12 +60,13 @@ void	ft_clear_token_list(t_token **list)
     *list = NULL;
 }
 
-static int	handle_separator(const char **line_ptr, t_token **token_list)
+static int	handle_separator(const char **line_ptr, t_lex_token **token_list)
 {
-    const char	*line = *line_ptr;
+    const char		*line = *line_ptr;
     t_token_type	type;
-    char		*value;
-    int			len;
+    char			*value;
+    t_lex_token		*tok;
+    int				len;
 
     len = 1;
     if (!ft_strncmp(line, "<<", 2))
@@ -89,18 +90,22 @@ static int	handle_separator(const char **line_ptr, t_token **token_list)
     else
         return (0);
     value = ft_substr(line, 0, len);
-    if (!value || !new_token(value, type))
+    if (!value)
+        return (0);
+    tok = new_token(value, type);
+    if (!tok)
         return (free(value), 0);
-    add_token_back(token_list, new_token(value, type));
+    add_token_back(token_list, tok);
     *line_ptr += len;
     return (1);
 }
 
-static int	handle_word(const char **line_ptr, t_token **token_list)
+static int	handle_word(const char **line_ptr, t_lex_token **token_list)
 {
-    const char	*start;
-    size_t		i;
-    char		*value;
+    const char		*start;
+    size_t			i;
+    char			*value;
+    t_lex_token		*tok;
 
     start = *line_ptr;
     i = 0;
@@ -115,18 +120,21 @@ static int	handle_word(const char **line_ptr, t_token **token_list)
             i++;
     }
     value = ft_substr(start, 0, i);
-    if (!value || !new_token(value, T_WORD))
+    if (!value)
+        return (0);
+    tok = new_token(value, T_WORD);
+    if (!tok)
         return (free(value), 0);
-    add_token_back(token_list, new_token(value, T_WORD));
+    add_token_back(token_list, tok);
     *line_ptr += i;
     return (1);
 }
 
-t_token	*lexer(const char *s)
+t_lex_token	*lexer(const char *s)
 {
-    t_token	*token_list;
-    int		erro_check;
-	size_t	i;
+    t_lex_token	*token_list;
+    int			erro_check;
+	size_t		i;
 
     if (!s)
         return (NULL);

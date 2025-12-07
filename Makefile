@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+         #
+#    By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 15:37:54 by miduarte &        #+#    #+#              #
-#    Updated: 2025/11/17 16:52:43 by miduarte &       ###   ########.fr        #
+#    Updated: 2025/11/21 16:23:46 by miduarte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS = \
 	srcs/parser/cmd_utils.c \
 	srcs/parser/redirs.c \
 	srcs/parser/parser.c \
-	srcs/parser/parser_utils.c
+	srcs/parser/parser_utils.c \
+	srcs/parser/input_parser.c
 	
 
 OBJS = $(SRCS:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 15:23:51 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/17 16:49:52 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/21 16:17:37 by miduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,47 @@ typedef enum e_token_type
     T_GREAT,     // > (redirect out)
     T_DLESS,     // << (heredoc)
     T_DGREAT,    // >> (append out)
-	T_AND,       // && (for parser)
+    T_AND,       // && (for parser)
     T_OR,        // || (for parser)
     T_O_PARENT,  // (  (for parser)
     T_C_PARENT,  // )  (for parser)
-}	t_token_type;
+}   t_token_type;
+
+/*
+** New redirection/file mode enum separate from lexer token types.
+** (Requested output representation)
+*/
+typedef enum e_token
+{
+    REDIN,   // <
+    REDOUT,  // >
+    HDOC,    // <<
+    APPEND   // >>
+}   t_token;
+
+/*
+** File representation for input/output redirections
+*/
+typedef struct s_file
+{
+    char    *filename;
+    t_token mode;
+    bool    quoted;
+}   t_file;
+
+/*
+** Parsed command segment (one pipeline component)
+** argv: NULL-terminated argument vector
+** infiles/outfiles: dynamic arrays terminated by filename == NULL (or tracked separately)
+** next: singly linked list to represent a pipeline
+*/
+typedef struct s_input
+{
+    char            **argv;
+    t_file          *infiles;
+    t_file          *outfiles;
+    struct s_input  *next;
+}   t_input;
 
 
 typedef struct s_redir
@@ -66,12 +102,12 @@ typedef struct s_redir
 
 // structs para o lexer
 
-typedef struct s_token
+typedef struct s_lex_token
 {
-    char			*value;
-    t_token_type	type;
-    struct s_token	*next;
-}	t_token;
+    char                *value;
+    t_token_type        type;
+    struct s_lex_token  *next;
+}   t_lex_token;
 
 // - ------------ -- --- Para o parser
 
@@ -83,21 +119,7 @@ typedef enum e_node_type
     N_CMD
 }	t_node_type;
 
-typedef struct s_simple_cmd
-{
-    char	**args;
-    t_list	*redir_list; // Use libft list for redirections
-}	t_simple_cmd;
-
-// This is the main AST node
-typedef struct s_node
-{
-    t_node_type		type;
-    t_simple_cmd	*simple_cmd; // Only used if type is N_CMD
-    struct s_node	*left;
-    struct s_node	*right;
-}	t_node;
-// ------------------------------------
+//---------------
 
 typedef struct s_env
 {
@@ -153,8 +175,8 @@ void	save_shell_history(void);
 /*
 ** srcs/lexer/lexer.c
 */
-t_token	*lexer(char const *s);
-void	ft_clear_token_list(t_token **list);
+t_lex_token	*lexer(char const *s);
+void	ft_clear_token_list(t_lex_token **list);
 int		is_separator_char(char c);
 void	skip_whitespace(const char *s, size_t *i);
 int		is_quote(char c);
@@ -165,20 +187,26 @@ void	ft_print_quote_err(char c);
 ** srcs/parser/parser.c
 */
 t_cmd	*parser(char *line, t_shell *shell);
-t_cmd	*parse_tokens(t_token *tokens, t_shell *shell);
+t_cmd	*parse_tokens(t_lex_token *tokens, t_shell *shell);
 t_cmd	*new_cmd_node(char *cmd, char **flags);
 void	add_cmd_node_back(t_cmd **cmd_list_head, t_cmd *new_node);
 void	free_cmds(t_cmd *cmd_list);
-int		check_syntax(t_token *tokens, t_shell *shell);
-int		count_args(t_token *tokens);
+int		check_syntax(t_lex_token *tokens, t_shell *shell);
+int		count_args(t_lex_token *tokens);
 int		print_syn_error(char *str, t_shell *shell);
 int		is_redir_token(t_token_type t);
-t_token	*get_last_token(t_token *token_list);
+t_lex_token	*get_last_token(t_lex_token *token_list);
+
+/*
+** Future parser (pipeline) output helpers (to be implemented)
+*/
+t_input		*parser_input(char *line, t_shell *shell);
+void		free_input_list(t_input *list);
 
 /*
 ** srcs/parser/redirs.c
 */
-int		handle_redirection(t_cmd *cmd, t_token **current, t_shell *shell);
+int		handle_redirection(t_cmd *cmd, t_lex_token **current, t_shell *shell);
 void	free_redirs(void *content);
 
 

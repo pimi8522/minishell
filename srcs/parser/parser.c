@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:07:03 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/17 16:52:32 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/21 16:11:59 by miduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static t_cmd	*parse_command(t_token **current, t_shell *shell);
+static t_cmd	*parse_command(t_lex_token **current, t_shell *shell);
 
 t_cmd	*parser(char *line, t_shell *shell)
 {
-	t_token	*tokens;
-	t_cmd	*cmds;
+	t_lex_token	*tokens;
+	t_cmd		*cmds;
 
 	tokens = lexer(line);
 	if (!tokens)
@@ -30,11 +30,11 @@ t_cmd	*parser(char *line, t_shell *shell)
 	return (cmds);
 }
 
-t_cmd	*parse_tokens(t_token *tokens, t_shell *shell)
-{ 
-	t_cmd	*cmds;
-	t_cmd	*current_cmd;
-	t_token	*current_tok;
+t_cmd	*parse_tokens(t_lex_token *tokens, t_shell *shell)
+{
+	t_cmd		*cmds;
+	t_cmd		*current_cmd;
+	t_lex_token	*current_tok;
 
 	if (!tokens)
 		return (NULL);
@@ -57,7 +57,7 @@ t_cmd	*parse_tokens(t_token *tokens, t_shell *shell)
 	return (cmds);
 }
 
-static t_cmd	*parse_command(t_token **current, t_shell *shell)
+static t_cmd	*parse_command(t_lex_token **current, t_shell *shell)
 {
 	t_cmd	*cmd;
 	int		argc;

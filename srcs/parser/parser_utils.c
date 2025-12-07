@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:44:45 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/11 17:58:31 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/21 16:11:29 by miduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_redir_token(t_token_type t)
 	return (t == T_LESS || t == T_GREAT || t == T_DLESS || t == T_DGREAT);
 }
 
-t_token	*get_last_token(t_token *token_list)
+t_lex_token	*get_last_token(t_lex_token *token_list)
 {
 	if (!token_list)
 		return (NULL);
@@ -35,7 +35,7 @@ t_token	*get_last_token(t_token *token_list)
 	return (token_list);
 }
 
-int	count_args(t_token *tokens)
+int	count_args(t_lex_token *tokens)
 {
 	int	count;
 
@@ -57,7 +57,7 @@ int	count_args(t_token *tokens)
 	return (count);
 }
 
-static bool	check_leading_pipe(t_token *token_list, t_shell *shell)
+static bool	check_leading_pipe(t_lex_token *token_list, t_shell *shell)
 {
 	if (token_list->type == T_PIPE)
 	{
@@ -66,9 +66,9 @@ static bool	check_leading_pipe(t_token *token_list, t_shell *shell)
 	return (false);
 }
 
-static bool	check_trailing_pipe(t_token *token_list, t_shell *shell)
+static bool	check_trailing_pipe(t_lex_token *token_list, t_shell *shell)
 {
-	t_token	*last_token;
+	t_lex_token	*last_token;
 
 	last_token = get_last_token(token_list);
 	if (last_token->type == T_PIPE)
@@ -78,9 +78,9 @@ static bool	check_trailing_pipe(t_token *token_list, t_shell *shell)
 	return (false);
 }
 
-static bool	check_bonus_parts(t_token *token_list, t_shell *shell)
+static bool	check_bonus_parts(t_lex_token *token_list, t_shell *shell)
 {
-	t_token	*current;
+	t_lex_token	*current;
 
 	current = token_list;
 	while (current)
@@ -95,9 +95,9 @@ static bool	check_bonus_parts(t_token *token_list, t_shell *shell)
 	return (false);
 }
 
-static bool	validate_redirections(t_token *token_list, t_shell *shell)
+static bool	validate_redirections(t_lex_token *token_list, t_shell *shell)
 {
-	t_token	*current;
+	t_lex_token	*current;
 
 	current = token_list;
 	while (current)
@@ -114,7 +114,7 @@ static bool	validate_redirections(t_token *token_list, t_shell *shell)
 	return (false);
 }
 
-int	check_syntax(t_token *tokens, t_shell *shell)
+int	check_syntax(t_lex_token *tokens, t_shell *shell)
 {
 	if (check_leading_pipe(tokens, shell))
 		return (1);

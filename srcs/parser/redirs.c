@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 16:52:30 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/17 16:52:19 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/21 16:18:20 by miduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_redirs(void *content)
 	free(redir);
 }
 
-int	handle_redirection(t_cmd *cmd, t_token **current, t_shell *shell)
+int	handle_redirection(t_cmd *cmd, t_lex_token **current, t_shell *shell)
 {
 	t_token_type	redir_type;
 	t_redir			*redir;

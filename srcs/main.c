@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: miduarte & adores <miduarte@student.42l    +#+  +:+       +#+        */
+/*   By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:06:57 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/17 16:48:19 by miduarte &       ###   ########.fr       */
+/*   Updated: 2025/11/21 16:33:10 by miduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,30 @@ static int	is_blank_line(const char *s)
 // lê a linha de input do utilizador e mostra o prompt
 char *read_line(void)
 {
-	char	*buf;
-	char	*prompt;
-	char	cwd[BUFSIZ];
+	char	 cwd[PATH_MAX];
+	/* Increase buffer to silence -Wformat-truncation while keeping stack allocation */
+	char	 prompt_buf[(PATH_MAX * 2) + 256];
+	size_t	 len;
+	char	*line;
 
-	// obtém o diretório atual para mostrar no prompt
 	get_cwd(cwd, sizeof(cwd));
-	prompt = ft_strjoin(RED, cwd);
-	if (!prompt)
-		return (NULL);
-	buf = ft_strjoin(prompt, " "RST""C"minishell$ "RST);
-	free(prompt);
-	if (!buf)
-		return (NULL);
-	prompt = buf;
-	// lê a linha de input
-	buf = readline(prompt);
-	free(prompt);
-	// se o readline retornar NULL (ctrl-D), sai da shell
-	if (!buf)
+	/* Build prompt safely without triggering format-truncation warning */
+	len = 0;
+	ft_strlcpy(prompt_buf, RED, sizeof(prompt_buf));
+	len = ft_strlcat(prompt_buf, cwd, sizeof(prompt_buf));
+	len = ft_strlcat(prompt_buf, " "RST, sizeof(prompt_buf));
+	len = ft_strlcat(prompt_buf, C, sizeof(prompt_buf));
+	len = ft_strlcat(prompt_buf, "minishell$ "RST, sizeof(prompt_buf));
+	(void)len;
+	line = readline(prompt_buf);
+	if (!line)
 	{
 		printf(RED"exit\n"RST);
 		exit(EXIT_SUCCESS);
 	}
-	// adiciona a linha ao histórico se não estiver em branco
-	if (!is_blank_line(buf))
-		add_history(buf);
-	return (buf);
+	if (!is_blank_line(line))
+		add_history(line);
+	return (line);
 }
 
 static char	*get_redir_type_str(t_token_type type)
@@ -70,6 +67,83 @@ static char	*get_redir_type_str(t_token_type type)
 	if (type == T_DGREAT)
 		return (">> (T_DGREAT)");
 	return ("UNKNOWN");
+}
+
+/* New helpers for t_input output */
+static const char	*mode_str(t_token m)
+{
+	if (m == REDIN)
+		return "<";
+	if (m == REDOUT)
+		return ">";
+	if (m == HDOC)
+		return "<<";
+	if (m == APPEND)
+		return ">>";
+	return "?";
+}
+
+static void	print_input_segments(t_input *list)
+{
+	int		idx;
+	int		i;
+
+	idx = 1;
+	while (list)
+	{
+		printf("--- Segment %d ---\n", idx++);
+		/* argv */
+		printf("Args:\n");
+		i = 0;
+		if (list->argv)
+		{
+			while (list->argv[i])
+			{
+				printf("  argv[%d]: %s\n", i, list->argv[i]);
+				i++;
+			}
+		}
+		if (i == 0)
+			printf("  (none)\n");
+		/* infiles */
+		printf("Infiles:\n");
+		i = 0;
+		if (list->infiles)
+		{
+			while (list->infiles[i].filename)
+			{
+				printf("  %s %s%s%s (quoted=%d)\n",
+					mode_str(list->infiles[i].mode),
+					list->infiles[i].quoted ? "\"" : "",
+					list->infiles[i].filename,
+					list->infiles[i].quoted ? "\"" : "",
+					list->infiles[i].quoted);
+				i++;
+			}
+		}
+		if (i == 0)
+			printf("  (none)\n");
+		/* outfiles */
+		printf("Outfiles:\n");
+		i = 0;
+		if (list->outfiles)
+		{
+			while (list->outfiles[i].filename)
+			{
+				printf("  %s %s%s%s (quoted=%d)\n",
+					mode_str(list->outfiles[i].mode),
+					list->outfiles[i].quoted ? "\"" : "",
+					list->outfiles[i].filename,
+					list->outfiles[i].quoted ? "\"" : "",
+					list->outfiles[i].quoted);
+				i++;
+			}
+		}
+		if (i == 0)
+			printf("  (none)\n");
+		printf("-------------------\n");
+		list = list->next;
+	}
 }
 
 void	print_cmds(t_cmd *cmds)
@@ -116,6 +190,7 @@ int main(int ac, char **av, char **env)
 {
 	char	*line;
 	t_cmd	*cmds;
+	t_input	*inputs;
 	t_shell	shell;
 
 	(void)ac;
@@ -127,7 +202,7 @@ int main(int ac, char **av, char **env)
 	shell.env_list = NULL;
 	if (isatty(STDIN_FILENO))
 	{
-		print_banner();
+		//print_banner();
 		// configura os sinais para o modo interativo
 		// setup_interactive_signals(); // separação do pars4er
 	}
@@ -144,18 +219,27 @@ int main(int ac, char **av, char **env)
 			break;
 		}
 		
-		// faz o parsing da linha para uma lista de comandos
-		cmds = parser(line, &shell);
-		
-		// se o parsing for bem sucedido, imprime a estrutura de comandos
-		if (cmds)
+		/* New input parser producing t_input pipeline list */
+		inputs = parser_input(line, &shell);
+		if (inputs)
 		{
-			printf("\n--- Parser Output ---\n");
-			print_cmds(cmds);
-			free_cmds(cmds); // liberta a memória da lista de comandos
+			printf("\n--- Input Parser Output ---\n");
+			print_input_segments(inputs);
+			free_input_list(inputs);
 		}
 		else
-			printf("Parser retornou NULL\n");
+		{
+			/* fallback to old parser for debugging if needed */
+			cmds = parser(line, &shell);
+			if (cmds)
+			{
+				printf("\n--- (Legacy) Parser Output ---\n");
+				print_cmds(cmds);
+				free_cmds(cmds);
+			}
+			else
+				printf("Parser retornou NULL\n");
+		}
 		
 		free(line); // liberta a memória da linha lida
 	}
