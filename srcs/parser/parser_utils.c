@@ -6,7 +6,7 @@
 /*   By: miduarte <miduarte@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:44:45 by miduarte &        #+#    #+#             */
-/*   Updated: 2025/11/21 16:11:29 by miduarte         ###   ########.fr       */
+/*   Updated: 2025/12/07 15:36:29 by miduarte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,25 @@ static bool	check_bonus_parts(t_lex_token *token_list, t_shell *shell)
 	return (false);
 }
 
+/*
+ cmd | | cmd.
+*/
+static bool	check_adjacent_pipes(t_lex_token *token_list, t_shell *shell)
+{
+	t_lex_token	*cur;
+
+	cur = token_list;
+	while (cur)
+	{
+		if (cur->type == T_PIPE && cur->next && cur->next->type == T_PIPE)
+		{
+			return (print_syn_error("|", shell), true);
+		}
+		cur = cur->next;
+	}
+	return (false);
+}
+
 static bool	validate_redirections(t_lex_token *token_list, t_shell *shell)
 {
 	t_lex_token	*current;
@@ -121,6 +140,8 @@ int	check_syntax(t_lex_token *tokens, t_shell *shell)
 	if (check_trailing_pipe(tokens, shell))
 		return (1);
 	if (check_bonus_parts(tokens, shell))
+		return (1);
+	if (check_adjacent_pipes(tokens, shell))
 		return (1);
 	if (validate_redirections(tokens, shell))
 		return (1);

@@ -251,6 +251,18 @@ t_input	*parser_input(char *line, t_shell *shell)
 			shell->last_exit_status = 2;
 			return (NULL);
 		}
+//secção dos pipes adjacentes com espaços entre eles
+		if (seg->argv[0] == NULL
+			&& (!seg->infiles || seg->infiles[0].filename == NULL)
+			&& (!seg->outfiles || seg->outfiles[0].filename == NULL))
+		{
+			print_syn_error("|", shell);
+			free_input_list(seg);
+			free_input_list(list);
+			ft_clear_token_list(&tokens);
+			shell->last_exit_status = 2;
+			return (NULL);
+		}
 		append_segment(&list, seg);
 		if (cur && cur->type == T_PIPE)
 			cur = cur->next;
