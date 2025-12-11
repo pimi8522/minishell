@@ -68,6 +68,16 @@ typedef enum e_token
 }   t_token;
 
 /*
+** manter conta do tipo de aspas cortadas em cada argumento
+*/
+typedef enum e_quote_type
+{
+    Q_NONE = 0,
+    Q_SINGLE,
+    Q_DOUBLE
+}   t_quote_type;
+
+/*
 ** File representation for input/output redirections
 */
 typedef struct s_file
@@ -86,6 +96,7 @@ typedef struct s_file
 typedef struct s_input
 {
     char            **argv;
+    t_quote_type    *arg_quotes;    // parallel array: quote type per argv[i], NULL-terminated with Q_NONE sentinel
     t_file          *infiles;
     t_file          *outfiles;
     struct s_input  *next;

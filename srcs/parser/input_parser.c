@@ -39,6 +39,21 @@ static bool	is_quoted(const char *s)
 	return (false);
 }
 
+//detetar o tipo de aspas
+static t_quote_type	quote_type_of(const char *s)
+{
+	size_t	len;
+
+	if (!s)
+		return (Q_NONE);
+	len = ft_strlen(s);
+	if (len >= 2 && s[0] == '"' && s[len - 1] == '"')
+		return (Q_DOUBLE);
+	if (len >= 2 && s[0] == '\'' && s[len - 1] == '\'')
+		return (Q_SINGLE);
+	return (Q_NONE);
+}
+
 //tirar quotes
 static char	*strip_surrounding_quotes(const char *s)
 {
@@ -70,6 +85,8 @@ void	free_input_list(t_input *list)
 			i++;
 		}
 		free(list->argv);
+		/* free parallel quotes array */
+		free(list->arg_quotes);
 		/* free infiles */
 		if (list->infiles)
 		{
@@ -138,6 +155,7 @@ static int	fill_segment(t_input *seg, t_lex_token **cursor)
 			seg->argv[ai] = strip_surrounding_quotes(tok->value);
 			if (!seg->argv[ai])
 				return (1);
+			seg->arg_quotes[ai] = quote_type_of(tok->value);
 			ai++;
 		}
 		else if (is_redir_token(tok->type))
@@ -170,6 +188,7 @@ static int	fill_segment(t_input *seg, t_lex_token **cursor)
 	}
 	/* NULL terminators */
 	seg->argv[ai] = NULL;
+	seg->arg_quotes[ai] = Q_NONE; /* sentinel to match argv terminator */
 	seg->infiles[ii].filename = NULL;
 	seg->outfiles[oi].filename = NULL;
 	*cursor = tok;
@@ -186,12 +205,15 @@ static t_input	*alloc_segment(int argc, int in_count, int out_count)
 	seg->argv = (char **)ft_calloc(argc + 1, sizeof(char *));
 	if (!seg->argv)
 		return (free(seg), NULL);
+	seg->arg_quotes = (t_quote_type *)ft_calloc(argc + 1, sizeof(t_quote_type));
+	if (!seg->arg_quotes)
+		return (free(seg->argv), free(seg), NULL);
 	seg->infiles = (t_file *)ft_calloc(in_count + 1, sizeof(t_file));
 	if (!seg->infiles)
-		return (free(seg->argv), free(seg), NULL);
+		return (free(seg->arg_quotes), free(seg->argv), free(seg), NULL);
 	seg->outfiles = (t_file *)ft_calloc(out_count + 1, sizeof(t_file));
 	if (!seg->outfiles)
-		return (free(seg->infiles), free(seg->argv), free(seg), NULL);
+		return (free(seg->infiles), free(seg->arg_quotes), free(seg->argv), free(seg), NULL);
 	seg->next = NULL;
 	return (seg);
 }
